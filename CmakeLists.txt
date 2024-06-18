@@ -1,0 +1,57 @@
+#set minimum version (fetch_content available since 3.11)
+cmake_minimum_required(VERSION 3.11)
+#set project name
+project(Reaction-Captcha-Game VERSION 0.0.1 LANGUAGES CXX)
+
+#set variable executable
+set(executable "ReactionCaptchaGame")
+
+# Specify C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# Detect the operating system
+if(UNIX)
+    message(STATUS "Compiling on Linux")
+    add_definitions(-DOS_LINUX)
+    set(OpenCV_DIR "/usr")
+elseif(WIN32)
+    message(STATUS "Compiling on Linux")
+    add_definitions(-DOS_WINDOWS)
+    set(OPENCV_DIR "C:\opencv\build\x64\vc15")
+elseif(APPLE)
+    message(STATUS "Compiling on macOS")
+    add_definitions(-DOS_MAC)
+    set(OpenCV_DIR "/usr")
+endif()
+
+message(STATUS "setting opencv directory to" ${OpenCV_DIR})
+
+# finds the opencv packages
+find_package(OpenCV REQUIRED)
+
+message(STATUS "found opencv library")
+
+set(Sources
+    src/main.cpp
+    src/test.cpp
+)
+
+set(LibSources
+    inc/test.hpp
+)
+
+# defines a static library and adds the include folder
+add_library(GameLib STATIC ${LibSources})
+
+# adds the source files to the executable
+add_executable(${executable} ${Sources})
+
+# sets the include directory relativ to the project directory
+target_include_directories(GameLib PUBLIC "${CMAKE_SOURCE_DIR}/inc/")
+
+# links the library "GameLib" with the executable
+target_link_libraries(${executable} PRIVATE GameLib)
+
+# links the opencv library with executable
+target_link_libraries(${executable} PRIVATE ${OPENCV_LIBS})
