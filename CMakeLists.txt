@@ -14,8 +14,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 if(UNIX)
     message(STATUS "Compiling on Linux")
     add_definitions(-DOS_LINUX)
-    set(OpenCV_DIR "/usr/lib/cmake/opencv4")
-    set(OpenCV_CONFIG_PATH "/usr/lib/cmake/opencv4")
 elseif(WIN32)
     message(STATUS "Compiling on Linux")
     add_definitions(-DOS_WINDOWS)
@@ -25,19 +23,17 @@ elseif(APPLE)
 endif()
 
 # Find OpenCV package
-find_package(OpenCV 4 REQUIRED)
+find_package(OpenCV REQUIRED)
 
 # Include OpenCV headers
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-
 set(Sources
-    src/Programmentwurf_Beispiele.cpp
-    src/test.cpp
+    src/main.cpp
 )
 
 set(LibSources
-    inc/test.hpp
+    src/test.cpp
 )
 
 # defines a static library and adds the include folder
@@ -54,9 +50,10 @@ set_target_properties(${executable} PROPERTIES LINKER_LANGUAGE CXX)
 
 # sets the include directory relativ to the project directory
 target_include_directories(GameLib PUBLIC "${CMAKE_SOURCE_DIR}/inc/")
+target_include_directories(${executable} PUBLIC "${CMAKE_SOURCE_DIR}/inc/")
 
 # links the library "GameLib" with the executable
 target_link_libraries(${executable} PRIVATE GameLib)
 
 # links the opencv library with executable
-target_link_libraries(${executable} PRIVATE ${OPENCV_LIBS})
+target_link_libraries(${executable} PRIVATE ${OpenCV_LIBS})
