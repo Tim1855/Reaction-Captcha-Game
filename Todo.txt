@@ -1,0 +1,40 @@
+GUI
+Menü
+greet spieler
+Name Spieler
+Anzahl n spielende Bilder
+Sequenz aus welcher Bilder stammen
+SPielmodus
+
+KITTI-Datensatz einlesen
+KITTI-Datensatz anzeigen
+GT Bounding Boxen visualisieren
+(Boxen von Dont Care ignorieren)
+(Falls Bild kein Boxen skip)
+
+Spiel
+while i<n
+    i. Bild anzeigen
+    Spielerinput
+    setReactionTime[i](input)
+    if(reaction>=3sek)
+    display(reaction)
+
+
+
+Klasse Menu:
+greet Player
+Get Inputs
+
+    Msg Spieler
+    Inputs Spieler
+    Spiel Starten
+
+
+    Spiel
+    
+    SpielerReaktion
+    Spielende
+
+    Auswertung
+    Ergebnisse

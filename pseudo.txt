@@ -1,0 +1,94 @@
+class Menu
+    method zeigeBegruessung()
+        print "Willkommen zum KITTI Reaction Game!"
+
+    method frageSpielerDaten(out spielerName, out anzahlBilder, out sequenz, out spielModus)
+        print "Bitte geben Sie Ihren Namen ein: "
+        input spielerName
+        print "Anzahl der zu spielenden Bilder: "
+        input anzahlBilder
+        print "Sequenznummer: "
+        input sequenz
+        print "Spielmodus (1 für Direct Click, 2 für Color Change): "
+        input spielModus
+
+    method bestaetigeStart() returns bool
+        print "Möchten Sie das Spiel starten? (ja/nein): "
+        input antwort
+        return antwort == "ja"
+
+class Spiel
+    attribute spielerName
+    attribute anzahlBilder
+    attribute sequenz
+    attribute spielModus
+    attribute bilder
+    attribute reaktionszeiten
+
+    constructor Spiel(name, anzahlBilder, sequenz, modus)
+        this.spielerName = name
+        this.anzahlBilder = anzahlBilder
+        this.sequenz = sequenz
+        this.spielModus = modus
+        ladeBilder()
+
+    method starten()
+        for i from 0 to anzahlBilder
+            if spielModus == 1
+                directClickReaction(bilder[i])
+            else if spielModus == 2
+                colorChangeReaction(bilder[i])
+        zeigeErgebnisse()
+
+    method zeigeErgebnisse()
+        print "Ergebnisse für Spieler " + spielerName
+        summe = 0
+        for zeit in reaktionszeiten
+            summe += zeit
+        durchschnitt = summe / len(reaktionszeiten)
+        print "Durchschnittliche Reaktionszeit: " + durchschnitt + " Sekunden"
+
+    method ladeBilder()
+        // Lade Bilder und initialisiere boundingBoxen
+
+    method directClickReaction(bild)
+        // Logik für Direct Click Reaction
+
+    method colorChangeReaction(bild)
+        // Logik für Color Change Reaction
+
+class Bild
+    attribute dateiPfad
+    attribute boundingBoxen
+
+    constructor Bild(dateiPfad)
+        this.dateiPfad = dateiPfad
+        // Initialisiere boundingBoxen
+
+    method anzeigen()
+        print "Zeige Bild: " + dateiPfad
+
+    method zeichneBoundingBoxen()
+        print "Zeichne Bounding Boxen"
+
+    method klickErkannt(x, y) returns bool
+        // Überprüfen, ob der Klick innerhalb einer Bounding Box war
+        return false
+
+// Hauptprogramm
+menu = new Menu()
+menu.zeigeBegruessung()
+spielerName, anzahlBilder, sequenz, spielModus = menu.frageSpielerDaten()
+if menu.bestaetigeStart()
+    spiel = new Spiel(spielerName, anzahlBilder, sequenz, spielModus)
+    spiel.starten()
+    // Frage, ob ein neues Spiel gestartet werden soll
+    print "Möchten Sie ein neues Spiel starten? (ja/nein): "
+    input neueAntwort
+    if neueAntwort == "ja"
+        // Starte ein neues Spiel
+        main()
+    else
+        print "Spiel beendet."
+else
+    print "Spiel beendet."
