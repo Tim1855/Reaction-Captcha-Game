@@ -7,16 +7,21 @@ UML/Programmaufbau
 HPP erstellen:
     Menu
     Image
-    game
+    gamehandler
+    MouseHandler
+    TimeHandler
     gamemode
     gamemode1
     gamemode2
     
     Gui
+    
 CPP erstellen:
     Menu
     Image
-    game
+    gamehandler    
+    MouseHandler
+    TimeHandler
     gamemode
     gamemode1
     gamemode2
