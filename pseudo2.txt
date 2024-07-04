@@ -1,0 +1,55 @@
+class Menu
+    methode greetPlayer
+    method getInput
+    method setName(Input)
+    method setSequenz(Input)
+    method setPictures(Input)
+    method setGamemode(Input)
+    method setStart(Input)
+
+
+    method setUserInputs
+        method setName
+        method setSequenz
+        method setPictures
+        method setGamemode
+
+    method initialize Menu
+        method greetPlayer
+        method getUserInputs
+        method setStart
+
+class Game
+    method startGame(setStart)
+
+
+
+
+class Gamemode
+    method chooseBoxes
+    method chooseTimers
+    method logikClickreaction
+    method logikColorchangereaction
+
+class gamemode1: Gamemode
+    method chooseBoxes
+    method chooseTimers
+
+
+class gamemode2 : Gamemode
+    method chooseBoxes
+    method chooseTimers
+
+
+
+class Image
+    method loadDatabase
+
+class Gui
+    method showImage
+    method showReactangles(gamemode) 
+    method showClick
+
+main
+    method initializeMenu
+
