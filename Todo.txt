@@ -1,4 +1,8 @@
-UML/Programmaufbau
+OpenCV installieren     [ ]
+Datensatz runterladen   [ ]
+CMAKE testen            [ ]
+
+UML/Programmaufbau      
 
 HPP erstellen:
     Menu
