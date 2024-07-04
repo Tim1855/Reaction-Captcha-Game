@@ -21,10 +21,7 @@ class Menu
 
 class Game
     method startGame(setStart)
-
-
-
-
+    
 class Gamemode
     method chooseBoxes
     method chooseTimers

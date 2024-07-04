@@ -1,40 +1,47 @@
-GUI
-Menü
-greet spieler
-Name Spieler
-Anzahl n spielende Bilder
-Sequenz aus welcher Bilder stammen
-SPielmodus
+UML/Programmaufbau
 
-KITTI-Datensatz einlesen
-KITTI-Datensatz anzeigen
-GT Bounding Boxen visualisieren
-(Boxen von Dont Care ignorieren)
-(Falls Bild kein Boxen skip)
-
-Spiel
-while i<n
-    i. Bild anzeigen
-    Spielerinput
-    setReactionTime[i](input)
-    if(reaction>=3sek)
-    display(reaction)
-
-
-
-Klasse Menu:
-greet Player
-Get Inputs
-
-    Msg Spieler
-    Inputs Spieler
-    Spiel Starten
-
-
-    Spiel
+HPP erstellen:
+    Menu
+    Image
+    game
+    gamemode
+    gamemode1
+    gamemode2
     
-    SpielerReaktion
-    Spielende
+    Gui
+CPP erstellen:
+    Menu
+    Image
+    game
+    gamemode
+    gamemode1
+    gamemode2
+    
+    Gui
 
-    Auswertung
-    Ergebnisse
+Implementierung:
+
+Menu
+Datensatz einlesen
+Datensatz/Bilder anzeigen
+Boxen anzeigen
+Spiellogik
+    spielmodus 1
+    spielmodus 2
+Spiellogik visualisieren 
+Spiel funktioniert(logik&visualisiereung)
+Ergebnisse speichern logik
+ergebnisse ausgeben 
+Feedback für Spieler (durchschnittliche zeit, besten 3 ergebnisse)
+Überprüfung auf Rückgabewerte des Users
+
+const- check
+STL-check
+clean code check
+Coding Conventions check
+Kommentare check
+
+UML
+Unit tests
+ReadME
+(EVTL Erweiterungen)
