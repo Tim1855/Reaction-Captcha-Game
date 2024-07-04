@@ -33,7 +33,8 @@ Spiel funktioniert(logik&visualisiereung)
 Ergebnisse speichern logik
 ergebnisse ausgeben 
 Feedback für Spieler (durchschnittliche zeit, besten 3 ergebnisse)
-Überprüfung auf Rückgabewerte des Users
+Überprüfung auf Rückgabewerte des Users(zb falsche werte int statt string eingaben usw.)
+Fehlerhandlich/Fehlertesting
 
 const- check
 STL-check
@@ -44,4 +45,5 @@ Kommentare check
 UML
 Unit tests
 ReadME
+Projektvorstellung
 (EVTL Erweiterungen)
