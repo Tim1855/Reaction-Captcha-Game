@@ -2,15 +2,18 @@
 opencv
 /* 
 
+
 # Allowed file types
-!*.cpp
-!*.hpp
-!*.h
-!*.drawio
-!*.txt
+#!*.cpp
+#!*.hpp
+#!*.h
+#!*.drawio
+#!*.txt
 !.gitignore
 !LICENSE
-!*.md
+#!*.md
+
+
 
 
 
