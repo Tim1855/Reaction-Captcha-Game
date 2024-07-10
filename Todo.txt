@@ -1,0 +1,58 @@
+OpenCV installieren     [ ]
+Datensatz runterladen   [ ]
+CMAKE testen            [ ]
+
+UML/Programmaufbau      [ ]
+
+HPP erstellen:          [ ]
+    Menu                [ ]
+    Image               [ ]
+    gamehandler         [ ]
+    MouseHandler        [ ]
+    TimeHandler         [ ]
+    gamemode            [ ]
+    gamemode1           [ ]
+    gamemode2           [ ]
+    
+    Gui                 [ ]
+    
+CPP erstellen:          [ ]
+    Menu                [ ]
+    Image               [ ]
+    gamehandler         [ ] 
+    MouseHandler        [ ]
+    TimeHandler         [ ]
+    gamemode            [ ]
+    gamemode1           [ ]
+    gamemode2           [ ]
+    
+    Gui                 [ ]
+
+Implementierung:
+
+Menu
+Datensatz einlesen
+Datensatz/Bilder anzeigen
+Boxen anzeigen
+Spiellogik
+    spielmodus 1
+    spielmodus 2
+Spiellogik visualisieren 
+Spiel funktioniert(logik&visualisiereung)
+Ergebnisse speichern logik
+ergebnisse ausgeben 
+Feedback für Spieler (durchschnittliche zeit, besten 3 ergebnisse)
+Überprüfung auf Rückgabewerte des Users(zb falsche werte int statt string eingaben usw.)
+Fehlerhandlich/Fehlertesting
+
+const- check
+STL-check
+clean code check
+Coding Conventions check
+Kommentare check
+
+UML
+Unit tests
+ReadME
+Projektvorstellung
+(EVTL Erweiterungen)
