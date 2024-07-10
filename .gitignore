@@ -1,6 +1,10 @@
 # Ignore everything
 opencv
-/* 
+#/*
+.vscode
+img
+cleancode.txt
+LICENSE 
 
 
 # Allowed file types
