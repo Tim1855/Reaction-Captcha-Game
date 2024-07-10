@@ -2,31 +2,31 @@ OpenCV installieren     [ ]
 Datensatz runterladen   [ ]
 CMAKE testen            [ ]
 
-UML/Programmaufbau      
+UML/Programmaufbau      [ ]
 
-HPP erstellen:
-    Menu
-    Image
-    gamehandler
-    MouseHandler
-    TimeHandler
-    gamemode
-    gamemode1
-    gamemode2
+HPP erstellen:          [ ]
+    Menu                [ ]
+    Image               [ ]
+    gamehandler         [ ]
+    MouseHandler        [ ]
+    TimeHandler         [ ]
+    gamemode            [ ]
+    gamemode1           [ ]
+    gamemode2           [ ]
     
-    Gui
+    Gui                 [ ]
     
-CPP erstellen:
-    Menu
-    Image
-    gamehandler    
-    MouseHandler
-    TimeHandler
-    gamemode
-    gamemode1
-    gamemode2
+CPP erstellen:          [ ]
+    Menu                [ ]
+    Image               [ ]
+    gamehandler         [ ] 
+    MouseHandler        [ ]
+    TimeHandler         [ ]
+    gamemode            [ ]
+    gamemode1           [ ]
+    gamemode2           [ ]
     
-    Gui
+    Gui                 [ ]
 
 Implementierung:
 

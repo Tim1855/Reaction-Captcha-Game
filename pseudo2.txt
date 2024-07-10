@@ -19,14 +19,19 @@ class Menu
         method getUserInputs
         method setStart
 
-class Game
+class Gamehandler
     method startGame(setStart)
+    
+
+class MouseHandler
+    method logikClickreaction
+    method logikColorchangereaction
     
 class Gamemode
     method chooseBoxes
     method chooseTimers
-    method logikClickreaction
-    method logikColorchangereaction
+    
+    
 
 class gamemode1: Gamemode
     method chooseBoxes
