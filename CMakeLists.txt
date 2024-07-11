@@ -15,18 +15,22 @@ if(UNIX)
     message(STATUS "Compiling on Linux")
     add_definitions(-DOS_LINUX)
 elseif(WIN32)
-    message(STATUS "Compiling on Linux")
+    message(STATUS "Compiling on Window")
     add_definitions(-DOS_WINDOWS)
 elseif(APPLE)
     message(STATUS "Compiling on macOS")
     add_definitions(-DOS_MAC)
 endif()
 
+set(OpenCV_DIR "C:/appldev/opencv/build")
+
 # Find OpenCV package
 find_package(OpenCV REQUIRED)
 
 # Include OpenCV headers
 include_directories(${OpenCV_INCLUDE_DIRS})
+
+target_link_libraries(Reaction-Captcha-Game ${OpenCV_LIBS})
 
 set(Sources
     src/main.cpp

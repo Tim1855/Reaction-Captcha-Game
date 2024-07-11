@@ -7,3 +7,7 @@ Attribute: currentImage, currentMode, playerStats
 
 
 */
+#ifndef GAMEHANDLER_HPP
+#define GAMEHANDLER_HPP
+
+#endif

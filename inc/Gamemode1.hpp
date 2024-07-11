@@ -7,3 +7,7 @@ GameMode2 Methoden: changeBoxColorAfterDelay()
 
 
 */
+#ifndef GAMEMODE1_HPP
+#define GAMEMODE1_HPP
+
+#endif
