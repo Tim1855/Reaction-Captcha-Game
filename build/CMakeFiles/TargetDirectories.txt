@@ -1,4 +1,0 @@
-C:/appldev/Reaction-Captcha-Game/build/CMakeFiles/GameLib.dir
-C:/appldev/Reaction-Captcha-Game/build/CMakeFiles/ReactionCaptchaGame.dir
-C:/appldev/Reaction-Captcha-Game/build/CMakeFiles/edit_cache.dir
-C:/appldev/Reaction-Captcha-Game/build/CMakeFiles/rebuild_cache.dir
