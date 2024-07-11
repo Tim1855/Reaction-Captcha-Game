@@ -57,7 +57,7 @@ int main()
 {
     //reading labels (GT Boxes) from KITTI Dataset
     std::cout << "Error: Could not open or find the image!" << std::endl;
-    std::string pathToLabelFile = "/Path/To/Label/File";
+    std::string pathToLabelFile = "C:/appldev/Reaction-Captcha-Game/data/0000.txt";
     auto allLabelsFromSequence = loadLabelsFromFile(pathToLabelFile);
     std::cout << "numberOfLabels: " << allLabelsFromSequence.size() << std::endl;
     for (const auto& label : allLabelsFromSequence) { //print class of all elements from frame number 5
@@ -73,7 +73,7 @@ int main()
 
 
     //Load example image
-    cv::Mat image = cv::imread("/Path/To/Image/File");
+    cv::Mat image = cv::imread("C:/appldev/Reaction-Captcha-Game/data/000000.png");
     if (image.empty()) {
         std::cerr << "Error: Could not open or find the image!" << std::endl;
         return -1;

@@ -1,6 +1,6 @@
-OpenCV installieren     [ ]
+OpenCV installieren     [X]
 Datensatz runterladen   [ ]
-CMAKE testen            [ ]
+CMAKE testen            [X]
 
 UML/Programmaufbau      [ ]
 

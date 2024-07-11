@@ -1,11 +1,8 @@
 #set minimum version (fetch_content available since 3.11)
 cmake_minimum_required(VERSION 3.11)
+
 #set project nameproject(Reaction-Captcha-Game VERSION 0.0.1 LANGUAGES CXX)
 project(Reaction-Captcha-Game)
-# 
-
-#set variable executable
-set(executable "ReactionCaptchaGame")
 
 # Specify C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -23,15 +20,14 @@ elseif(APPLE)
     add_definitions(-DOS_MAC)
 endif()
 
-set(OpenCV_DIR "C:/opencv/build/x64/vc16/bin")
-
 # Find OpenCV package
 find_package(OpenCV REQUIRED)
 
 # Include OpenCV headers
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-target_link_libraries(Reaction-Captcha-Game ${OpenCV_LIBS})
+#set variable executable
+set(executable "Reaction-Captcha-Game")
 
 set(Sources
     src/main.cpp
