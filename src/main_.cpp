@@ -1,6 +1,6 @@
 #include "Menu.hpp"
 
-int main__() {
+int main_() {
     Menu myMenu;
     myMenu.displayMenu();
 }

@@ -12,27 +12,26 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Detect the operating system
-# if(UNIX)
-#     message(STATUS "Compiling on Linux")
-#     add_definitions(-DOS_LINUX)
-# elseif(WIN32)
-#     message(STATUS "Compiling on Window")
-#     add_definitions(-DOS_WINDOWS)
-# elseif(APPLE)
-#     message(STATUS "Compiling on macOS")
-#     add_definitions(-DOS_MAC)
-# endif()
+if(UNIX)
+    message(STATUS "Compiling on Linux")
+    add_definitions(-DOS_LINUX)
+elseif(WIN32)
+    message(STATUS "Compiling on Window")
+    add_definitions(-DOS_WINDOWS)
+elseif(APPLE)
+    message(STATUS "Compiling on macOS")
+    add_definitions(-DOS_MAC)
+endif()
 
-set(OpenCV_DIR "C:/opencv/opencv/build")
+set(OpenCV_DIR "C:/opencv/build/x64/vc16/bin")
 
 # Find OpenCV package
+find_package(OpenCV REQUIRED)
 
 # Include OpenCV headers
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-# target_link_libraries(Reaction-Captcha-Game ${OpenCV_LIBS})
-
-# find_package(OpenCV REQUIRED)
+target_link_libraries(Reaction-Captcha-Game ${OpenCV_LIBS})
 
 set(Sources
     src/main.cpp
