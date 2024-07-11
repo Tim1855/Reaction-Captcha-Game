@@ -1,11 +1,8 @@
 # Ignore everything
-opencv
 #/*
 .vscode
-img
-cleancode.txt
-LICENSE 
-
+build
+data
 
 # Allowed file types
 #!*.cpp

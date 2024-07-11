@@ -56,3 +56,10 @@ Unit tests
 ReadME
 Projektvorstellung
 (EVTL Erweiterungen)
+
+Clean Code:
+variablenNamen klar deklarieren
+1 Sprache beibehalten
+const nutzen
+jede klasse 1 funktionalität(simple responsibility)
+

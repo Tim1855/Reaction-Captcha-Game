@@ -1,24 +1,3 @@
-class Menu
-    methode greetPlayer
-    method getInput
-    method setName(Input)
-    method setSequenz(Input)
-    method setPictures(Input)
-    method setGamemode(Input)
-    method setStart(Input)
-
-
-    method setUserInputs
-        method setName
-        method setSequenz
-        method setPictures
-        method setGamemode
-
-    method initialize Menu
-        method greetPlayer
-        method getUserInputs
-        method setStart
-
 class Gamehandler
     method startGame(setStart)
     
@@ -55,3 +34,23 @@ class Gui
 main
     method initializeMenu
 
+class Menu
+    methode greetPlayer
+    method getInput
+    method setName(Input)
+    method setSequenz(Input)
+    method setPictures(Input)
+    method setGamemode(Input)
+    method setStart(Input)
+
+
+    method setUserInputs
+        method setName
+        method setSequenz
+        method setPictures
+        method setGamemode
+
+    method initialize Menu
+        method greetPlayer
+        method getUserInputs
+        method setStart
