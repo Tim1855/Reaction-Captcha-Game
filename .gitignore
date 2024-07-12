@@ -1,33 +1,19 @@
-# # Ignore all files
-!*
+# Ignore all files
+*
 
-<<<<<<< HEAD
-# # upload these folders and their contents
-# !inc/
-# inc/*
-# !src/
-# src/*
-# !doc/
-# doc/*
-=======
 # upload these folders and their contents
 !inc/
-inc/**
+!inc/**
 !src/
-src/**
+!src/**
 !doc/
-doc/**
->>>>>>> ad2f13fd359dac396da2c0efd1c6939ae019a948
+!doc/**
 
-# # don't ignore these files
-# !.gitignore
-# !CMakeLists.txt
-# !README.md
-# !LICENSE
-# !todo.txt
-# !code_structure.txt
-# !todo_code.txt
-
-
-
-
+# don't ignore these files
+!.gitignore
+!CMakeLists.txt
+!README.md
+!LICENSE
+!todo.txt
+!code_structure.txt
+!todo_code.txt
