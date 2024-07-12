@@ -35,7 +35,7 @@ set(Sources
 
 set(LibSources
     src/Menu.cpp
-    src/Image.cpp
+    #src/Image.cpp
 )
 
 # defines a static library and adds the include folder
