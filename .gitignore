@@ -3,11 +3,11 @@
 
 # upload these folders and their contents
 !inc/
-inc/*
+inc/**
 !src/
-src/*
+src/**
 !doc/
-doc/*
+doc/**
 
 # don't ignore these files
 !.gitignore
