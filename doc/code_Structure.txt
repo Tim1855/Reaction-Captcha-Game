@@ -1,0 +1,31 @@
+Menu:
+Verantwortlich für die Interaktion mit dem Benutzer und die Menüführung.
+Verbessern: Stellen Sie sicher, dass es robustes Fehlerhandling für Benutzereingaben gibt.
+
+Image:
+Verantwortlich für das Laden und Verarbeiten der Bilder aus dem KITTI-Datensatz.
+Verbessern: Nutzen Sie const-Correctness und die Standard Template Library (STL) für effizientes Speicher- und Datenmanagement.
+
+GameHandler:
+Verantwortlich für die Spielsteuerung, den Ablauf und das Verwalten des aktuellen Spielzustands.
+Verbessern: Verwenden Sie Designmuster wie State oder Strategy, um den Spielmoduswechsel zu erleichtern.
+
+MouseHandler:
+Verantwortlich für die Verarbeitung der Mausereignisse und Klicks.
+Verbessern: Integrieren Sie Event-Handling-Mechanismen und stellen Sie sicher, dass alle möglichen Mausereignisse berücksichtigt werden.
+
+TimeHandler:
+Verantwortlich für die Zeitmessung der Reaktionen.
+Verbessern: Verwenden Sie präzise Zeitmessungsfunktionen und überprüfen Sie die Leistung, um sicherzustellen, dass die Zeitmessung genau ist.
+
+GameMode (Base Class):
+Eine Basisklasse für verschiedene Spielmodi.
+Verbessern: Stellen Sie sicher, dass die Klassenvererbung und Polymorphie effektiv genutzt werden, um unterschiedliche Spielmodi zu implementieren.
+
+GameMode1 und GameMode2:
+Spezifische Implementierungen der Spielmodi, die von GameMode erben.
+Verbessern: Nutzen Sie Override-Mechanismen und stellen Sie sicher, dass jeder Modus seine spezifische Logik korrekt implementiert.
+
+Gui:
+Verantwortlich für die grafische Benutzeroberfläche.
+Verbessern: Integrieren Sie robuste Bibliotheken zur GUI-Erstellung und stellen Sie sicher, dass die Benutzeroberfläche intuitiv und reaktionsschnell ist.

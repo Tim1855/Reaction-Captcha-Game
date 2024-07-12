@@ -1,11 +1,11 @@
 #include "Menu.hpp"
 
 void Menu::displayMenu() {
-    // promptPlayerName();
-    // promptNumberOfImages();
+    promptPlayerName();
+    promptNumberOfImages();
     promptSequence();
-    // promptGameMode();
-    // promptGameStart();
+    promptGameMode();
+    promptGameStart();
 }
     
 void Menu::promptPlayerName() {

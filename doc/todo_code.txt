@@ -1,0 +1,26 @@
+Image Handling:
+
+Implementiere die Image.hpp und Image.cpp, um das Laden und Verarbeiten der Bilder aus dem KITTI-Datensatz zu ermöglichen.
+Stelle sicher, dass die Bilder korrekt angezeigt werden können und die Bounding Boxes aus dem Datensatz verarbeitet und angezeigt werden.
+GameHandler:
+
+Implementiere die GameHandler.hpp und GameHandler.cpp, um die Hauptlogik des Spiels zu steuern.
+Diese Komponente sollte die Bilder laden, die Spielmodi verwalten und die Spielzustände steuern.
+TimeHandler:
+
+Implementiere die TimeHandler.hpp und TimeHandler.cpp, um die Reaktionszeit des Spielers zu messen.
+Stelle sicher, dass die Zeitmessung präzise ist und korrekt in den verschiedenen Spielmodi verwendet wird.
+MouseHandler:
+
+Implementiere die MouseHandler.hpp und MouseHandler.cpp, um die Mausereignisse zu verarbeiten.
+Diese Komponente sollte Mausbewegungen und -klicks registrieren und die entsprechenden Aktionen im Spiel auslösen.
+GameModes:
+
+Implementiere die GameMode.hpp als Basisklasse für die verschiedenen Spielmodi.
+Implementiere GameMode1.hpp und GameMode1.cpp für den ersten Spielmodus.
+Implementiere GameMode2.hpp und GameMode2.cpp für den zweiten Spielmodus.
+Diese Klassen sollten die spezifischen Regeln und Verhaltensweisen der jeweiligen Spielmodi enthalten.
+Gui:
+
+Implementiere die Gui.hpp und Gui.cpp, um die grafische Benutzeroberfläche zu erstellen und zu verwalten.
+Diese Komponente sollte für die Darstellung der Spielinhalte und die Interaktion mit dem Spieler verantwortlich sein.
