@@ -8,14 +8,17 @@
 inc/*
 !src/
 src/*
-!documentation/
-documentation/*
+!doc/
+doc/*
 
 # don't ignore these files
 !.gitignore
 !CMakeLists.txt
 !README.md
 !LICENSE
+!todo.txt
+!code_structure.txt
+!todo_code.txt
 
 
 
