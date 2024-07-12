@@ -1,3 +1,0 @@
-C:\appldev\CMake\bin\cmake.exe -E rm -f CMakeFiles\Reaction-Captcha-Game.dir/objects.a
-C:\appldev\msys64\ucrt64\bin\ar.exe qc CMakeFiles\Reaction-Captcha-Game.dir/objects.a @CMakeFiles\Reaction-Captcha-Game.dir\objects1.rsp
-C:\appldev\msys64\ucrt64\bin\c++.exe -g -Wl,--whole-archive CMakeFiles\Reaction-Captcha-Game.dir/objects.a -Wl,--no-whole-archive -o Reaction-Captcha-Game.exe -Wl,--out-implib,libReaction-Captcha-Game.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Reaction-Captcha-Game.dir\linkLibs.rsp

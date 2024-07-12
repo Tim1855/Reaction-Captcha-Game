@@ -2,7 +2,6 @@
 *
 # Ignore all folders
 */
-*\
 
 # upload these folders and their contents
 !inc/
