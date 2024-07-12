@@ -8,8 +8,8 @@
 inc/*
 !src/
 src/*
-!documentation/
-documentation/*
+!doc/
+doc/*
 
 # don't ignore these files
 !.gitignore
