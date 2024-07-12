@@ -1,22 +1,21 @@
-# Ignore everything
-opencv
-#/*
-.vscode
-img
-cleancode.txt
-LICENSE 
+# Ignore all files
+*
+# Ignore all folders
+*/
 
+# upload these folders and their contents
+!inc/
+inc/*
+!src/
+src/*
+!documentation/
+documentation/*
 
-# Allowed file types
-#!*.cpp
-#!*.hpp
-#!*.h
-#!*.drawio
-#!*.txt
+# don't ignore these files
 !.gitignore
+!CMakeLists.txt
+!README.md
 !LICENSE
-#!*.md
-
 
 
 
