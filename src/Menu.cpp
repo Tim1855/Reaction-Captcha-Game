@@ -1,11 +1,11 @@
 #include "Menu.hpp"
 
 void Menu::displayMenu() {
-    promptPlayerName();
-    promptNumberOfImages();
+    // promptPlayerName();
+    // promptNumberOfImages();
     promptSequence();
-    promptGameMode();
-    promptGameStart();
+    // promptGameMode();
+    // promptGameStart();
 }
     
 void Menu::promptPlayerName() {
@@ -36,27 +36,49 @@ void Menu::promptGameStart() {
 
 void Menu::setPlayerName() {
     std::cin>>m_PlayerName;
-    //checkInputName()
+    //checkInputInputName()
 }
 
 void Menu::setNumberOfImages() {
     std::cin>>m_numberOfImages;
-    //checkInputImages()
+    //checkInputInputImages()
 }
 
-void Menu::setSequence() {
-    std::cin>>m_sequence;
-    //checkInputSequence()
+void Menu::setSequence() {     
+    std::cin >> m_sequence;
+    while(!checkInputSequence()) { //wenn input falsch, also 1 wiederhole 
+        std::cin >> m_sequence;
+    }
 }
 
 void Menu::setGameMode() {
     std::cin>>m_gameMode;
-    //checkInputMode()
+    //checkInputInputMode()
 }
 void Menu::setGameStart() {
     std::cin>>m_gameStart;
-    //checkInputStart()
+    //checkInputInputStart()
 }
+
+
+// bool Menu::checkInputInputPlayerName();
+// bool Menu::checkInputNumberOfImages();
+bool Menu::checkInputSequence() {
+    if(std::cin.fail()) {
+        std::cout<<"\nGebe einen Integer ein: ";
+        return 0;
+    }
+    else if(m_sequence < 0 || m_sequence < 20) {
+        std::cout<<"\nGebe eine Zahl zwischen 0 - 20 ein: ";
+        return 0;
+    }
+    else {
+        return 1;
+    }
+}
+// bool Menu::checkInputGameMode();
+// bool Menu::checkInputGameMode();
+// bool Menu::checkInputGameStart();
 
 
 std::string Menu::getPlayerName() const {

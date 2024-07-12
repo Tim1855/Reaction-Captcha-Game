@@ -1,0 +1,2 @@
+C:\appldev\msys64\ucrt64\bin\ar.exe qc libGameLib.a CMakeFiles/GameLib.dir/src/Menu.cpp.obj
+C:\appldev\msys64\ucrt64\bin\ranlib.exe libGameLib.a

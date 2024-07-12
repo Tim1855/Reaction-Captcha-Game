@@ -1,10 +1,8 @@
 #set minimum version (fetch_content available since 3.11)
 cmake_minimum_required(VERSION 3.11)
-#set project name
-project(Reaction-Captcha-Game VERSION 0.0.1 LANGUAGES CXX)
 
-#set variable executable
-set(executable "ReactionCaptchaGame")
+#set project nameproject(Reaction-Captcha-Game VERSION 0.0.1 LANGUAGES CXX)
+project(Reaction-Captcha-Game)
 
 # Specify C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -15,7 +13,7 @@ if(UNIX)
     message(STATUS "Compiling on Linux")
     add_definitions(-DOS_LINUX)
 elseif(WIN32)
-    message(STATUS "Compiling on Linux")
+    message(STATUS "Compiling on Window")
     add_definitions(-DOS_WINDOWS)
 elseif(APPLE)
     message(STATUS "Compiling on macOS")
@@ -28,12 +26,16 @@ find_package(OpenCV REQUIRED)
 # Include OpenCV headers
 include_directories(${OpenCV_INCLUDE_DIRS})
 
+#set variable executable
+set(executable "Reaction-Captcha-Game")
+
 set(Sources
     src/main.cpp
 )
 
 set(LibSources
-    src/test.cpp
+    src/Menu.cpp
+    src/Image.cpp
 )
 
 # defines a static library and adds the include folder

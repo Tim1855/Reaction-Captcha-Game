@@ -7,3 +7,8 @@ Methoden: getClickPosition(), isClickWithinBoundingBox()
 
 
 */
+
+#ifndef MOUSEHANDLER_HPP
+#define MOUSEHANDLER_HPP
+
+#endif

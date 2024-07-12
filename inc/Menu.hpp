@@ -13,6 +13,12 @@ class Menu {
         void setGameMode();
         void setGameStart();
 
+        bool checkInputPlayerName();
+        bool checkInputNumberOfImages();
+        bool checkInputSequence();
+        bool checkInputGameMode();
+        bool checkInputGameStart();
+
         void promptPlayerName();
         void promptNumberOfImages();
         void promptSequence();

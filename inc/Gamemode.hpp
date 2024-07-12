@@ -6,3 +6,7 @@ Methoden: startMode(), processReaction(), displayResults()
 
 
 */
+#ifndef GAMEMODE_HPP
+#define GAMEMODE_HPP
+
+#endif
