@@ -29,18 +29,14 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 #set variable executable
 set(executable "Reaction-Captcha-Game")
 
-set(Sources
-    src/main.cpp
-)
-
 # Define a variable for the source directory
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 
 # Gather all source files in the src directory
-file(GLOB_RECURSE Libsources ${SRC_DIR}/*.cpp)
+file(GLOB_RECURSE LibSources ${SRC_DIR}/*.cpp)
 
 # list all the gathered files
-message("Libsources: ${Libsources}")
+message("LibSources: ${LibSources}")
 
 # defines a static library and adds the include folder
 add_library(GameLib STATIC ${LibSources})
@@ -48,10 +44,10 @@ add_library(GameLib STATIC ${LibSources})
 # set the linker language for the library to c++
 set_target_properties(GameLib PROPERTIES LINKER_LANGUAGE CXX)
 
-# adds the source files to the executable
-add_executable(${executable} ${Sources})
+# adds the execution file to the executable
+add_executable(${executable} src/main.cpp)
 
-# set the linker language for the executable
+# sets the linker language for the executable
 set_target_properties(${executable} PROPERTIES LINKER_LANGUAGE CXX)
 
 # sets the include directory relativ to the project directory
