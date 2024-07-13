@@ -8,6 +8,8 @@
 !src/**
 !doc/
 !doc/**
+!test/
+!test/**
 
 # don't ignore these files
 !.gitignore

@@ -8,6 +8,13 @@ project(Reaction-Captcha-Game)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# fetch tests
+#include(FetchContent)
+#FetchContent_Declare(
+#    googletest
+#    URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+#)
+
 # Detect the operating system
 if(UNIX)
     message(STATUS "Compiling on Linux")
@@ -15,10 +22,17 @@ if(UNIX)
 elseif(WIN32)
     message(STATUS "Compiling on Window")
     add_definitions(-DOS_WINDOWS)
+    # For Windows: Prevent overriding the parent project's compiler/linker settings
+    #set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    #FetchContent_MakeAvailable(googletest)
 elseif(APPLE)
     message(STATUS "Compiling on macOS")
     add_definitions(-DOS_MAC)
 endif()
+
+
+#enable_testing()
+#add_subdirectory(test)
 
 # Find OpenCV package
 find_package(OpenCV REQUIRED)
