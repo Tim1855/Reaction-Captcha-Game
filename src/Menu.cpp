@@ -32,7 +32,7 @@ void Menu::promptSequence() {
 
 void Menu::promptGameMode() {
     std::cout<<"\nWaehlen Sie den Spielmodus(1,2)";
-    setGameMode();    
+    setGameMode();
 }
 
 void Menu::promptGameStart() {
