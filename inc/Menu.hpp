@@ -2,10 +2,11 @@
 #define MENU_HPP
 
 #include <iostream>
+#include <string>
 
 class Menu {
 public:
-    Menu(/* args */);
+    Menu();
     ~Menu();
 
     void displayMenu();
@@ -42,4 +43,4 @@ private:
     bool m_gameStart;
 };
 
-#endif
+#endif // MENU_HPP

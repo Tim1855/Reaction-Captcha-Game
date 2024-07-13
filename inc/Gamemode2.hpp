@@ -1,23 +1,19 @@
-/*
-
-Diese Klassen implementieren die spezifische Logik für die verschiedenen Spielmodi.
-Erbt von Gamemode
-GameMode1 Methoden: highlightRandomBox()
-GameMode2 Methoden: changeBoxColorAfterDelay()
-
-*/
-
-
 #ifndef GAMEMODE2_HPP
 #define GAMEMODE2_HPP
 
-class Gamemode2
-{
-private:
-  /* data */
+#include "GameMode.hpp"
+
+class GameMode2 : public GameMode {
 public:
-  Gamemode2(/* args */);
-  ~Gamemode2();
+    GameMode2();
+    ~GameMode2();
+
+    void startMode() override;
+    void processInput(int x, int y) override;
+    void display() override;
+
+private:
+    // Private members for GameMode2
 };
 
-#endif
+#endif // GAMEMODE2_HPP

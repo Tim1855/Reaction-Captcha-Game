@@ -1,11 +1,15 @@
 #include "Gamemode.hpp"
 
+// Implementierung von GameMode
 
-
-Gamemode::Gamemode(/* args */)
-{
+void GameMode::startMode() {
+    // Override in derived classes
 }
 
-Gamemode::~Gamemode()
-{
+void GameMode::processInput(int x, int y) {
+    // Override in derived classes
+}
+
+void GameMode::display() {
+    // Override in derived classes
 }

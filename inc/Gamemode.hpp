@@ -1,21 +1,12 @@
-/*
-
-
-Diese Klasse könnte als Grundlage für die verschiedenen Spielmodi dienen und gemeinsame Funktionen bereitstellen.
-Methoden: startMode(), processReaction(), displayResults()
-
-
-*/
 #ifndef GAMEMODE_HPP
 #define GAMEMODE_HPP
 
-class Gamemode
-{
-private:
-  /* data */
+class GameMode {
 public:
-  Gamemode(/* args */);
-  ~Gamemode();
+    virtual ~GameMode() = default;
+    virtual void startMode() = 0;
+    virtual void processInput(int x, int y) = 0;
+    virtual void display() = 0;
 };
 
-#endif
+#endif // GAMEMODE_HPP

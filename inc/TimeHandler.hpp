@@ -1,20 +1,18 @@
-/*
-
-Diese Klasse könnte die Zeitmessung für die Reaktionen des Spielers verwalten.
-Methoden: startTimer(), stopTimer(), getElapsedTime()
-
-*/
-
 #ifndef TIMEHANDLER_HPP
 #define TIMEHANDLER_HPP
 
-class Timehandler
-{
-private:
-  /* data */
+#include <chrono>
+
+class TimeHandler {
 public:
-  Timehandler(/* args */);
-  ~Timehandler();
+    TimeHandler();
+    ~TimeHandler();
+
+    void startTimer();
+    double stopTimer();
+
+private:
+    std::chrono::high_resolution_clock::time_point startTime;
 };
 
-#endif
+#endif // TIMEHANDLER_HPP
