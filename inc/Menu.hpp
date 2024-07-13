@@ -17,11 +17,11 @@ public:
     void setGameMode();
     void setGameStart();
 
-    bool checkInputPlayerName();
-    bool checkInputNumberOfImages();
-    bool checkInputSequence();
-    bool checkInputGameMode();
-    bool checkInputGameStart();
+    bool checkInputPlayerName(std::string m_PlayerName);
+    bool checkInputNumberOfImages(int m_numberOfImages);
+    bool checkInputSequence(int m_sequence);
+    bool checkInputGameMode(int m_gameMode);
+    bool checkInputGameStart(int m_gameStart);
 
     void promptPlayerName();
     void promptNumberOfImages();
@@ -41,6 +41,7 @@ private:
     int m_sequence;
     int m_gameMode;
     bool m_gameStart;
+    InputChecker checker;
 };
 
 #endif // MENU_HPP

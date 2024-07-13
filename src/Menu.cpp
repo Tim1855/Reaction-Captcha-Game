@@ -1,11 +1,13 @@
 #include "Menu.hpp"
-#include <limits> // Für std::numeric_limits
+#include "InputChecker.cpp"
+
 
 Menu::Menu() {
 }
 
 Menu::~Menu() {
 }
+
 
 void Menu::displayMenu() {
     promptPlayerName();
@@ -21,61 +23,25 @@ void Menu::promptPlayerName() {
 }
 
 void Menu::promptNumberOfImages() {
-    std::cout << "\nWaehlen Sie wie viele Bilder Sie spielen moechten: ";
+    std::cout << "\nWaehlen Sie wie viele Bilder Sie spielen moechten (1-77): ";
     setNumberOfImages();
 }
 
 void Menu::promptSequence() {
-    std::cout << "\nWaehlen Sie welche Sequenz Sie spielen moechten (0000-0020): ";
+    std::cout << "\nWaehlen Sie welche Sequenz Sie spielen moechten (0-20): ";
     setSequence();
 }
 
 void Menu::promptGameMode() {
-    std::cout << "\nWaehlen Sie den Spielmodus (1, 2): ";
+    std::cout << "\nWaehlen Sie den Spielmodus aus (1 oder 2): ";
     setGameMode();
 }
 
 void Menu::promptGameStart() {
-    std::cout << "\nWollen Sie das Spiel starten (ja:1, nein:0)?: ";
+    std::cout << "\n\nWollen Sie das Spiel starten (1:ja, 0:nein): ";
     setGameStart();
 }
 
-void Menu::setPlayerName() {
-    std::cin >> m_PlayerName;
-}
-
-void Menu::setNumberOfImages() {
-    std::cin >> m_numberOfImages;
-}
-
-void Menu::setSequence() {
-    std::cin >> m_sequence;
-    while (!checkInputSequence()) {
-        std::cin >> m_sequence;
-    }
-}
-
-void Menu::setGameMode() {
-    std::cin >> m_gameMode;
-}
-
-void Menu::setGameStart() {
-    std::cin >> m_gameStart;
-}
-
-bool Menu::checkInputSequence() {
-    if (std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "\nGebe einen Integer ein: ";
-        return false;
-    } else if (m_sequence < 0 || m_sequence > 20) {
-        std::cout << "\nGebe eine Zahl zwischen 0 - 20 ein: ";
-        return false;
-    } else {
-        return true;
-    }
-}
 
 std::string Menu::getPlayerName() const {
     return m_PlayerName;
@@ -95,4 +61,87 @@ int Menu::getGameMode() const {
 
 bool Menu::getGameStart() const {
     return m_gameStart;
+}
+
+
+void Menu::setPlayerName() {
+    while (!checkInputPlayerName(m_PlayerName)) { // loop until checkInput returns 1, which indicates that the input is right
+        promptPlayerName;
+    }
+}
+
+void Menu::setNumberOfImages() {
+    while (!checkInputGameStart(m_numberOfImages)) {
+        promptNumberOfImages;
+    }
+}
+
+void Menu::setSequence() {
+    while (!checkInputGameStart(m_sequence)) {
+        promptSequence;
+    }
+}
+
+void Menu::setGameMode() {
+    while (!checkInputGameStart(m_gameMode)) {
+        promptGameMode;
+    }
+}
+
+void Menu::setGameStart() {
+    while (!checkInputGameStart(m_gameStart)) {
+        promptGameStart;
+    }
+}
+
+
+bool Menu::checkInputPlayerName(std::string m_PlayerName)
+{
+    if (!checker.checkDatatype(m_PlayerName))
+    {
+        return 0;
+    }
+}
+
+bool Menu::checkInputNumberOfImages(int m_numberOfImages)
+{
+    if (!checker.checkDatatype(m_numberOfImages))
+    {
+        return 0;
+    }
+    if ((m_numberOfImages < 1) || (m_numberOfImages > 77)) // smallest sequence has 77 images (0012)
+    {
+        return 0;
+    }
+}
+
+bool Menu::checkInputSequence(int m_sequence) {
+    if (!checker.checkDatatype(m_sequence))
+    {
+        return 0;
+    }
+    if ((m_sequence < 0) || (m_sequence > 20))
+    {
+        return 0;
+    }
+}
+
+bool Menu::checkInputGameMode(int m_gameMode) {
+    if (!checker.checkDatatype(m_gameMode))
+    {
+        return 0;
+    }
+    if ((m_gameMode < 1) || (m_gameMode > 2)) {
+        return 0;
+    }
+}
+
+bool Menu::checkInputGameStart(int m_gameStart) {
+    if (!checker.checkDatatype(m_gameStart))
+    {
+        return 0;
+    }
+    if ((m_gameMode < 0) || (m_gameMode > 1)) {
+        return 0;
+    }
 }
