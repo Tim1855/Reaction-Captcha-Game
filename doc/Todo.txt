@@ -2,9 +2,6 @@ OpenCV installieren     [X]
 Datensatz runterladen   [X]
 CMAKE testen            [X]
 
-UML/Programmaufbau      [ ]
-automatisch für Windows mit https://www.softwareideas.net/Download/3723/software-ideas-modeler-14-55-setup-
-
 HPP erstellen:          [ ]
     Menu                [X]
     Image               [ ]
@@ -14,7 +11,6 @@ HPP erstellen:          [ ]
     gamemode            [ ]
     gamemode1           [ ]
     gamemode2           [ ]
-
     Gui                 [ ]
 
 CPP erstellen:          [ ]
@@ -27,32 +23,22 @@ CPP erstellen:          [ ]
     gamemode1           [ ]
     gamemode2           [ ]
     Gui                 [ ]
+    main                [ ]
 
-Implementierung:
 
-Menu
-Datensatz einlesen
-Datensatz/Bilder anzeigen
-Boxen anzeigen
-Spiellogik
-    spielmodus 1
-    spielmodus 2
-Spiellogik visualisieren
-Spiel funktioniert(logik&visualisiereung)
-Ergebnisse speichern logik
-ergebnisse ausgeben
-Feedback für Spieler (durchschnittliche zeit, besten 3 ergebnisse)
-Überprüfung auf Rückgabewerte des Users(zb falsche werte int statt string eingaben usw.)
-Fehlerhandlich/Fehlertesting
+Überprüfung auf Rückgabewerte des Users [ ]
+Fehlerhandlich/Fehlertesting            [ ]
 
-const- check
-STL-check
-clean code check
-Coding Conventions check
-Kommentare check
+const- check                            [ ]
+STL-check                               [ ]
+clean code check                        [ ]
+Coding Conventions check                [ ]
+Kommentare check                        [ ]
 
-UML
-Unit tests
-ReadME
-Projektvorstellung
-(EVTL Erweiterungen)
+UML/Programmaufbau                      [ ]
+automatisch für Windows mit https://www.softwareideas.net/Download/3723/software-ideas-modeler-14-55-setup-
+
+Unit tests                              [ ]
+ReadME                                  [ ]
+Projektvorstellung                      [ ]
+(EVTL Erweiterungen)                    [ ]
