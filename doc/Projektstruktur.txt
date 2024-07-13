@@ -1,0 +1,53 @@
+Reaction-Captcha-Game/
+|
+├── data/
+│   ├── testing/
+|   |    └── image_02/
+|   |        └── 0000/
+│   └── training/
+|        └── image_02/
+|            └── 0000/
+|
+├── doc/
+│   ├── Anleitung.txt
+│   ├── Programmentwurf_ITA_und_IN_2024.pdf
+│   ├── code-Struktur.txt
+│   ├── Voraussetzungen.txt
+│   ├── todo.txt
+│   └── Projektstruktur.txt
+│
+├── inc/
+│   ├── Menu.hpp
+|   ├── Image.hpp
+|   ├── GameHandler.hpp
+|   ├── MouseHandler.hpp
+|   ├── TimeHandler.hpp
+|   ├── GameMode.hpp
+|   ├── GameMode1.hpp
+|   ├── GameMode2.hpp
+│   └── Gui.hpp
+│
+├── src/
+│   ├── Menu.cpp
+|   ├── Image.cpp
+|   ├── GameHandler.cpp
+|   ├── MouseHandler.cpp
+|   ├── TimeHandler.cpp
+|   ├── GameMode.cpp
+|   ├── GameMode1.cpp
+|   ├── GameMode2.cpp
+|   ├── Gui.cpp
+|   ├── Programmentwurf_Beispiele.cpp
+│   └── main.cpp
+│
+├── test/
+│   ├── CMakeLists.txt
+│   └── gameTest.cpp
+│
+├── .gitignore
+│
+├── CMakeLists.txt
+│
+├── LICENSE
+│
+└── README.md

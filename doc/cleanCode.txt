@@ -1,6 +1,0 @@
-variablenNamen klar deklarieren
-1 Sprache beibehalten
-const nutzen
-jede klasse 1 funktionalität(simple responsibility)
-am Anfang von jedem cpp Default Constructor und Destructor
-

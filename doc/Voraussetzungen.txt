@@ -2,6 +2,13 @@ Das Programm erfüllt die geforderten funktionalen Anforderungen
 Das Programm ist objektorientiert und verwendet C++ und objektorientierte Prinzipien, wie etwa Klassen, Vererbung und Polymorphie, const-Correctness, STL-Nutzung sinnvoll und korrekt.
 Projektbeschreibung und Klassendiagramm wie gefordert vorhanden
 Das Programm ist einfach lesbar, strukturiert und weitestgehend Code-Smell frei (siehe Clean Code). 
+    variablenNamen klar deklarieren
+    1 Sprache beibehalten
+    const nutzen
+    jede klasse 1 funktionalität(simple responsibility)
+    am Anfang von jedem cpp Default Constructor und Destructor
+
+
 Ausnahmen werden im Zweifelsfall begründet. 
 Korrektes Fehlerhandling (was passiert z.B. bei einer unerwarteten Eingabe?)
 
