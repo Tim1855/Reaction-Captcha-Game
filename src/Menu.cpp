@@ -1,5 +1,12 @@
 #include "Menu.hpp"
 
+Menu::Menu(/* args */)
+{
+}
+Menu::~Menu()
+{
+}
+
 void Menu::displayMenu() {
     promptPlayerName();
     promptNumberOfImages();
@@ -7,7 +14,7 @@ void Menu::displayMenu() {
     promptGameMode();
     promptGameStart();
 }
-    
+
 void Menu::promptPlayerName() {
     std::cout<<"Hallo Spieler, geben Sie ihren Namen ein: ";
     setPlayerName();
@@ -30,7 +37,7 @@ void Menu::promptGameMode() {
 
 void Menu::promptGameStart() {
     std::cout<<"\nWollen Sie das Spiel starten(ja:1, nein:0)?:";
-    setGameStart();    
+    setGameStart();
 }
 
 
@@ -44,9 +51,9 @@ void Menu::setNumberOfImages() {
     //checkInputInputImages()
 }
 
-void Menu::setSequence() {     
+void Menu::setSequence() {
     std::cin >> m_sequence;
-    while(!checkInputSequence()) { //wenn input falsch, also 1 wiederhole 
+    while(!checkInputSequence()) { //wenn input falsch, also 1 wiederhole
         std::cin >> m_sequence;
     }
 }
@@ -84,7 +91,7 @@ bool Menu::checkInputSequence() {
 std::string Menu::getPlayerName() const {
     return m_PlayerName;
 }
-   
+
 int Menu::getNumberOfImages() const {
     return m_numberOfImages;
 }

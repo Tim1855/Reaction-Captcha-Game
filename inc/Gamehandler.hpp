@@ -10,4 +10,13 @@ Attribute: currentImage, currentMode, playerStats
 #ifndef GAMEHANDLER_HPP
 #define GAMEHANDLER_HPP
 
+class Gamehandler
+{
+private:
+  /* data */
+public:
+  Gamehandler(/* args */);
+  ~Gamehandler();
+};
+
 #endif

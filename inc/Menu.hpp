@@ -7,9 +7,9 @@ class Menu {
     public:
         void displayMenu();
 
-        void setPlayerName();        
+        void setPlayerName();
         void setNumberOfImages();
-        void setSequence();        
+        void setSequence();
         void setGameMode();
         void setGameStart();
 
@@ -25,7 +25,7 @@ class Menu {
         void promptGameMode();
         void promptGameStart();
 
-        std::string getPlayerName() const;    
+        std::string getPlayerName() const;
         int getNumberOfImages() const;
         int getSequence() const;
         int getGameMode() const;
