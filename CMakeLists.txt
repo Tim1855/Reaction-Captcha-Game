@@ -33,10 +33,14 @@ set(Sources
     src/main.cpp
 )
 
-set(LibSources
-    src/Menu.cpp
-    #src/Image.cpp
-)
+# Define a variable for the source directory
+set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
+
+# Gather all source files in the src directory
+file(GLOB_RECURSE Libsources ${SRC_DIR}/*.cpp)
+
+# list all the gathered files
+message("Libsources: ${Libsources}")
 
 # defines a static library and adds the include folder
 add_library(GameLib STATIC ${LibSources})
