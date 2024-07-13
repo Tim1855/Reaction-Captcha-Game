@@ -1,24 +1,26 @@
 /*
-
-Diese Klasse könnte die Bilddaten und zugehörigen Bounding Boxes verwalten.
-Methoden: loadImage(), drawBoundingBox(), displayImage(), skipImage()
-Attribute: imageData, boundingBoxes
-
-
-
+Laden und speichern von Bildern
 */
-
 
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
-class Image
-{
-private:
-  /* data */
+#include <string>
+#include <opencv2/opencv.hpp>
+
+class Image {
 public:
-  Image(/* args */);
-  ~Image();
+  Image(const std::string& imagePath); // Constructor
+  ~Image();           // Destructor
+
+  bool load();  // Load the image from file
+  const cv::Mat& getImage() const;   // Get the loaded image
+  const std::string& getPath() const;   // Get the path of the image
+
+private:
+  std::string m_path;
+  cv::Mat m_image;
+
 };
 
 
