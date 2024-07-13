@@ -55,9 +55,30 @@ std::vector<Label> loadLabelsFromFile(std::string filename)
 
 int main()
 {
+<<<<<<< HEAD
     //reading labels (GT Boxes) from KITTI Dataset
     std::cout << "Error: Could not open or find the image!" << std::endl;
     std::string pathToLabelFile = "/Path/To/Label/File";
+=======
+    // Construct file paths relative to the current source directory
+    std::string pathToLabelFile;
+    std::string pathToImageFile;
+
+    std::cout << "Error: Could not open or find the image!" << std::endl;
+    #if defined(OS_LINUX) || defined(OS_MAC)
+    pathToLabelFile = std::string(SOURCE_DIR) + "/data/training/label_02/0000.txt";
+    pathToImageFile = std::string(SOURCE_DIR) + "/data/training/image_02/0000/000000.png";
+    #elif defined(OS_WINDOWS)
+    pathToLabelFile = std::string(SOURCE_DIR) + "\\data\\training\\label_02\\0000.txt";
+    pathToImageFile = std::string(SOURCE_DIR) + "\\data\\training\\image_02\\0000\\000000.png";
+    #endif
+
+    // For debugging, print the constructed file paths
+    std::cout << "Label file path: " << pathToLabelFile << std::endl;
+    std::cout << "Image file path: " << pathToImageFile << std::endl;
+
+    //reading labels (GT Boxes) from KITTI Dataset
+>>>>>>> cb9a1be331e8fea19181acf8f9684f74f803f191
     auto allLabelsFromSequence = loadLabelsFromFile(pathToLabelFile);
     std::cout << "numberOfLabels: " << allLabelsFromSequence.size() << std::endl;
     for (const auto& label : allLabelsFromSequence) { //print class of all elements from frame number 5
@@ -73,7 +94,11 @@ int main()
 
 
     //Load example image
+<<<<<<< HEAD
     cv::Mat image = cv::imread("/Path/To/Image/File");
+=======
+    cv::Mat image = cv::imread(pathToImageFile);
+>>>>>>> cb9a1be331e8fea19181acf8f9684f74f803f191
     if (image.empty()) {
         std::cerr << "Error: Could not open or find the image!" << std::endl;
         return -1;

@@ -4,39 +4,42 @@
 #include <iostream>
 
 class Menu {
-    public:
-        void displayMenu();
+public:
+    Menu(/* args */);
+    ~Menu();
 
-        void setPlayerName();        
-        void setNumberOfImages();
-        void setSequence();        
-        void setGameMode();
-        void setGameStart();
+    void displayMenu();
 
-        bool checkInputPlayerName();
-        bool checkInputNumberOfImages();
-        bool checkInputSequence();
-        bool checkInputGameMode();
-        bool checkInputGameStart();
+    void setPlayerName();
+    void setNumberOfImages();
+    void setSequence();
+    void setGameMode();
+    void setGameStart();
 
-        void promptPlayerName();
-        void promptNumberOfImages();
-        void promptSequence();
-        void promptGameMode();
-        void promptGameStart();
+    bool checkInputPlayerName();
+    bool checkInputNumberOfImages();
+    bool checkInputSequence();
+    bool checkInputGameMode();
+    bool checkInputGameStart();
 
-        std::string getPlayerName() const;    
-        int getNumberOfImages() const;
-        int getSequence() const;
-        int getGameMode() const;
-        bool getGameStart() const;
+    void promptPlayerName();
+    void promptNumberOfImages();
+    void promptSequence();
+    void promptGameMode();
+    void promptGameStart();
 
-    private:
-        std::string m_PlayerName;
-        int m_numberOfImages;
-        int m_sequence;
-        int m_gameMode;
-        bool m_gameStart;
+    std::string getPlayerName() const;
+    int getNumberOfImages() const;
+    int getSequence() const;
+    int getGameMode() const;
+    bool getGameStart() const;
+
+private:
+    std::string m_PlayerName;
+    int m_numberOfImages;
+    int m_sequence;
+    int m_gameMode;
+    bool m_gameStart;
 };
 
 #endif
