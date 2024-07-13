@@ -59,3 +59,6 @@ target_link_libraries(${executable} PRIVATE GameLib)
 
 # links the opencv library with executable
 target_link_libraries(${executable} PRIVATE ${OpenCV_LIBS})
+
+# Define the current source directory as a macro
+add_compile_definitions(SOURCE_DIR="${CMAKE_SOURCE_DIR}")
