@@ -1,23 +1,39 @@
 #include "Image.hpp"
+#include <opencv2/highgui/highgui.hpp>
+#include <iostream>
 
-Image::Image(const std::string& imagePath) // Constructor
-    : m_path(imagePath) {}
+// Constructor
+Image::Image(const std::string& imagePath)
+    : m_path(imagePath), m_loaded(false) {}
 
-Image::~Image() {} // Destructor
+// Destructor
+Image::~Image() {}
 
-bool Image::load() { // Load the image from file
+// Load the image from file
+void Image::load() {
     m_image = cv::imread(m_path, cv::IMREAD_COLOR);
-    if (m_image.empty()) {
-        std::cerr << "Error: Could not load image at " << m_path << std::endl;
-        return false;
-    }
-    return true;
+    m_loaded = !m_image.empty();
 }
 
-const cv::Mat& Image::getImage() const { // Get the loaded image
+// Check if the image was loaded successfully
+bool Image::isLoaded() const {
+    return m_loaded;
+}
+
+// Verify the loaded image and handle errors
+void Image::checkLoad() const {
+    if (!isLoaded()) {
+        std::cerr << "Failed to load image: " << m_path << std::endl;
+        exit(-1);
+    }
+}
+
+// Get the loaded image
+const cv::Mat& Image::getImage() const {
     return m_image;
 }
 
-const std::string& Image::getPath() const { // Get the path of the image
+// Get the path of the image
+const std::string& Image::getPath() const {
     return m_path;
 }

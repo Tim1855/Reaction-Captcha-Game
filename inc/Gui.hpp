@@ -1,37 +1,33 @@
-/*
-
-Darstellung und Interaktion
-
-*/
 #ifndef GUI_HPP
 #define GUI_HPP
 
 #include "Image.hpp"
+#include "BoundingBox.hpp"
 #include <vector>
 #include <string>
 
 class Gui {
 public:
-  Gui(); // Constructor
-  ~Gui(); // Destructor
+    // Constructor
+    Gui();
 
-  void initWindow() const; // Initialize the GUI window 
+    // Destructor
+    ~Gui();
 
-  void showImage(const Image& image) const;  // Display the image    
+    // Initialize the GUI window
+    void initWindow() const;
 
-  void drawBoundingBoxes(cv::Mat& image) const; // Draw bounding boxes on the image   
+    // Display the image
+    void showImage(const Image& image, const BoundingBox& boundingBox, int frame) const;
 
-  void addBoundingBox(int x, int y, int width, int height, const std::string& label); // Add a bounding box to be displayed 
+    // Draw bounding boxes on the image
+    void drawBoundingBoxes(cv::Mat& image, const std::vector<BoundingBox::Box>& boundingBoxes) const;
 
-  void waitForUserInput() const; // Wait for user input
+    // Wait for user input
+    void waitForUserInput() const;
 
-
-private:
-  struct BoundingBox {
-        int m_x, m_y, m_width, m_height;
-        std::string m_label;
-    };
-    std::vector<BoundingBox> m_boundingBoxes;
+    // Verify that the image and bounding boxes are loaded and handle errors
+    void checkLoad(const Image& image, const BoundingBox& boundingBox) const;
 };
 
-#endif
+#endif // GUI_HPP

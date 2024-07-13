@@ -1,7 +1,3 @@
-/*
-Laden und speichern von Bildern
-*/
-
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
@@ -10,18 +6,31 @@ Laden und speichern von Bildern
 
 class Image {
 public:
-  Image(const std::string& imagePath); // Constructor
-  ~Image();           // Destructor
+    // Constructor
+    Image(const std::string& imagePath);
 
-  bool load();  // Load the image from file
-  const cv::Mat& getImage() const;   // Get the loaded image
-  const std::string& getPath() const;   // Get the path of the image
+    // Destructor
+    ~Image();
+
+    // Load the image from file
+    void load();
+
+    // Check if the image was loaded successfully
+    bool isLoaded() const;
+
+    // Verify the loaded image and handle errors
+    void checkLoad() const;
+
+    // Get the loaded image
+    const cv::Mat& getImage() const;
+
+    // Get the path of the image
+    const std::string& getPath() const;
 
 private:
-  std::string m_path;
-  cv::Mat m_image;
-
+    std::string m_path;
+    cv::Mat m_image;
+    bool m_loaded;
 };
 
-
-#endif
+#endif // IMAGE_HPP

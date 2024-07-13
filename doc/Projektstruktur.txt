@@ -19,24 +19,28 @@ Reaction-Captcha-Game/
 ├── inc/
 │   ├── Menu.hpp
 |   ├── Image.hpp
+|   ├── BoundingBox.hpp
+|   ├── Gui.hpp
 |   ├── GameHandler.hpp
 |   ├── MouseHandler.hpp
 |   ├── TimeHandler.hpp
 |   ├── GameMode.hpp
 |   ├── GameMode1.hpp
 |   ├── GameMode2.hpp
-│   └── Gui.hpp
+
 │
 ├── src/
 │   ├── Menu.cpp
 |   ├── Image.cpp
+|   ├── BoundingBox.cpp
+|   ├── Gui.cpp
 |   ├── GameHandler.cpp
 |   ├── MouseHandler.cpp
 |   ├── TimeHandler.cpp
 |   ├── GameMode.cpp
 |   ├── GameMode1.cpp
 |   ├── GameMode2.cpp
-|   ├── Gui.cpp
+|   |
 |   ├── Programmentwurf_Beispiele.cpp
 │   └── main.cpp
 │
