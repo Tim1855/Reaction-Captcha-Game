@@ -5,7 +5,7 @@ Das Programm ist einfach lesbar, strukturiert und weitestgehend Code-Smell frei 
     variablenNamen klar deklarieren
     1 Sprache beibehalten
     const nutzen
-    jede klasse 1 funktionalität(simple responsibility)
+    Single Responsibility Principle
     am Anfang von jedem cpp Default Constructor und Destructor
 
 
