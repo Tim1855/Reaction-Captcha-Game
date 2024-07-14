@@ -1,4 +1,5 @@
 #include "GameMode2.hpp"
+#include "Gui.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -39,11 +40,11 @@ bool GameMode2::loadBoundingBoxes(int sequence) {
             continue;
         }
 
-        cv::Rect bbox(static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2 - x1), static_cast<int>(y2 - y1));
+        BoundingBox bbox(static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2), static_cast<int>(y2));
         if (m_boundingBoxes.size() <= frameIndex) {
             m_boundingBoxes.resize(frameIndex + 1);
         }
-        m_boundingBoxes[frameIndex].push_back(bbox);
+        m_boundingBoxes[frameIndex].push_back(cv::Rect(cv::Point(bbox.getX1(), bbox.getY1()), cv::Point(bbox.getX2(), bbox.getY2())));
     }
 
     std::cout << "Loaded bounding boxes for sequence " << std::setw(4) << std::setfill('0') << sequence << std::endl;
