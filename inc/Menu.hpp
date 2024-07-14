@@ -41,7 +41,6 @@ private:
     int m_sequence;
     int m_gameMode;
     bool m_gameStart;
-    InputChecker checker;
 };
 
 #endif // MENU_HPP

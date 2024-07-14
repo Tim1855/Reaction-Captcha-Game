@@ -1,4 +1,4 @@
-#include "Gamemode.hpp"
+#include "GameMode.hpp"
 
 // Implementierung von GameMode
 

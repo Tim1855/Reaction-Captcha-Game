@@ -1,8 +1,8 @@
-#include "GameMode1.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include "GameMode1.hpp"
 
 GameMode1::GameMode1(const std::string& imageFolderPath, const std::string& bboxFolderPath)
     : imageFolderPath(imageFolderPath), bboxFolderPath(bboxFolderPath), currentSequence(0), currentIndex(0) {

@@ -1,15 +1,8 @@
-#include "MouseHandler.hpp"
-#include "TimeHandler.hpp"
-#include "GameHandler.hpp"
 #include "Menu.hpp"
-#include <opencv2/opencv.hpp>
-#include <iostream>
+#include "GameHandler.cpp"
 
 int main() {
-    // initialize components
-    MouseHandler mouseHandler;
-    TimeHandler timeHandler;
-    GameHandler gameHandler;
+    // initialize menu
     Menu menu;
 
     // display menu and get player information
@@ -22,6 +15,8 @@ int main() {
 
 
     if (gameStart) {
+    // initialize components
+    
     gameHandler.initializeGame(playerName, numImages, sequence, gameMode);
     // start game
     gameHandler.startGame();
