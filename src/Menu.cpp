@@ -1,7 +1,8 @@
 #include "Menu.hpp"
+#include <limits>
+#include <iostream>
 
-
-Menu::Menu() {
+Menu::Menu(/* args */) : m_numberOfImages(0), m_sequence(0), m_gameMode(0), m_gameStart(false) {
 }
 
 Menu::~Menu() {

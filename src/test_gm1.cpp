@@ -7,6 +7,7 @@ int main() {
 
     // display menu and get player information
     menu.displayMenu();
+
     std::string playerName = menu.getPlayerName();
     int numImages = menu.getNumberOfImages();
     int sequence = menu.getSequence();

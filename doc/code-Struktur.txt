@@ -8,6 +8,14 @@ Verbessern: Nutzen Sie const-Correctness und die Standard Template Library (STL)
 Implementiere die Image.hpp und Image.cpp, um das Laden und Verarbeiten der Bilder aus dem KITTI-Datensatz zu ermöglichen.
 Stelle sicher, dass die Bilder korrekt angezeigt werden können und die Bounding Boxes aus dem Datensatz verarbeitet und angezeigt werden.
 
+BoundingBox:
+
+
+Gui:
+Verantwortlich für die grafische Benutzeroberfläche.
+Verbessern: Integrieren Sie robuste Bibliotheken zur GUI-Erstellung und stellen Sie sicher, dass die Benutzeroberfläche intuitiv und reaktionsschnell ist.
+Implementiere die Gui.hpp und Gui.cpp, um die grafische Benutzeroberfläche zu erstellen und zu verwalten.
+Diese Komponente sollte für die Darstellung der Spielinhalte und die Interaktion mit dem Spieler verantwortlich sein.
 
 
 GameHandler:
@@ -41,9 +49,3 @@ Diese Klassen sollten die spezifischen Regeln und Verhaltensweisen der jeweilige
 GameMode1 und GameMode2:
 Spezifische Implementierungen der Spielmodi, die von GameMode erben.
 Verbessern: Nutzen Sie Override-Mechanismen und stellen Sie sicher, dass jeder Modus seine spezifische Logik korrekt implementiert.
-
-Gui:
-Verantwortlich für die grafische Benutzeroberfläche.
-Verbessern: Integrieren Sie robuste Bibliotheken zur GUI-Erstellung und stellen Sie sicher, dass die Benutzeroberfläche intuitiv und reaktionsschnell ist.
-Implementiere die Gui.hpp und Gui.cpp, um die grafische Benutzeroberfläche zu erstellen und zu verwalten.
-Diese Komponente sollte für die Darstellung der Spielinhalte und die Interaktion mit dem Spieler verantwortlich sein.

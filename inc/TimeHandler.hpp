@@ -6,13 +6,11 @@
 class TimeHandler {
 public:
     TimeHandler();
-    ~TimeHandler();
-
-    void startTimer();
-    double stopTimer();
+    void start();
+    double stop();
 
 private:
-    std::chrono::high_resolution_clock::time_point startTime;
+    std::chrono::high_resolution_clock::time_point m_startTime;
 };
 
 #endif // TIMEHANDLER_HPP
