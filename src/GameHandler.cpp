@@ -70,7 +70,6 @@ void GameHandler::startGame() {
                 m_reactionTimes.push_back(reactionTime + 5.0); // Strafe von 5 Sekunden
             }
         }
-        cv::destroyAllWindows();
     }
 
     endGame();
