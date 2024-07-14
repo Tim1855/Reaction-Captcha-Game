@@ -6,24 +6,26 @@
 #include <iostream>
 
 int main() {
-    // Initialisieren der Komponenten
+    // initialize components
     MouseHandler mouseHandler;
     TimeHandler timeHandler;
     GameHandler gameHandler;
     Menu menu;
 
-    // Menü anzeigen und Benutzereingaben erfassen
+    // display menu and get player information
     menu.displayMenu();
     std::string playerName = menu.getPlayerName();
     int numImages = menu.getNumberOfImages();
     int sequence = menu.getSequence();
     int gameMode = menu.getGameMode();
+    bool gameStart = menu.getGameStart();
 
-    // Spiel initialisieren
+
+    if (gameStart) {
     gameHandler.initializeGame(playerName, numImages, sequence, gameMode);
-
-    // Spiel starten
+    // start game
     gameHandler.startGame();
+    }
 
     return 0;
 }

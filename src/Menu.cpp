@@ -19,26 +19,31 @@ void Menu::displayMenu() {
 
 void Menu::promptPlayerName() {
     std::cout << "Hallo Spieler, geben Sie ihren Namen ein: ";
+    std::cin >> m_PlayerName;
     setPlayerName();
 }
 
 void Menu::promptNumberOfImages() {
     std::cout << "\nWaehlen Sie wie viele Bilder Sie spielen moechten (1-77): ";
+    std::cin >> m_numberOfImages;
     setNumberOfImages();
 }
 
 void Menu::promptSequence() {
     std::cout << "\nWaehlen Sie welche Sequenz Sie spielen moechten (0-20): ";
+    std::cin >> m_sequence;
     setSequence();
 }
 
 void Menu::promptGameMode() {
     std::cout << "\nWaehlen Sie den Spielmodus aus (1 oder 2): ";
+    std::cin >> m_gameMode;
     setGameMode();
 }
 
 void Menu::promptGameStart() {
     std::cout << "\n\nWollen Sie das Spiel starten (1:ja, 0:nein): ";
+    std::cin >> m_gameStart;
     setGameStart();
 }
 
@@ -65,7 +70,8 @@ bool Menu::getGameStart() const {
 
 
 void Menu::setPlayerName() {
-    while (!checkInputPlayerName(m_PlayerName)) { // loop until checkInput returns 1, which indicates that the input is right
+    while (!checkInputPlayerName(m_PlayerName)) // loop until checkInput returns 1, which indicates that the input is right
+    {
         promptPlayerName;
     }
 }
@@ -91,6 +97,15 @@ void Menu::setGameMode() {
 void Menu::setGameStart() {
     while (!checkInputGameStart(m_gameStart)) {
         promptGameStart;
+    }
+    switch (m_gameStart)
+    {
+    case 0:
+        displayMenu();
+    case 1:
+        break;
+    default:
+        break;
     }
 }
 
