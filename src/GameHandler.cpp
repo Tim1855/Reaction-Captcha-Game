@@ -6,7 +6,7 @@
 #include <chrono>
 #include <algorithm>
 
-GameHandler::GameHandler() : m_currentGameMode(nullptr), m_numImagesToDisplay(0), m_imageClicked(false) {
+GameHandler::GameHandler() : m_currentGameMode(nullptr), m_numImagesToDisplay(0), m_imageClicked(false), m_sequence{0} {
 }
 
 GameHandler::~GameHandler() {
@@ -15,14 +15,16 @@ GameHandler::~GameHandler() {
 void GameHandler::initializeGame(const std::string& playerName, int numImages, int sequence, int gameMode) {
     m_playerName = playerName;
     m_numImagesToDisplay = numImages;
-    m_sequence = sequence; // Speichern der Sequenznummer
+    m_sequence = sequence;
     m_gameMode = gameMode;
     std::string imageFolderPath;
     std::string bboxFolderPath;
 
+
     std::ostringstream sequenceStream;
     sequenceStream << std::setw(4) << std::setfill('0') << sequence;
     std::string sequenceString = sequenceStream.str();
+    std::cout << sequenceString;
 
     #if defined(OS_LINUX) || defined(OS_MAC)
     imageFolderPath = std::string(SOURCE_DIR) + "/data/training/image_02/" + sequenceString;

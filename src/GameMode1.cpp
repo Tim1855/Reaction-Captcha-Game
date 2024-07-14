@@ -20,11 +20,12 @@ bool GameMode1::loadBoundingBoxes(int sequence) {
     std::ostringstream bboxFilePathStream;
     bboxFilePathStream << m_bboxFolderPath << "/" << std::setw(4) << std::setfill('0') << sequence << ".txt";
     std::string bboxFilePath = bboxFilePathStream.str();
+    std::cout << bboxFilePath;
 
     std::ifstream infile(bboxFilePath);
     if (!infile.is_open()) {
-        std::cerr << "Error: Cannot open bounding box file: " << bboxFilePath << std::endl;
-        return false;
+        std::cout << "Error: Cannot open bounding box file" << std::endl;
+        return 0;
     }
 
     m_boundingBoxes.clear();
@@ -43,43 +44,45 @@ bool GameMode1::loadBoundingBoxes(int sequence) {
         }
 
         BoundingBox bbox(static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2), static_cast<int>(y2));
-        if (m_boundingBoxes.size() <= frameIndex) {
-            m_boundingBoxes.resize(frameIndex + 1);
-        }
+            if (m_boundingBoxes.size() <= frameIndex) {
+                    m_boundingBoxes.resize(frameIndex + 1);
+            }
         m_boundingBoxes[frameIndex].push_back(cv::Rect(cv::Point(bbox.getX1(), bbox.getY1()), cv::Point(bbox.getX2(), bbox.getY2())));
     }
 
-    return true;
+    return 1;
 }
 
 void GameMode1::loadImageAndBoundingBox(int sequence, int index) {
-    if (sequence != m_currentSequence) {
         if (!loadBoundingBoxes(sequence)) {
+            std::cout << "Cannot load bounding boxes";
             return;
         }
-    }
     m_currentIndex = index;
 
     std::ostringstream imagePathStream;
     imagePathStream << m_imageFolderPath << "/" << std::setw(6) << std::setfill('0') << index << ".png";
     std::string imagePath = imagePathStream.str();
-
     m_currentImage = cv::imread(imagePath);
     if (m_currentImage.empty()) {
         std::cerr << "Error: Image not found: " << imagePath << std::endl;
         return;
     }
-
     if (!filterBoundingBoxesForFrame(index)) {
         return;
     }
-
     display();
 }
 
 bool GameMode1::filterBoundingBoxesForFrame(int frameIndex) {
     if (frameIndex < 0 || frameIndex >= static_cast<int>(m_boundingBoxes.size())) {
-        return false;
+        // std::cout << "Frame Index: " << frameIndex << std::endl;
+        // std::cout << "Bounding Box Size: " << m_boundingBoxes.size() << std::endl;
+        return 0;
+    }
+    else {
+        // std::cout << "Frame Index: " << frameIndex << std::endl;
+        // std::cout << "Bounding Box Size: " << m_boundingBoxes.size() << std::endl;
     }
 
     m_currentBoundingBoxes.clear();
@@ -113,7 +116,7 @@ void GameMode1::display() {
         if (event == cv::EVENT_LBUTTONDOWN) {
             static_cast<GameMode1*>(userdata)->handleMouseClick(x, y);
         }
-    }, this);
+        }, this);
 }
 
 void GameMode1::setMouseCallback(bool* imageClicked) {
@@ -123,7 +126,8 @@ void GameMode1::setMouseCallback(bool* imageClicked) {
 void GameMode1::handleMouseClick(int x, int y) {
     if (m_targetBoundingBox.contains(cv::Point(x, y))) {
         m_lastClickInBoundingBox = true;
-    } else {
+    }
+    else {
         m_lastClickInBoundingBox = false;
     }
     *m_imageClicked = true;

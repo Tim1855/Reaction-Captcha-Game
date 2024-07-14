@@ -10,10 +10,10 @@ Menu::~Menu() {
 
 
 void Menu::displayMenu() {
-    promptPlayerName();
-    promptNumberOfImages();
-    promptSequence();
-    promptGameMode();
+    // promptPlayerName();
+    // promptNumberOfImages();
+    // promptSequence();
+    // promptGameMode();
     promptGameStart();
 }
 

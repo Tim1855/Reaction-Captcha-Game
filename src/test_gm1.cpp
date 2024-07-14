@@ -8,11 +8,15 @@ int main() {
     // display menu and get player information
     menu.displayMenu();
 
-    std::string playerName = menu.getPlayerName();
-    int numImages = menu.getNumberOfImages();
-    int sequence = menu.getSequence();
-    int gameMode = menu.getGameMode();
+    // std::string playerName = menu.getPlayerName();
+    // int numImages = menu.getNumberOfImages();
+    // int sequence = menu.getSequence();
+    // int gameMode = menu.getGameMode();
     bool gameStart = menu.getGameStart();
+    std::string playerName = "Tim";
+    int numImages = 5;
+    int sequence = 0;
+    int gameMode = 1;
 
 
     if (gameStart) {
