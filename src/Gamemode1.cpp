@@ -12,6 +12,8 @@ GameMode1::~GameMode1() {
 }
 
 bool GameMode1::loadBoundingBoxes(int sequence) {
+    currentSequence = sequence; // Speichern der aktuellen Sequenznummer
+
     std::ostringstream bboxFilePathStream;
     bboxFilePathStream << bboxFolderPath << "/" << std::setw(4) << std::setfill('0') << sequence << ".txt";
     std::string bboxFilePath = bboxFilePathStream.str();
@@ -84,11 +86,7 @@ void GameMode1::startMode() {
 }
 
 void GameMode1::processInput(int x, int y) {
-    if (x == -1 && y == -1) {
-        std::cout << "No valid input received." << std::endl;
-        return;
-    }
-
+    y = currentImage.rows - y; // Korrektur der y-Koordinate
     std::cout << "Processing input in GameMode1 at (" << x << ", " << y << ")" << std::endl;
     if (boundingBox.contains(cv::Point(x, y))) {
         std::cout << "Hit! Bounding box clicked." << std::endl;
