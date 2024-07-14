@@ -2,19 +2,15 @@
 #define TIMEHANDLER_HPP
 
 #include <chrono>
-#include <thread>
 
 class TimeHandler {
 public:
     TimeHandler();
-    ~TimeHandler();
-
-    void startTimer();
-    double stopTimer();
-    void delay(int milliseconds); // Neue Methode zum Verzögern
+    void start();
+    double stop();
 
 private:
-    std::chrono::high_resolution_clock::time_point startTime;
+    std::chrono::high_resolution_clock::time_point m_startTime;
 };
 
 #endif // TIMEHANDLER_HPP

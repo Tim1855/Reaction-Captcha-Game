@@ -1,7 +1,8 @@
 #include "Menu.hpp"
-#include <limits> // Für std::numeric_limits
+#include <limits>
+#include <iostream>
 
-Menu::Menu() {
+Menu::Menu(/* args */) : m_numberOfImages(0), m_sequence(0), m_gameMode(0), m_gameStart(false) {
 }
 
 Menu::~Menu() {
@@ -31,7 +32,7 @@ void Menu::promptSequence() {
 }
 
 void Menu::promptGameMode() {
-    std::cout << "\nWaehlen Sie den Spielmodus (1, 2): ";
+    std::cout << "\nWaehlen Sie den Spielmodus (1 oder 2): ";
     setGameMode();
 }
 
@@ -42,10 +43,14 @@ void Menu::promptGameStart() {
 
 void Menu::setPlayerName() {
     std::cin >> m_PlayerName;
+    // checkInputPlayerName();
 }
 
 void Menu::setNumberOfImages() {
     std::cin >> m_numberOfImages;
+    while (!checkInputNumberOfImages()) {
+        std::cin >> m_numberOfImages;
+    }
 }
 
 void Menu::setSequence() {
@@ -57,24 +62,52 @@ void Menu::setSequence() {
 
 void Menu::setGameMode() {
     std::cin >> m_gameMode;
+    while (!checkInputGameMode()) {
+        std::cin >> m_gameMode;
+    }
 }
 
 void Menu::setGameStart() {
     std::cin >> m_gameStart;
+    // checkInputGameStart();
+}
+
+bool Menu::checkInputPlayerName() {
+    return true; // Implementieren Sie die Überprüfung für den Spielernamen, falls erforderlich
+}
+
+bool Menu::checkInputNumberOfImages() {
+    if (std::cin.fail() || m_numberOfImages <= 0) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\nGeben Sie eine gültige Anzahl von Bildern ein: ";
+        return false;
+    }
+    return true;
 }
 
 bool Menu::checkInputSequence() {
-    if (std::cin.fail()) {
+    if (std::cin.fail() || m_sequence < 0 || m_sequence > 20) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "\nGebe einen Integer ein: ";
+        std::cout << "\nGeben Sie eine Zahl zwischen 0000 und 0020 ein: ";
         return false;
-    } else if (m_sequence < 0 || m_sequence > 20) {
-        std::cout << "\nGebe eine Zahl zwischen 0 - 20 ein: ";
-        return false;
-    } else {
-        return true;
     }
+    return true;
+}
+
+bool Menu::checkInputGameMode() {
+    if (std::cin.fail() || (m_gameMode != 1 && m_gameMode != 2)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "\nUngueltige Eingabe. Bitte waehlen Sie den Spielmodus (1 oder 2): ";
+        return false;
+    }
+    return true;
+}
+
+bool Menu::checkInputGameStart() {
+    return true; // Implementieren Sie die Überprüfung für den Spielstart, falls erforderlich
 }
 
 std::string Menu::getPlayerName() const {

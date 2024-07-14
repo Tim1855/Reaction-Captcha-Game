@@ -1,21 +1,14 @@
 #ifndef MOUSEHANDLER_HPP
 #define MOUSEHANDLER_HPP
 
-#include <functional>
-#include <string>
+#include <opencv2/opencv.hpp>
 
 class MouseHandler {
 public:
-    MouseHandler();
-    ~MouseHandler();
-
-    void setClickCallback(std::function<void(int, int)> callback);
-    void setWindowName(const std::string& windowName);
+    static void onMouse(int event, int x, int y, int, void* param);
 
 private:
-    std::function<void(int, int)> clickCallback;
-    std::string windowName;
-    static void mouseCallback(int event, int x, int y, int flags, void* userdata);
+    MouseHandler() = default;
 };
 
 #endif // MOUSEHANDLER_HPP

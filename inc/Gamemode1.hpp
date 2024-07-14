@@ -3,7 +3,6 @@
 
 #include "GameMode.hpp"
 #include <opencv2/opencv.hpp>
-#include <string>
 #include <vector>
 
 class GameMode1 : public GameMode {
@@ -11,24 +10,24 @@ public:
     GameMode1(const std::string& imageFolderPath, const std::string& bboxFolderPath);
     ~GameMode1();
 
-    void startMode() override;
-    void processInput(int x, int y) override;
+    void startMode(int sequence, int numImages) override;
+    void loadImageAndBoundingBox(int sequence, int index) override;
     void display() override;
-
-    void loadImageAndBoundingBox(int sequence, int index);
-
-    int getCurrentSequence() const { return currentSequence; }
+    void setMouseCallback(bool* imageClicked) override;
 
 private:
-    cv::Mat currentImage;
-    cv::Rect boundingBox;
-    std::string imageFolderPath;
-    std::string bboxFolderPath;
-    std::vector<std::vector<cv::Rect>> boundingBoxes;
-    int currentSequence;
-    int currentIndex;
-
     bool loadBoundingBoxes(int sequence);
+    bool filterBoundingBoxesForFrame(int frameIndex);
+
+    std::string m_imageFolderPath;
+    std::string m_bboxFolderPath;
+    int m_currentSequence;
+    int m_currentIndex;
+    cv::Mat m_currentImage;
+    bool* m_imageClicked;
+
+    std::vector<std::vector<cv::Rect>> m_boundingBoxes;
+    std::vector<cv::Rect> m_currentBoundingBoxes;
 };
 
 #endif // GAMEMODE1_HPP
