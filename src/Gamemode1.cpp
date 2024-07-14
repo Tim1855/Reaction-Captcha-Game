@@ -7,7 +7,7 @@
 #include <random>
 
 GameMode1::GameMode1(const std::string& imageFolderPath, const std::string& bboxFolderPath)
-    : m_imageFolderPath(imageFolderPath), m_bboxFolderPath(bboxFolderPath), m_currentSequence(0), m_currentIndex(0), m_imageClicked(nullptr) {
+    : m_imageFolderPath(imageFolderPath), m_bboxFolderPath(bboxFolderPath), m_currentSequence(0), m_currentIndex(0), m_imageClicked(nullptr), m_lastClickInBoundingBox(false) {
 }
 
 GameMode1::~GameMode1() {
@@ -22,6 +22,7 @@ bool GameMode1::loadBoundingBoxes(int sequence) {
 
     std::ifstream infile(bboxFilePath);
     if (!infile.is_open()) {
+        std::cerr << "Error: Cannot open bounding box file: " << bboxFilePath << std::endl;
         return false;
     }
 
@@ -65,6 +66,7 @@ void GameMode1::loadImageAndBoundingBox(int sequence, int index) {
 
     m_currentImage = cv::imread(imagePath);
     if (m_currentImage.empty()) {
+        std::cerr << "Error: Image not found: " << imagePath << std::endl;
         return;
     }
 
@@ -86,39 +88,47 @@ bool GameMode1::filterBoundingBoxesForFrame(int frameIndex) {
     }
 
     if (!m_currentBoundingBoxes.empty()) {
-        // Zufällige Auswahl einer Bounding Box
+        // Select a random bounding box
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> dis(0, m_currentBoundingBoxes.size() - 1);
-        int randomIndex = dis(gen);
-
-        // Nur die zufällig ausgewählte Bounding Box behalten
-        m_currentBoundingBoxes = { m_currentBoundingBoxes[randomIndex] };
+        m_targetBoundingBox = m_currentBoundingBoxes[dis(gen)];
     }
 
     return !m_currentBoundingBoxes.empty();
 }
 
 void GameMode1::startMode(int sequence, int numImages) {
-    // Game mode started
+    // Empty for now
 }
 
 void GameMode1::display() {
     if (m_currentImage.empty()) return;
 
     cv::Mat displayImage = m_currentImage.clone();
-    for (const auto& bbox : m_currentBoundingBoxes) {
-        cv::rectangle(displayImage, bbox, cv::Scalar(0, 0, 255), 2);
-    }
+    cv::rectangle(displayImage, m_targetBoundingBox, cv::Scalar(0, 0, 255), 2);
 
     cv::imshow("Game Window", displayImage);
     cv::setMouseCallback("Game Window", [](int event, int x, int y, int flags, void* userdata) {
         if (event == cv::EVENT_LBUTTONDOWN) {
-            *static_cast<bool*>(userdata) = true;
+            static_cast<GameMode1*>(userdata)->handleMouseClick(x, y);
         }
-    }, static_cast<void*>(m_imageClicked));
+    }, this);
 }
 
 void GameMode1::setMouseCallback(bool* imageClicked) {
     m_imageClicked = imageClicked;
+}
+
+void GameMode1::handleMouseClick(int x, int y) {
+    if (m_targetBoundingBox.contains(cv::Point(x, y))) {
+        m_lastClickInBoundingBox = true;
+    } else {
+        m_lastClickInBoundingBox = false;
+    }
+    *m_imageClicked = true;
+}
+
+bool GameMode1::lastClickInBoundingBox() const {
+    return m_lastClickInBoundingBox;
 }

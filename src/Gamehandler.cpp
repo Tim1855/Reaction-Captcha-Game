@@ -54,8 +54,13 @@ void GameHandler::startGame() {
         if (m_imageClicked) {
             auto endTime = std::chrono::high_resolution_clock::now();
             auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
-            std::cout << "Bild " << i + 1 << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
-            m_reactionTimes.push_back(reactionTime);
+            if (static_cast<GameMode1*>(m_currentGameMode.get())->lastClickInBoundingBox()) {
+                std::cout << "Bild " << i + 1 << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
+                m_reactionTimes.push_back(reactionTime);
+            } else {
+                std::cout << "Bild " << i + 1 << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
+                m_reactionTimes.push_back(reactionTime + 5.0); // Strafe von 5 Sekunden
+            }
         }
         cv::destroyAllWindows();
     }

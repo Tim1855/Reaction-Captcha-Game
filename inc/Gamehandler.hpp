@@ -1,16 +1,16 @@
 #ifndef GAMEHANDLER_HPP
 #define GAMEHANDLER_HPP
 
-#include "Gamemode.hpp"
 #include <memory>
-#include <vector>
 #include <string>
+#include <vector>
+#include "GameMode.hpp"
 
 class GameHandler {
 public:
     GameHandler();
     ~GameHandler();
-    
+
     void initializeGame(const std::string& playerName, int numImages, int sequence, int gameMode);
     void startGame();
     void endGame();
