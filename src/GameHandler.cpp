@@ -21,6 +21,7 @@ void GameHandler::initializeGame(const std::string& playerName, int numImages, i
     std::ostringstream sequenceStream;
     sequenceStream << std::setw(4) << std::setfill('0') << sequence;
     std::string sequenceString = sequenceStream.str();
+    
     std::string imageFolderPath = "C:/appldev/Reaction-Captcha-Game/data/training/image_02/" + sequenceString;
     std::string bboxFolderPath = "C:/appldev/Reaction-Captcha-Game/data/label_02";
 

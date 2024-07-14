@@ -2,7 +2,10 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <random>
 #include "GameMode1.hpp"
+#include "BoundingBox.hpp"
+
 
 GameMode1::GameMode1(const std::string& imageFolderPath, const std::string& bboxFolderPath)
     : m_imageFolderPath(imageFolderPath), m_bboxFolderPath(bboxFolderPath), m_currentSequence(0), m_currentIndex(0), m_imageClicked(nullptr), m_lastClickInBoundingBox(false) {
@@ -55,7 +58,6 @@ void GameMode1::loadImageAndBoundingBox(int sequence, int index) {
             return;
         }
     }
-    
     m_currentIndex = index;
 
     std::ostringstream imagePathStream;

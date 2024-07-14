@@ -17,7 +17,7 @@ int main() {
 
     if (gameStart) {
     // initialize components
-    
+    GameHandler gameHandler;
     gameHandler.initializeGame(playerName, numImages, sequence, gameMode);
     // start game
     gameHandler.startGame();

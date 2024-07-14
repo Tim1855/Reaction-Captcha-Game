@@ -1,4 +1,4 @@
-#include "Mousehandler.hpp"
+#include "MouseHandler.hpp"
 #include <opencv2/opencv.hpp>
 
 void MouseHandler::onMouse(int event, int x, int y, int, void* param) {
