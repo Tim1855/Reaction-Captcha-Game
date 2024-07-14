@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <random>
 
 GameMode1::GameMode1(const std::string& imageFolderPath, const std::string& bboxFolderPath)
     : m_imageFolderPath(imageFolderPath), m_bboxFolderPath(bboxFolderPath), m_currentSequence(0), m_currentIndex(0), m_imageClicked(nullptr) {
@@ -21,7 +22,6 @@ bool GameMode1::loadBoundingBoxes(int sequence) {
 
     std::ifstream infile(bboxFilePath);
     if (!infile.is_open()) {
-        std::cerr << "Error: Cannot open bounding box file: " << bboxFilePath << std::endl;
         return false;
     }
 
@@ -47,7 +47,6 @@ bool GameMode1::loadBoundingBoxes(int sequence) {
         m_boundingBoxes[frameIndex].push_back(cv::Rect(cv::Point(bbox.getX1(), bbox.getY1()), cv::Point(bbox.getX2(), bbox.getY2())));
     }
 
-    std::cout << "Loaded bounding boxes for sequence " << std::setw(4) << std::setfill('0') << sequence << std::endl;
     return true;
 }
 
@@ -66,7 +65,6 @@ void GameMode1::loadImageAndBoundingBox(int sequence, int index) {
 
     m_currentImage = cv::imread(imagePath);
     if (m_currentImage.empty()) {
-        std::cerr << "Error: Image not found: " << imagePath << std::endl;
         return;
     }
 
@@ -78,8 +76,7 @@ void GameMode1::loadImageAndBoundingBox(int sequence, int index) {
 }
 
 bool GameMode1::filterBoundingBoxesForFrame(int frameIndex) {
-    if (frameIndex < 0 || frameIndex >= m_boundingBoxes.size()) {
-        std::cerr << "Error: Invalid frame index for bounding box" << std::endl;
+    if (frameIndex < 0 || frameIndex >= static_cast<int>(m_boundingBoxes.size())) {
         return false;
     }
 
@@ -88,11 +85,22 @@ bool GameMode1::filterBoundingBoxesForFrame(int frameIndex) {
         m_currentBoundingBoxes.push_back(bbox);
     }
 
+    if (!m_currentBoundingBoxes.empty()) {
+        // Zufällige Auswahl einer Bounding Box
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dis(0, m_currentBoundingBoxes.size() - 1);
+        int randomIndex = dis(gen);
+
+        // Nur die zufällig ausgewählte Bounding Box behalten
+        m_currentBoundingBoxes = { m_currentBoundingBoxes[randomIndex] };
+    }
+
     return !m_currentBoundingBoxes.empty();
 }
 
 void GameMode1::startMode(int sequence, int numImages) {
-    std::cout << "GameMode1 started" << std::endl;
+    // Game mode started
 }
 
 void GameMode1::display() {

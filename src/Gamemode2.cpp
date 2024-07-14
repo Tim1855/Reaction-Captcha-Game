@@ -47,7 +47,6 @@ bool GameMode2::loadBoundingBoxes(int sequence) {
         m_boundingBoxes[frameIndex].push_back(cv::Rect(cv::Point(bbox.getX1(), bbox.getY1()), cv::Point(bbox.getX2(), bbox.getY2())));
     }
 
-    std::cout << "Loaded bounding boxes for sequence " << std::setw(4) << std::setfill('0') << sequence << std::endl;
     return true;
 }
 
@@ -78,7 +77,7 @@ void GameMode2::loadImageAndBoundingBox(int sequence, int index) {
 }
 
 bool GameMode2::filterBoundingBoxesForFrame(int frameIndex) {
-    if (frameIndex < 0 || frameIndex >= m_boundingBoxes.size()) {
+    if (frameIndex < 0 || frameIndex >= static_cast<int>(m_boundingBoxes.size())) {
         std::cerr << "Error: Invalid frame index for bounding box" << std::endl;
         return false;
     }
