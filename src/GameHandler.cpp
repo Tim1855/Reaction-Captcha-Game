@@ -17,13 +17,21 @@ void GameHandler::initializeGame(const std::string& playerName, int numImages, i
     m_numImagesToDisplay = numImages;
     m_sequence = sequence; // Speichern der Sequenznummer
     m_gameMode = gameMode;
+    std::string imageFolderPath;
+    std::string bboxFolderPath;
 
     std::ostringstream sequenceStream;
     sequenceStream << std::setw(4) << std::setfill('0') << sequence;
     std::string sequenceString = sequenceStream.str();
-    
-    std::string imageFolderPath = "C:/appldev/Reaction-Captcha-Game/data/training/image_02/" + sequenceString;
-    std::string bboxFolderPath = "C:/appldev/Reaction-Captcha-Game/data/label_02";
+
+    #if defined(OS_LINUX) || defined(OS_MAC)
+    imageFolderPath = std::string(SOURCE_DIR) + "/data/training/image_02/" + sequenceString;
+    bboxFolderPath = std::string(SOURCE_DIR) + "/data/training/label_02";
+    #elif defined(OS_WINDOWS)
+    imageFolderPath = std::string(SOURCE_DIR) + "\\data\\training\\image_02\\" + sequenceString;
+    bboxFolderPath = std::string(SOURCE_DIR) + "\\data\\training\\label_02";
+    #endif
+
 
     if (m_gameMode == 1) {
         m_currentGameMode = std::make_unique<GameMode1>(imageFolderPath, bboxFolderPath);
@@ -39,7 +47,6 @@ void GameHandler::startGame() {
     for (int i = 0; i < m_numImagesToDisplay; ++i) {
         m_currentGameMode->loadImageAndBoundingBox(m_sequence, i);
         displayNextImage();
-        
         m_imageClicked = false;
         auto startTime = std::chrono::high_resolution_clock::now();
         while (!m_imageClicked) {
