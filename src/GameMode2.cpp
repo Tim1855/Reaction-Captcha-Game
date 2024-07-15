@@ -51,12 +51,9 @@ bool GameMode2::loadBoundingBoxes(int sequence) {
 }
 
 void GameMode2::loadImageAndBoundingBox(int sequence, int index) {
-    if (sequence != m_currentSequence) {
-        if (!loadBoundingBoxes(sequence)) {
-            return;
-        }
+    if (!loadBoundingBoxes(sequence)) {
+        return;
     }
-    
     m_currentIndex = index;
 
     std::ostringstream imagePathStream;
@@ -107,7 +104,7 @@ void GameMode2::display() {
         if (event == cv::EVENT_LBUTTONDOWN) {
             *static_cast<bool*>(userdata) = true;
         }
-    }, static_cast<void*>(m_imageClicked));
+        }, static_cast<void*>(m_imageClicked));
 }
 
 void GameMode2::setMouseCallback(bool* imageClicked) {

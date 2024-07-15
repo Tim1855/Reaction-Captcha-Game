@@ -1,10 +1,11 @@
-#include "GameHandler.hpp"
-#include "GameMode1.hpp"
-#include "GameMode2.hpp"
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <chrono>
 #include <algorithm>
+#include "GameHandler.hpp"
+#include "GameMode1.hpp"
+#include "GameMode2.hpp"
+#include "Config.hpp"
 
 GameHandler::GameHandler() : m_currentGameMode(nullptr), m_numImagesToDisplay(0), m_imageClicked(false), m_sequence{0} {
 }
@@ -18,7 +19,6 @@ void GameHandler::initializeGame(const std::string& playerName, int numImages, i
     m_sequence = sequence;
     m_gameMode = gameMode;
     std::string imageFolderPath;
-    std::string bboxFolderPath;
 
 
     std::ostringstream sequenceStream;
@@ -26,13 +26,7 @@ void GameHandler::initializeGame(const std::string& playerName, int numImages, i
     std::string sequenceString = sequenceStream.str();
     std::cout << sequenceString;
 
-    #if defined(OS_LINUX) || defined(OS_MAC)
-    imageFolderPath = std::string(SOURCE_DIR) + "/data/training/image_02/" + sequenceString;
-    bboxFolderPath = std::string(SOURCE_DIR) + "/data/training/label_02";
-    #elif defined(OS_WINDOWS)
-    imageFolderPath = std::string(SOURCE_DIR) + "\\data\\training\\image_02\\" + sequenceString;
-    bboxFolderPath = std::string(SOURCE_DIR) + "\\data\\training\\label_02";
-    #endif
+    imageFolderPath = imageFolder + sequenceString ;
 
 
     if (m_gameMode == 1) {
