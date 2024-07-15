@@ -38,7 +38,7 @@ test inputs                             [ ] LUIS
 check path in menu                      [ ] LUIS
 Programmbeschreibung                    [ ] LUIS
 Projektstruktur fix                     [ ] LUIS
-add main.cpp                            [ ] LUIS
+add main.                            [ ] LUIS
 
 Di/Mi:
 clean code check                        [ ] TIM
@@ -53,5 +53,5 @@ Mi:
 ReadME                                  [ ] LUIS
 Projektvorstellung                      [ ] TIM/LUIS
 UML/Programmaufbau                      [ ] LUIS
-automatisch für Windows mit https://www.softwareideas.net/Download/3723/software-ideas-modeler-14-55-setup-
-(Unit tests                              [ ] LUIS)
+keine privaten Methoden, keine Tests etc. https://www.softwareideas.net/Download/3723/software-ideas-modeler-14-55-setup-
+(Unit tests                             [ ] LUIS)
