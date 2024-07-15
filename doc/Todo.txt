@@ -33,12 +33,12 @@ Mo:
 STL-check                               [X]
 Bug-Fixing                              [ ]  TIM
 check inputs                            [X] 
+Projektstruktur fix                     [ ] LUIS
 int check,string check/std.infail check [ ] LUIS
 test inputs                             [ ] LUIS
 check path in menu                      [ ] LUIS
-Programmbeschreibung                    [ ] LUIS
-Projektstruktur fix                     [ ] LUIS
-add main.                            [ ] LUIS
+
+add main.                               [ ] LUIS
 
 Di/Mi:
 clean code check                        [ ] TIM
@@ -53,5 +53,6 @@ Mi:
 ReadME                                  [ ] LUIS
 Projektvorstellung                      [ ] TIM/LUIS
 UML/Programmaufbau                      [ ] LUIS
+Programmbeschreib/READ(Implementierung) [ ] LUIS
 keine privaten Methoden, keine Tests etc. https://www.softwareideas.net/Download/3723/software-ideas-modeler-14-55-setup-
 (Unit tests                             [ ] LUIS)
