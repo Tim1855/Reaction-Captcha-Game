@@ -16,7 +16,7 @@ int main() {
     std::string playerName = "Tim";
     int numImages = 10;
     int sequence = 0;
-    int gameMode = 1;
+    int gameMode = 2;
 
 
     if (gameStart) {

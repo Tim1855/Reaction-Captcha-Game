@@ -20,7 +20,6 @@ bool GameMode1::loadBoundingBoxes(int sequence) {
     std::ostringstream bboxFilePathStream;
     bboxFilePathStream << m_bboxFolderPath << "/" << std::setw(4) << std::setfill('0') << sequence << ".txt";
     std::string bboxFilePath = bboxFilePathStream.str();
-    std::cout << bboxFilePath;
 
     std::ifstream infile(bboxFilePath);
     if (!infile.is_open()) {
@@ -76,13 +75,7 @@ void GameMode1::loadImageAndBoundingBox(int sequence, int index) {
 
 bool GameMode1::filterBoundingBoxesForFrame(int frameIndex) {
     if (frameIndex < 0 || frameIndex >= static_cast<int>(m_boundingBoxes.size())) {
-        // std::cout << "Frame Index: " << frameIndex << std::endl;
-        // std::cout << "Bounding Box Size: " << m_boundingBoxes.size() << std::endl;
         return 0;
-    }
-    else {
-        // std::cout << "Frame Index: " << frameIndex << std::endl;
-        // std::cout << "Bounding Box Size: " << m_boundingBoxes.size() << std::endl;
     }
 
     m_currentBoundingBoxes.clear();
@@ -125,12 +118,12 @@ void GameMode1::setMouseCallback(bool* imageClicked) {
 
 void GameMode1::handleMouseClick(int x, int y) {
     if (m_targetBoundingBox.contains(cv::Point(x, y))) {
-        m_lastClickInBoundingBox = true;
+        m_lastClickInBoundingBox = 1;
     }
     else {
-        m_lastClickInBoundingBox = false;
+        m_lastClickInBoundingBox = 0;
     }
-    *m_imageClicked = true;
+    *m_imageClicked = 1;
 }
 
 bool GameMode1::lastClickInBoundingBox() const {

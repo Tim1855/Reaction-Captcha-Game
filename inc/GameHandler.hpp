@@ -14,7 +14,6 @@ public:
     void initializeGame(const std::string& playerName, int numImages, int sequence, int gameMode);
     void startGame();
     void endGame();
-    void displayNextImage();
     void giveFeedback();
 
 private:
@@ -23,6 +22,7 @@ private:
     int m_sequence;
     int m_gameMode;
     bool m_imageClicked;
+    bool m_spacebarPressed;
     std::unique_ptr<GameMode> m_currentGameMode;
     std::vector<double> m_reactionTimes;
 };
