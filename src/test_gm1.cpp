@@ -18,7 +18,6 @@ int main() {
     int sequence = 0;
     int gameMode = 1;
 
-
     if (gameStart) {
     // initialize components
     GameHandler gameHandler;

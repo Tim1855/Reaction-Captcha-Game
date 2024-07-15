@@ -21,6 +21,7 @@ private:
     int m_numImagesToDisplay;
     int m_sequence;
     int m_gameMode;
+    int m_duration;
     bool m_imageClicked;
     bool m_spacebarPressed;
     std::unique_ptr<GameMode> m_currentGameMode;
