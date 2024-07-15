@@ -76,13 +76,7 @@ void GameMode1::loadImageAndBoundingBox(int sequence, int index) {
 
 bool GameMode1::filterBoundingBoxesForFrame(int frameIndex) {
     if (frameIndex < 0 || frameIndex >= static_cast<int>(m_boundingBoxes.size())) {
-        // std::cout << "Frame Index: " << frameIndex << std::endl;
-        // std::cout << "Bounding Box Size: " << m_boundingBoxes.size() << std::endl;
         return 0;
-    }
-    else {
-        // std::cout << "Frame Index: " << frameIndex << std::endl;
-        // std::cout << "Bounding Box Size: " << m_boundingBoxes.size() << std::endl;
     }
 
     m_currentBoundingBoxes.clear();
