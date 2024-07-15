@@ -6,17 +6,22 @@ int main() {
     Menu menu;
 
     // display menu and get player information
-    menu.displayMenu();
+    // menu.displayMenu();
 
+
+    ////To test manually////
     // std::string playerName = menu.getPlayerName();
     // int numImages = menu.getNumberOfImages();
-    // int sequence = menu.getSequence();
+    int sequence = menu.getSequence();
     // int gameMode = menu.getGameMode();
-    bool gameStart = menu.getGameStart();
-    std::string playerName = "Tim";
-    int numImages = 10;
-    int sequence = 0;
-    int gameMode = 1;
+    // bool gameStart = menu.getGameStart();
+
+    ////To test manually////
+    std::string playerName = "Tim"; 
+    int numImages = 30;
+    // int sequence = 0;
+    int gameMode = 2;
+    bool gameStart = true;
 
 
     if (gameStart) {
@@ -29,3 +34,4 @@ int main() {
 
     return 0;
 }
+
