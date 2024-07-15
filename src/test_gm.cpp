@@ -6,7 +6,7 @@ int main() {
     Menu menu;
 
     // display menu and get player information
-    // menu.displayMenu();
+    menu.displayMenu();
 
 
     ////To test manually////
@@ -18,7 +18,7 @@ int main() {
 
     ////To test manually////
     std::string playerName = "Tim"; 
-    int numImages = 30;
+    int numImages = 5;
     // int sequence = 0;
     int gameMode = 2;
     bool gameStart = true;
