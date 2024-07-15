@@ -96,7 +96,7 @@ void GameMode2::display() {
 
     cv::Mat displayImage = m_currentImage.clone();
     for (const auto& bbox : m_currentBoundingBoxes) {
-        cv::rectangle(displayImage, bbox, cv::Scalar(0, 0, 255), 2);
+        cv::rectangle(displayImage, bbox, cv::Scalar(255, 0, 0), 2); // blue boxes (255, 0, 0)
     }
 
     cv::imshow("Game Window", displayImage);
