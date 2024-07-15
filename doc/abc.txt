@@ -1,0 +1,6 @@
+gamemode 1:
+
+seq 1 läd nicht
+evtl bilder reihenfolge von sequenz zufällig
+wenn keine box im bild skip bild UND box
+
