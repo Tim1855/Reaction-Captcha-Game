@@ -10,13 +10,14 @@ int main() {
 
     // std::string playerName = menu.getPlayerName();
     // int numImages = menu.getNumberOfImages();
-    // int sequence = menu.getSequence();
+    int sequence = menu.getSequence();
     // int gameMode = menu.getGameMode();
-    bool gameStart = menu.getGameStart();
+    // bool gameStart = menu.getGameStart();
     std::string playerName = "Tim";
-    int numImages = 10;
-    int sequence = 0;
+    int numImages = 30;
+    // int sequence = 0;
     int gameMode = 2;
+    bool gameStart = true;
 
 
     if (gameStart) {
