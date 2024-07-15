@@ -51,7 +51,7 @@ void GameHandler::startGame() {
             auto currentTime = std::chrono::high_resolution_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime).count();
 
-            int key = cv::waitKey(32); // Kurzes Warten, um die Benutzerinteraktion zu überprüfen
+            int key = cv::waitKey(30); // Kurzes Warten, um die Benutzerinteraktion zu überprüfen
             if (key == 32) { // Check for spacebar (ASCII 32)
                 m_spacebarPressed = 1;
             }
@@ -76,9 +76,8 @@ void GameHandler::startGame() {
                 }
             }
         }
-
-        endGame();
     }
+    endGame();
 }
 
 void GameHandler::endGame() {
