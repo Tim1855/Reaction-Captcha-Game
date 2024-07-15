@@ -1,55 +1,121 @@
 #include "Menu.hpp"
 #include <limits>
 #include <iostream>
+#include <sstream>
+#include <algorithm>
+#include <cctype>
+#include <string>
 
-Menu::Menu(/* args */) : m_numberOfImages(0), m_sequence(0), m_gameMode(0), m_gameStart(false) {
+Menu::Menu() : m_numberOfImages(0), m_sequence(0), m_gameMode(0), m_gameStart(false) {
 }
 
 Menu::~Menu() {
 }
 
-
 void Menu::displayMenu() {
-    // promptPlayerName();
-    // promptNumberOfImages();
+    promptPlayerName();
+    setPlayerName();
+
+    promptNumberOfImages();
+    setNumberOfImages();
+
     promptSequence();
-    // promptGameMode();
-    // promptGameStart();
+    setSequence();
+
+    promptGameMode();
+    setGameMode();
+
+    promptGameStart();
+    setGameStart();
 }
 
+//Promptfunktionen für die Spielereingaben
 void Menu::promptPlayerName() { 
-    std::cout << "Hallo Spieler, geben Sie ihren Namen ein: ";
-    std::cin >> m_PlayerName;
-    setPlayerName();
+    std::cout << "\nHallo Spieler, geben Sie ihren Namen ein: "; 
 }
 
 void Menu::promptNumberOfImages() {
-    std::cout << "\nWaehlen Sie wie viele Bilder Sie spielen moechten (1-77): ";
-    std::cin >> m_numberOfImages;
-    setNumberOfImages();
+    std::cout << "\nWaehlen Sie wie viele Bilder Sie spielen moechten (1-77): ";    
 }
 
 void Menu::promptSequence() {
-    std::cout << "\nWaehlen Sie welche Sequenz Sie spielen moechten (0-20): ";
-    std::cin >> m_sequence;
-    setSequence();
+    std::cout << "\nWaehlen Sie welche Sequenz Sie spielen moechten (0-20): ";    
 }
 
 void Menu::promptGameMode() {
     std::cout << "\nWaehlen Sie den Spielmodus aus (1 oder 2): ";
-    std::cin >> m_gameMode;
-    setGameMode();
 }
 
 void Menu::promptGameStart() {
-    std::cout << "\n\nWollen Sie das Spiel starten (1:ja, 0:nein): ";
-    std::cin >> m_gameStart;
-    setGameStart();
+    std::cout << "\nWollen Sie das Spiel starten (1:ja, 0:nein): ";    
+}
+
+//Setter Funktionen für die Spielereingaben
+void Menu::setPlayerName() {
+    std::cin>>m_playerName;
+}
+
+void Menu::setNumberOfImages() {
+    std::cin>>m_numberOfImages;
+    if (!(checkNumberOfImages(m_numberOfImages) && checkInteger(m_numberOfImages))) { //testet Inputrange und Datentyp 
+        promptNumberOfImages();
+        setNumberOfImages();
+    }
+}
+
+void Menu::setSequence() {
+    std::cin>>m_sequence;
+    if (!(checkSequence(m_sequence) && checkInteger(m_sequence))) { 
+        promptSequence();
+        setSequence();
+    }
+}
+
+void Menu::setGameMode() {
+    std::cin>>m_gameMode;
+    if (!(checkGameMode(m_gameMode) && checkInteger(m_gameMode))) { 
+        promptGameMode();
+        setGameMode();
+    }
+}
+
+void Menu::setGameStart() {
+    std::cin>>m_gameStart;
+    if (!(checkGameStart(m_gameStart) && checkInteger(m_gameStart))) { 
+        promptGameStart();
+        setGameStart();
+    }
+    if (!m_gameStart) {
+        std::cout<<"\nMenu will restart now"<<std::endl;
+        displayMenu();
+    }
+}
+
+//Checker Funktionen testen Inputrange
+bool Menu::checkNumberOfImages(int m_numberOfImages) {
+    return ((m_numberOfImages >= 1) && (m_numberOfImages <= 77)); // smallest sequence has 77 images (0012)
+}
+
+bool Menu::checkSequence(int m_sequence) {
+    return ((m_sequence >= 0) && (m_sequence <= 20));
+}
+
+bool Menu::checkGameMode(int m_gameMode) {
+    return ((m_gameMode == 1) || (m_gameMode == 2));
+}
+
+bool Menu::checkGameStart(int m_gameStart) {
+    return ((m_gameStart == 0) || (m_gameStart == 1));
+}
+
+bool Menu::checkInteger(int integer) {
+//
 }
 
 
+//Getter Funktionen für die Spielereingaben
 std::string Menu::getPlayerName() const {
-    return m_PlayerName;
+    return m_playerName;
 }
 
 int Menu::getNumberOfImages() const {
@@ -64,84 +130,6 @@ int Menu::getGameMode() const {
     return m_gameMode;
 }
 
-bool Menu::getGameStart() const {
+int Menu::getGameStart() const {
     return m_gameStart;
-}
-
-
-void Menu::setPlayerName() {
-    if (!checkInputPlayerName(m_PlayerName))
-    {
-        promptPlayerName();
-    }
-}
-
-void Menu::setNumberOfImages() {
-    if (!checkInputNumberOfImages(m_numberOfImages))
-    {
-        promptNumberOfImages();
-    }
-}
-
-void Menu::setSequence() {
-    if (!checkInputSequence(m_sequence))
-    {
-        promptSequence();
-    }
-}
-
-void Menu::setGameMode() {
-    if (!checkInputGameMode(m_gameMode))
-    {
-        promptGameMode();
-    }
-}
-
-void Menu::setGameStart() {
-    if (!checkInputGameStart(m_gameStart))
-    {
-        promptGameStart();
-    }
-    if (!m_gameStart) {
-        displayMenu();
-    }
-}
-
-
-bool Menu::checkInputPlayerName(std::string m_PlayerName)
-{
-    return 1;
-}
-
-bool Menu::checkInputNumberOfImages(int m_numberOfImages)
-{
-
-    if ((m_numberOfImages >= 1) && (m_numberOfImages <= 77)) // smallest sequence has 77 images (0012)
-    {
-        return 1;
-    }
-
-    return 0;
-}
-
-bool Menu::checkInputSequence(int m_sequence) {
-    if ((m_sequence >= 0) && (m_sequence <= 20))
-    {
-        return 1;
-    }
-    return 0;
-}
-
-bool Menu::checkInputGameMode(int m_gameMode) {
-    if ((m_gameMode >= 1) && (m_gameMode <= 2)) {
-        return 1;
-    }
-    return 0;
-}
-
-bool Menu::checkInputGameStart(int m_gameStart) {
-    if ((m_gameMode >= 0) && (m_gameMode <= 1)) {
-        return 1;
-    }
-    return 0;
 }

@@ -14,7 +14,6 @@ HPP erstellen:          [X]
     gamemode1           [X]
     gamemode2           [X]
 
-
 CPP erstellen:          [X]
     Menu                [X]
     Image               [X]
@@ -26,19 +25,18 @@ CPP erstellen:          [X]
     gamemode            [X]
     gamemode1           [X]
     gamemode2           [X]
-
     main                [X]
 
 Mo:
 STL-check                               [X]
 Bug-Fixing                              [ ]  TIM
 check inputs                            [X] 
-Projektstruktur fix                     [ ] LUIS
+Projektstruktur fix                     [X] LUIS
 int check,string check/std.infail check [ ] LUIS
 test inputs                             [ ] LUIS
 check path in menu                      [ ] LUIS
-
 add main.                               [ ] LUIS
+fenster im vordergrund öffnen           [ ] LUIS
 
 Di/Mi:
 clean code check                        [ ] TIM
