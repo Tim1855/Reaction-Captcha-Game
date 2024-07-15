@@ -12,12 +12,12 @@ Menu::~Menu() {
 void Menu::displayMenu() {
     // promptPlayerName();
     // promptNumberOfImages();
-    // promptSequence();
+    promptSequence();
     // promptGameMode();
-    promptGameStart();
+    // promptGameStart();
 }
 
-void Menu::promptPlayerName() {
+void Menu::promptPlayerName() { 
     std::cout << "Hallo Spieler, geben Sie ihren Namen ein: ";
     std::cin >> m_PlayerName;
     setPlayerName();

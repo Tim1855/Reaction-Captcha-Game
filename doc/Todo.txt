@@ -2,47 +2,56 @@ OpenCV installieren     [X]
 Datensatz runterladen   [X]
 CMAKE testen            [X]
 
-HPP erstellen:          [ ]
+HPP erstellen:          [X]
     Menu                [X]
     Image               [X]
     BoundingBox         [X]
     Gui                 [X]
-    gamehandler         [ ]
-    MouseHandler        [ ]
-    TimeHandler         [ ]
-    gamemode            [ ]
-    gamemode1           [ ]
-    gamemode2           [ ]
+    gamehandler         [X]
+    MouseHandler        [X]
+    TimeHandler         [X]
+    gamemode            [X]
+    gamemode1           [X]
+    gamemode2           [X]
 
 
-CPP erstellen:          [ ]
+CPP erstellen:          [X]
     Menu                [X]
     Image               [X]
     BoundingBox         [X]
     Gui                 [X]
-    gamehandler         [ ]
-    MouseHandler        [ ]
-    TimeHandler         [ ]
-    gamemode            [ ]
-    gamemode1           [ ]
-    gamemode2           [ ]
+    gamehandler         [X]
+    MouseHandler        [X]
+    TimeHandler         [X]
+    gamemode            [X]
+    gamemode1           [X]
+    gamemode2           [X]
 
-    main                [ ]
+    main                [X]
 
+Mo:
+STL-check                               [X]
+Bug-Fixing                              [ ]  TIM
+check inputs                            [X] 
+int check,string check/std.infail check [ ] LUIS
+test inputs                             [ ] LUIS
+check path in menu                      [ ] LUIS
+Programmbeschreibung                    [ ] LUIS
+Projektstruktur fix                     [ ] LUIS
+add main.cpp                            [ ] LUIS
 
-Überprüfung auf Rückgabewerte des Users [ ]
-Fehlerhandlich/Fehlertesting            [ ]
+Di/Mi:
+clean code check                        [ ] TIM
+const- check                            [ ] LUIS
+Coding consitency                       [ ] LUIS
+fix bug: seq 18, fix gm2 klickspam      [ ] TIM
 
-const- check                            [ ]
-STL-check                               [ ]
-clean code check                        [ ]
-Coding Conventions check                [ ]
-Kommentare check                        [ ]
+Di:
+Kommentare check                        [ ] TIM/LUIS
 
-UML/Programmaufbau                      [ ]
+Mi:
+ReadME                                  [ ] LUIS
+Projektvorstellung                      [ ] TIM/LUIS
+UML/Programmaufbau                      [ ] LUIS
 automatisch für Windows mit https://www.softwareideas.net/Download/3723/software-ideas-modeler-14-55-setup-
-
-Unit tests                              [ ]
-ReadME                                  [ ]
-Projektvorstellung                      [ ]
-(EVTL Erweiterungen)                    [ ]
+(Unit tests                              [ ] LUIS)
