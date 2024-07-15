@@ -29,28 +29,22 @@ CPP erstellen:          [X]
 
 Mo:
 STL-check                               [X]
-Bug-Fixing                              [ ]  TIM
+Bug-Fixing                              [X]  TIM
 check inputs                            [X] 
 Projektstruktur fix                     [X] LUIS
-int check,string check/std.infail check [ ] LUIS
-test inputs                             [ ] LUIS
-check path in menu                      [ ] LUIS
-add main.                               [ ] LUIS
-fenster im vordergrund öffnen           [ ] LUIS
+int check                               [ ] TIM
+test inputs                             [X] LUIS
+add main.                               [X] LUIS
 
-Di/Mi:
+
+MI:
 clean code check                        [ ] TIM
-const- check                            [ ] LUIS
-Coding consitency                       [ ] LUIS
-fix bug: seq 18, fix gm2 klickspam      [ ] TIM
-
-Di:
+const- check                            [X] LUIS
+Coding consitency                       [X] LUIS
 Kommentare check                        [ ] TIM/LUIS
 
-Mi:
 ReadME                                  [ ] LUIS
 Projektvorstellung                      [ ] TIM/LUIS
 UML/Programmaufbau                      [ ] LUIS
 Programmbeschreib/READ(Implementierung) [ ] LUIS
 keine privaten Methoden, keine Tests etc. https://www.softwareideas.net/Download/3723/software-ideas-modeler-14-55-setup-
-(Unit tests                             [ ] LUIS)

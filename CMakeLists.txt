@@ -59,7 +59,7 @@ add_library(GameLib STATIC ${LibSources})
 set_target_properties(GameLib PROPERTIES LINKER_LANGUAGE CXX)
 
 # adds the execution file to the executable
-add_executable(${executable} src/test_menu.cpp)
+add_executable(${executable} src/main.cpp)
 
 # sets the linker language for the executable
 set_target_properties(${executable} PROPERTIES LINKER_LANGUAGE CXX)

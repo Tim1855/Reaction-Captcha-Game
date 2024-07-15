@@ -108,9 +108,9 @@ bool Menu::checkGameStart(int m_gameStart) {
     return ((m_gameStart == 0) || (m_gameStart == 1));
 }
 
-bool Menu::checkInteger(int integer) {
-//
-}
+     bool Menu::checkInteger(int integer) {
+        return 1;
+ }  
 
 
 //Getter Funktionen für die Spielereingaben
