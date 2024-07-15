@@ -13,6 +13,10 @@ public:
     void startMode(int sequence, int numImages) override;
     void loadImageAndBoundingBox(int sequence, int index) override;
     void display() override;
+    void updateRedBoundingBox();
+    void handleMouseClick(int x, int y);
+    void handleSpacebarPress();
+    bool lastClickInBoundingBox() const;
     void setMouseCallback(bool* imageClicked) override;
 
 private:
@@ -25,6 +29,11 @@ private:
     int m_currentIndex;
     cv::Mat m_currentImage;
     bool* m_imageClicked;
+    cv::Rect m_redBoundingBox;
+    bool m_redBoundingBoxSet = 0;
+    bool m_lastClickInBoundingBox;
+    bool* m_spacebarPressed;
+
 
     std::vector<std::vector<cv::Rect>> m_boundingBoxes;
     std::vector<cv::Rect> m_currentBoundingBoxes;

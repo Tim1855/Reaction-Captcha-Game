@@ -42,8 +42,7 @@ void GameHandler::startGame() {
 
     for (int i = 0; i < m_numImagesToDisplay; ++i) {
         m_currentGameMode->loadImageAndBoundingBox(m_sequence, i);
-        displayNextImage();
-        m_imageClicked = false;
+        m_imageClicked = 0;
         auto startTime = std::chrono::high_resolution_clock::now();
         while (!m_imageClicked) {
             auto currentTime = std::chrono::high_resolution_clock::now();
@@ -58,7 +57,7 @@ void GameHandler::startGame() {
         if (m_imageClicked) {
             auto endTime = std::chrono::high_resolution_clock::now();
             auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
-            if (static_cast<GameMode1*>(m_currentGameMode.get())->lastClickInBoundingBox()) {
+            if (static_cast<GameMode2*>(m_currentGameMode.get())->lastClickInBoundingBox()) {
                 std::cout << "Bild " << i + 1 << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
                 m_reactionTimes.push_back(reactionTime);
             } else {
@@ -75,12 +74,6 @@ void GameHandler::endGame() {
     std::cout << "Game ended." << std::endl;
     cv::destroyAllWindows();
     giveFeedback();
-}
-
-void GameHandler::displayNextImage() {
-    if (m_currentGameMode) {
-        m_currentGameMode->display();
-    }
 }
 
 void GameHandler::giveFeedback() {

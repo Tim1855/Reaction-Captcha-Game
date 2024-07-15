@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <random>
 
 GameMode2::GameMode2(const std::string& imageFolderPath, const std::string& bboxFolderPath)
     : m_imageFolderPath(imageFolderPath), m_bboxFolderPath(bboxFolderPath), m_currentSequence(0), m_currentIndex(0), m_imageClicked(nullptr) {
@@ -47,7 +48,7 @@ bool GameMode2::loadBoundingBoxes(int sequence) {
         m_boundingBoxes[frameIndex].push_back(cv::Rect(cv::Point(bbox.getX1(), bbox.getY1()), cv::Point(bbox.getX2(), bbox.getY2())));
     }
 
-    return true;
+    return 1;
 }
 
 void GameMode2::loadImageAndBoundingBox(int sequence, int index) {
@@ -70,6 +71,7 @@ void GameMode2::loadImageAndBoundingBox(int sequence, int index) {
         return;
     }
 
+    m_redBoundingBoxSet = 0;
     display();
 }
 
@@ -96,17 +98,49 @@ void GameMode2::display() {
 
     cv::Mat displayImage = m_currentImage.clone();
     for (const auto& bbox : m_currentBoundingBoxes) {
-        cv::rectangle(displayImage, bbox, cv::Scalar(0, 0, 255), 2);
+        cv::Scalar color = (bbox == m_redBoundingBox) ? cv::Scalar(0, 0, 255) : cv::Scalar(255, 0, 0);
+        cv::rectangle(displayImage, bbox, color, 2);
     }
 
     cv::imshow("Game Window", displayImage);
+    updateRedBoundingBox();
     cv::setMouseCallback("Game Window", [](int event, int x, int y, int flags, void* userdata) {
         if (event == cv::EVENT_LBUTTONDOWN) {
-            *static_cast<bool*>(userdata) = true;
+            static_cast<GameMode2*>(userdata)->handleMouseClick(x, y);
         }
-        }, static_cast<void*>(m_imageClicked));
+        }, this);
 }
+
+void GameMode2::updateRedBoundingBox() {
+    if (!m_redBoundingBoxSet) {
+        int delay = 1000 + (std::rand() % 1000); // 1-2 seconds delay
+        cv::waitKey(delay); // Wait for the delay
+        if (!m_currentBoundingBoxes.empty()) {
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<> dis(0, m_currentBoundingBoxes.size() - 1);
+            m_redBoundingBox = m_currentBoundingBoxes[dis(gen)];
+            m_redBoundingBoxSet = 1;
+            display();
+        }
+    }
+}
+
 
 void GameMode2::setMouseCallback(bool* imageClicked) {
     m_imageClicked = imageClicked;
+}
+
+void GameMode2::handleMouseClick(int x, int y) {
+    if (m_redBoundingBox.contains(cv::Point(x, y))) {
+        m_lastClickInBoundingBox = 1;
+    }
+    else {
+        m_lastClickInBoundingBox = 0;
+    }
+    *m_imageClicked = 1;
+}
+
+bool GameMode2::lastClickInBoundingBox() const {
+    return m_lastClickInBoundingBox;
 }
