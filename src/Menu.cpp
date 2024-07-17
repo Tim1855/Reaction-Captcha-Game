@@ -1,10 +1,12 @@
-#include "Menu.hpp"
 #include <limits>
 #include <iostream>
 #include <sstream>
 #include <algorithm>
 #include <cctype>
 #include <string>
+
+#include "Menu.hpp"
+#include "Inputchecker.hpp"
 
 Menu::Menu() : m_numberOfImages(0), m_sequence(0), m_gameMode(0), m_gameStart(false) {
 }
@@ -30,16 +32,16 @@ void Menu::displayMenu() {
 }
 
 //Promptfunktionen für die Spielereingaben
-void Menu::promptPlayerName() { 
-    std::cout << "\nHallo Spieler, geben Sie ihren Namen ein: "; 
+void Menu::promptPlayerName() {
+    std::cout << "\nHallo Spieler, geben Sie ihren Namen ein: ";
 }
 
 void Menu::promptNumberOfImages() {
-    std::cout << "\nWaehlen Sie wie viele Bilder Sie spielen moechten (1-77): ";    
+    std::cout << "\nWaehlen Sie wie viele Bilder Sie spielen moechten (1-77): ";
 }
 
 void Menu::promptSequence() {
-    std::cout << "\nWaehlen Sie welche Sequenz Sie spielen moechten (0-20): ";    
+    std::cout << "\nWaehlen Sie welche Sequenz Sie spielen moechten (0-20): ";
 }
 
 void Menu::promptGameMode() {
@@ -47,47 +49,84 @@ void Menu::promptGameMode() {
 }
 
 void Menu::promptGameStart() {
-    std::cout << "\nWollen Sie das Spiel starten (1:ja, 0:nein): ";    
+    std::cout << "\nWollen Sie das Spiel starten (1:ja, 0:nein): ";
 }
 
 //Setter Funktionen für die Spielereingaben
 void Menu::setPlayerName() {
-    std::cin>>m_playerName;
+    std::getline(std::cin, m_input);
+    if (checkDataType<std::string>(m_input)) {
+        m_playerName = m_input;
+    }
+    else {
+        promptPlayerName();
+        setPlayerName();
+    }
 }
 
 void Menu::setNumberOfImages() {
-    std::cin>>m_numberOfImages;
-    if (!(checkNumberOfImages(m_numberOfImages) && checkInteger(m_numberOfImages))) { //testet Inputrange und Datentyp 
+    std::getline(std::cin, m_input);
+    if (checkDataType<int>(m_input)) {
+        m_numberOfImages = std::stoi(m_input);
+        if ((m_numberOfImages < 1) && (m_numberOfImages > 77)) {
+            promptNumberOfImages();
+            setNumberOfImages();
+        }
+    }
+    else {
         promptNumberOfImages();
         setNumberOfImages();
     }
 }
 
 void Menu::setSequence() {
-    std::cin>>m_sequence;
-    if (!(checkSequence(m_sequence) && checkInteger(m_sequence))) { 
+    std::getline(std::cin, m_input);
+    if (checkDataType<int>(m_input)) {
+        m_sequence = std::stoi(m_input);
+        if ((m_sequence < 1) || (m_sequence > 20)) {
+            promptSequence();
+            setSequence();
+        }
+    }
+    else {
         promptSequence();
         setSequence();
     }
 }
 
 void Menu::setGameMode() {
-    std::cin>>m_gameMode;
-    if (!(checkGameMode(m_gameMode) && checkInteger(m_gameMode))) { 
+    std::getline(std::cin, m_input);
+    if (checkDataType<int>(m_input)) {
+        m_gameMode = std::stoi(m_input);
+        if ((m_gameMode != 1) && (m_gameMode != 2)) {
+            promptGameMode();
+            setGameMode();
+        }
+    }
+    else {
         promptGameMode();
         setGameMode();
     }
 }
 
 void Menu::setGameStart() {
-    std::cin>>m_gameStart;
-    if (!(checkGameStart(m_gameStart) && checkInteger(m_gameStart))) { 
+    std::getline(std::cin, m_input);
+    if (checkDataType<int>(m_input)) {
+        m_gameStart = std::stoi(m_input);
+        if (m_gameStart == 0) {
+            displayMenu();
+        }
+        else if (m_gameStart == 1) {
+            std::cout << "\nSpielbeginn: ";
+        }
+        else {
+            promptGameStart();
+            setGameStart();
+        }
+    }
+    else {
         promptGameStart();
         setGameStart();
-    }
-    if (!m_gameStart) {
-        std::cout<<"\nMenu will restart now"<<std::endl;
-        displayMenu();
     }
 }
 
@@ -107,10 +146,6 @@ bool Menu::checkGameMode(int m_gameMode) {
 bool Menu::checkGameStart(int m_gameStart) {
     return ((m_gameStart == 0) || (m_gameStart == 1));
 }
-
-     bool Menu::checkInteger(int integer) {
-        return 1;
- }  
 
 
 //Getter Funktionen für die Spielereingaben

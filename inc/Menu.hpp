@@ -1,6 +1,7 @@
 #ifndef MENU_HPP
 #define MENU_HPP
 
+#include <string>
 #include <iostream>
 
 class Menu {
@@ -40,6 +41,7 @@ public:
 
 private:
     std::string m_playerName;
+    std::string m_input;
     int m_numberOfImages;
     int m_sequence;
     int m_gameMode;
