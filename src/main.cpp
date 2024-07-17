@@ -9,9 +9,12 @@ int main() {
     myMenu.displayMenu();
 
     if (myMenu.getGameStart()) {
+
     // initialize components
-    GameHandler gameHandler;
-    gameHandler.initializeGame(myMenu.getPlayerName(), myMenu.getNumberOfImages(), myMenu.getSequence(), myMenu.getGameMode());
+    GameHandler gameHandler(myMenu.getPlayerName(), myMenu.getNumberOfImages(), myMenu.getSequence(), myMenu.getGameMode());
+
+    // initialize game
+    gameHandler.initializeGame();
     // start game
     gameHandler.startGame();
     }
