@@ -28,17 +28,17 @@ CPP erstellen:          [X]
     main                [X]
 
 Mo:
-STL-check                               [X]
-Bug-Fixing                              [X]  TIM
-check inputs                            [X] 
+STL-check                               [X] LUIS
+Bug-Fixing                              [X] TIM
+check inputs                            [X] LUis
 Projektstruktur fix                     [X] LUIS
-int check                               [ ] TIM
+int check                               [X] TIM
 test inputs                             [X] LUIS
 add main.                               [X] LUIS
 
 
 MI:
-clean code check                        [ ] TIM
+clean code check                        [X] TIM
 const- check                            [X] LUIS
 Coding consitency                       [X] LUIS
 Kommentare check                        [ ] TIM/LUIS
