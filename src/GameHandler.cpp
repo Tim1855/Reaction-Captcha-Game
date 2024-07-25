@@ -30,12 +30,8 @@ int GameHandler::getGameMode() {
 }
 
 
-void GameHandler::initializeGame() {
-    setImageFolderPath(); // set folder to correct sequence;
-}
-
-
 void GameHandler::startGame() {
+    setImageFolderPath(); // set folder to correct sequence;
     if (m_gameMode == 1) {
         GameMode1 myGameMode(m_imageFolderPath, bboxFolderPath);
         for (int i = 0; i < m_numberofImages; ++i) {

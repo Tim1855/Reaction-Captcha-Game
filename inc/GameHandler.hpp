@@ -14,7 +14,6 @@ public:
     ~GameHandler();
 
     void setImageFolderPath();
-    void initializeGame();
     void startGame();
     void endGame();
     void giveFeedback();

@@ -12,9 +12,8 @@ int main() {
 
         // initialize components
         // GameHandler gameHandler(myMenu.getPlayerName(), myMenu.getNumberOfImages(), myMenu.getSequence(), myMenu.getGameMode());
-        GameHandler gameHandler("Tim", 5, 1, 2);
-        // initialize game
-        gameHandler.initializeGame();
+        GameHandler gameHandler("Tim", 5, 1, 1);
+
         // start game
         gameHandler.startGame();
     }
