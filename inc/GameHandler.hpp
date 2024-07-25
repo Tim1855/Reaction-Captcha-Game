@@ -4,27 +4,31 @@
 #include <memory>
 #include <string>
 #include <vector>
+
 #include "GameMode.hpp"
 
 class GameHandler {
 public:
     GameHandler();
+    GameHandler(std::string playerName, int numberofImages, int sequence, int gameMode);
     ~GameHandler();
 
-    void initializeGame(const std::string& playerName, int numImages, int sequence, int gameMode);
+    void setImageFolderPath();
+    void initializeGame();
     void startGame();
     void endGame();
     void giveFeedback();
+    int getGameMode();
+
+    std::string getImageFolderPath();
 
 private:
     std::string m_playerName;
-    int m_numImagesToDisplay;
+    std::string m_imageFolderPath;
+    int m_numberofImages;
     int m_sequence;
     int m_gameMode;
     int m_duration;
-    bool m_imageClicked;
-    bool m_spacebarPressed;
-    std::unique_ptr<GameMode> m_currentGameMode;
     std::vector<double> m_reactionTimes;
 };
 
