@@ -13,28 +13,29 @@ GameHandler::GameHandler(std::string playerName, int numberofImages, int sequenc
 GameHandler::~GameHandler() {
 }
 
-void GameHandler::setImageFolderPath() {
-    std::string sequenceString = std::to_string(m_sequence);
+std::string GameHandler::formatSequence(int sequence) {
+    std::string sequenceString = std::to_string(sequence);
     sequenceString.insert(sequenceString.begin(), 4 - sequenceString.length(), '0');
+    return sequenceString;
+}
 
+void GameHandler::setImageFolderPath() {
+    std::string sequenceString = formatSequence(m_sequence);
     m_imageFolderPath = imageFolder + sequenceString;
 }
 
-std::string GameHandler::getImageFolderPath() {
-    return m_imageFolderPath;
-}
 
-int GameHandler::getGameMode() {
-    return m_gameMode;
-}
 
 
 void GameHandler::startGame() {
-    setImageFolderPath(); // set folder to correct sequence;
+    setImageFolderPath();
     if (m_gameMode == 1) {
-        GameMode1 myGameMode(m_imageFolderPath, bboxFolderPath);
-        for (int i = 0; i < m_numberofImages; ++i) {
-            myGameMode.loadImageAndBoundingBox(m_sequence, i);
+        GameMode1 myGameMode(m_imageFolderPath);
+        for (int image = 0; image < m_numberofImages; ++image) {
+            myGameMode.loadImage(m_sequence, image);
+            myGameMode.loadBoundingBoxes(m_sequence, m_numberofImages);
+            myGameMode.filterBoundingBoxesForFrame(image);
+            myGameMode.display();
             myGameMode.setImageClicked(false);
             auto startTime = std::chrono::high_resolution_clock::now();
             while (!myGameMode.getImageClicked()) {
@@ -47,7 +48,7 @@ void GameHandler::startGame() {
                     break;
                 }
                 else if (m_duration >= 3) {
-                    std::cout << "Bild " << i + 1 << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
+                    std::cout << "Bild " << image + 1 << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
                     m_reactionTimes.push_back(5.0); // 5 seconds penalty
                     break;
                 }
@@ -57,21 +58,23 @@ void GameHandler::startGame() {
                 auto endTime = std::chrono::high_resolution_clock::now();
                 auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
                 if (myGameMode.lastClickInBoundingBox()) {
-                    std::cout << "Bild " << i + 1 << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
+                    std::cout << "Bild " << image + 1 << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
                     m_reactionTimes.push_back(reactionTime);
                 }
                 else {
-                    std::cout << "Bild " << i + 1 << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
+                    std::cout << "Bild " << image + 1 << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
                     m_reactionTimes.push_back(reactionTime + 5.0); // Strafe von 5 Sekunden
                 }
             }
         }
-        endGame();
     }
-    else if (m_gameMode == 2) {
-        GameMode2 myGameMode(m_imageFolderPath, bboxFolderPath);
-        for (int i = 0; i < m_numberofImages; ++i) {
-            myGameMode.loadImageAndBoundingBox(m_sequence, i);
+    else {
+        GameMode2 myGameMode(m_imageFolderPath);
+        for (int image = 0; image < m_numberofImages; ++image) {
+            myGameMode.loadImage(m_sequence, image);
+            myGameMode.loadBoundingBoxes(m_sequence, m_numberofImages);
+            myGameMode.filterBoundingBoxesForFrame(image);
+            myGameMode.display();
             myGameMode.setSpaceBarPress(false);
             auto startTime = std::chrono::high_resolution_clock::now();
             while (!myGameMode.getSpaceBarPress()) {
@@ -85,7 +88,7 @@ void GameHandler::startGame() {
                 }
 
                 if (m_duration >= 3) {
-                    std::cout << "Bild " << i + 1 << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
+                    std::cout << "Bild " << image + 1 << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
                     m_reactionTimes.push_back(5.0); // 5 seconds penalty
                     break;
                 }
@@ -95,29 +98,28 @@ void GameHandler::startGame() {
                 auto endTime = std::chrono::high_resolution_clock::now();
                 auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
                 if (myGameMode.lastClickInBoundingBox()) {
-                    std::cout << "Bild " << i + 1 << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
+                    std::cout << "Bild " << image + 1 << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
                     m_reactionTimes.push_back(reactionTime);
                 }
                 else {
-                    std::cout << "Bild " << i + 1 << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
+                    std::cout << "Bild " << image + 1 << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
                     m_reactionTimes.push_back(reactionTime + 5.0); // Strafe von 5 Sekunden
                 }
             }
         }
     }
     endGame();
+    giveFeedback();
 }
 
 
 void GameHandler::endGame() {
-    std::cout << "Game ended." << std::endl;
     cv::destroyAllWindows();
-    giveFeedback();
+    std::cout << "Game ended." << std::endl;
 }
 
 void GameHandler::giveFeedback() {
     std::cout << "Player: " << m_playerName << std::endl;
-    std::cout << "Feedback: Spiel beendet." << std::endl;
 
     if (!m_reactionTimes.empty()) {
         std::sort(m_reactionTimes.begin(), m_reactionTimes.end(), [](double a, double b) { return a > 0 && (b < 0 || a < b); });

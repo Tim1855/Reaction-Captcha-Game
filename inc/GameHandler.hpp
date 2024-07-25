@@ -17,11 +17,11 @@ public:
     void startGame();
     void endGame();
     void giveFeedback();
-    int getGameMode();
 
+    std::string formatSequence(int sequence);
     std::string getImageFolderPath();
 
-private:
+protected:
     std::string m_playerName;
     std::string m_imageFolderPath;
     int m_numberofImages;

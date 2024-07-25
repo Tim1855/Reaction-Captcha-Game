@@ -5,27 +5,32 @@
 #include <vector>
 #include <opencv2/opencv.hpp>
 
+#include "BoundingBox.hpp"
+
 
 class GameMode {
 protected:
     std::string m_imageFolderPath;
-    std::string m_bboxFolderPath;
+    std::string m_imagePath;
+    std::string m_boxFolder;
     int m_currentSequence;
     int m_currentIndex;
     int m_gameMode;
     bool m_imageClicked;
     bool m_lastClickInBoundingBox;
     cv::Mat m_currentImage;
-    std::vector<std::vector<cv::Rect>> m_boundingBoxes;
+    std::vector<std::vector<cv::Rect>> m_Boxes;
     std::vector<cv::Rect> m_currentBoundingBoxes;
     cv::Rect m_targetBoundingBox;
 public:
     GameMode();
-    GameMode(std::string imageFolderPath, std::string bboxFolderPath);
+    GameMode(std::string imageFolderPath);
     virtual ~GameMode();
 
-    virtual bool loadBoundingBoxes(int sequence);
-    virtual void loadImageAndBoundingBox(int sequence, int index);
+    virtual void loadBoundingBoxes(int sequence, int numberOfImages);
+    virtual void loadImage(int sequence, int index);
+    virtual void setImagePath(int image);
+    virtual bool checkImage();
     virtual void display();
     virtual void filterBoundingBoxesForFrame(int frameIndex);
     virtual void handleMouseClick(int x, int);
@@ -33,6 +38,9 @@ public:
     virtual void setupCallback();
     virtual bool getImageClicked();
     virtual void setImageClicked(bool imageClicked);
+    virtual void setBoxFolderPath(int sequence);
+    virtual std::string formatSequence(int sequence);
+    BoundingBox box(int x1, int y1, int x2, int y2);
 };
 
 #endif // GAMEMODE_HPP

@@ -8,11 +8,13 @@ int main() {
     // display menu and get player information
     // myMenu.displayMenu();
 
+
+
     if (myMenu.getGameStart() || 1) {
 
         // initialize components
         // GameHandler gameHandler(myMenu.getPlayerName(), myMenu.getNumberOfImages(), myMenu.getSequence(), myMenu.getGameMode());
-        GameHandler gameHandler("Tim", 5, 1, 1);
+        GameHandler gameHandler("Tim", 5, 0, 2);
 
         // start game
         gameHandler.startGame();

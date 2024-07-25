@@ -6,33 +6,58 @@
 #include <random>
 
 #include "GameMode.hpp"
-#include "BoundingBox.hpp"
 #include "Gui.hpp"
+#include "Config.hpp"
 
 
 GameMode::GameMode() {}
 GameMode::~GameMode() {}
 
-GameMode::GameMode(std::string imageFolderPath, std::string bboxFolderPath)
-  : m_imageFolderPath(imageFolderPath), m_bboxFolderPath(bboxFolderPath), m_currentSequence(0), m_currentIndex(0), m_imageClicked(0), m_lastClickInBoundingBox(0) {
+GameMode::GameMode(std::string imageFolderPath)
+  : m_imageFolderPath(imageFolderPath), m_currentSequence(0), m_currentIndex(0), m_imageClicked(0), m_lastClickInBoundingBox(0) {
 }
 
-bool GameMode::loadBoundingBoxes(int sequence) {
-  std::ostringstream bboxFolderPathStream;
-  bboxFolderPathStream << m_bboxFolderPath << "/" << std::setw(4) << std::setfill('0') << sequence << ".txt";
-  std::string bboxFolderPath = bboxFolderPathStream.str();
+BoundingBox GameMode::box(int x1, int y1, int x2, int y2) {
+  return BoundingBox(x1, y1, x2, y2);
+}
 
-  std::ifstream infile(bboxFolderPath);
+std::string GameMode::formatSequence(int sequence) {
+  std::string sequenceString = std::to_string(sequence);
+  sequenceString.insert(sequenceString.begin(), 4 - sequenceString.length(), '0');
+  return sequenceString;
+}
+
+void GameMode::setBoxFolderPath(int sequence) {
+  std::string sequenceString = formatSequence(sequence);
+  m_boxFolder = bboxFolderPath + "/" + sequenceString + ".txt";
+}
+
+
+void GameMode::loadBoundingBoxes(int sequence, int numberOfImages) {
+  setBoxFolderPath(sequence);
+
+  std::ifstream infile(m_boxFolder);
   if (!infile.is_open()) {
     std::cout << "Error: Cannot open bounding box file" << std::endl;
-    return 0;
   }
 
-  m_boundingBoxes.clear();
+  m_Boxes.clear();
   std::string line;
   while (std::getline(infile, line)) {
     std::istringstream iss(line);
-    int frameIndex, objIndex, truncation, occlusion;
+    int frameIndex;
+    iss >> frameIndex;
+
+    // Check if frameIndex exceeds numberOfImages
+    if (frameIndex >= numberOfImages) {
+      break;
+    }
+
+    // Reset the stringstream to process the entire line
+    iss.clear();
+    iss.seekg(0, std::ios::beg);
+
+    int objIndex, truncation, occlusion;
     std::string type;
     float alpha, x1, y1, x2, y2, h, w, l, t1, t2, t3, rotY;
     if (!(iss >> frameIndex >> objIndex >> type >> truncation >> occlusion >> alpha >> x1 >> y1 >> x2 >> y2 >> h >> w >> l >> t1 >> t2 >> t3 >> rotY)) {
@@ -42,42 +67,48 @@ bool GameMode::loadBoundingBoxes(int sequence) {
     if (type == "DontCare") {
       continue;
     }
-
-    BoundingBox bbox(static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2), static_cast<int>(y2));
-    if (m_boundingBoxes.size() <= frameIndex) {
-      m_boundingBoxes.resize(frameIndex + 1);
+    BoundingBox box = this->box(static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2), static_cast<int>(y2));
+    if (m_Boxes.size() <= frameIndex) {
+      m_Boxes.resize(frameIndex + 1);
     }
-    m_boundingBoxes[frameIndex].push_back(cv::Rect(cv::Point(bbox.getX1(), bbox.getY1()), cv::Point(bbox.getX2(), bbox.getY2())));
+    m_Boxes[frameIndex].push_back(cv::Rect(cv::Point(box.getX1(), box.getY1()), cv::Point(box.getX2(), box.getY2())));
+    std::cout << "Loaded bounding box from frameIndex" << frameIndex << std::endl;
+    std::cout << "Boxes size: " << m_Boxes.size();
   }
+}
 
+void GameMode::setImagePath(int image) {
+  std::ostringstream imagePathStream;
+  imagePathStream << m_imageFolderPath << "/" << std::setw(6) << std::setfill('0') << image << ".png";
+  m_imagePath = imagePathStream.str();
+}
+
+bool GameMode::checkImage() {
+  if (m_currentImage.empty()) {
+    std::cout << "Error: Image not found: " << m_imagePath << std::endl;
+    return 0;
+  }
   return 1;
 }
 
-void GameMode::loadImageAndBoundingBox(int sequence, int index) {
-  loadBoundingBoxes(sequence);
-  std::ostringstream imagePathStream;
-  imagePathStream << m_imageFolderPath << "/" << std::setw(6) << std::setfill('0') << index << ".png";
-  std::string imagePath = imagePathStream.str();
-  std::cout << imagePath;
-  m_currentImage = cv::imread(imagePath);
-  if (m_currentImage.empty()) {
-    std::cout << "Error: Image not found: " << std::endl;
-    return;
+void GameMode::loadImage(int sequence, int image) {
+  setImagePath(image);
+  m_currentImage = cv::imread(m_imagePath);
+  if (checkImage() == false) {
+    return; // TODO: Do something else
   }
-  filterBoundingBoxesForFrame(index);
-  display();
 }
 
 void GameMode::filterBoundingBoxesForFrame(int frameIndex) {
   std::cout << "\nFrameIndex: " << frameIndex;
-  std::cout << "\nBounding Box Size: " << m_boundingBoxes.size();
-  if (frameIndex < 0 || frameIndex >= static_cast<int>(m_boundingBoxes.size())) {
+  std::cout << "\nBounding Box Size: " << m_Boxes.size();
+  if (frameIndex < 0 || frameIndex >= static_cast<int>(m_Boxes.size())) {
     std::cout << "Error: Invalid frame index for bounding box" << std::endl;
     return;
   }
   m_currentBoundingBoxes.clear();
-  for (auto bbox : m_boundingBoxes[frameIndex]) {
-    m_currentBoundingBoxes.push_back(bbox);
+  for (auto box : m_Boxes[frameIndex]) {
+    m_currentBoundingBoxes.push_back(box);
   }
   return;
 }
@@ -117,7 +148,6 @@ void GameMode::handleMouseClick(int x, int y) {
   else {
     m_lastClickInBoundingBox = 0;
   }
-  m_imageClicked = 1;
 }
 
 bool GameMode::getImageClicked() {

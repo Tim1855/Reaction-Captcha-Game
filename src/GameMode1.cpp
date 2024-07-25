@@ -8,8 +8,8 @@
 #include "BoundingBox.hpp"
 
 
-GameMode1::GameMode1(std::string imageFolderPath, std::string bboxFolderPath)
-    : GameMode(imageFolderPath,bboxFolderPath) {}
+GameMode1::GameMode1(std::string imageFolderPath)
+    : GameMode(imageFolderPath) {}
 
 GameMode1::~GameMode1() {
 }

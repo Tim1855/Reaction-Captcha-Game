@@ -7,7 +7,7 @@
 
 class GameMode1 : public GameMode {
 public:
-    GameMode1(std::string imageFolderPath, std::string bboxFolderPath);
+    GameMode1(std::string imageFolderPath);
     ~GameMode1();
 };
 
