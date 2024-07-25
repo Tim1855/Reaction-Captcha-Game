@@ -1,7 +1,6 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <chrono>
-#include <algorithm>
 #include "GameHandler.hpp"
 #include "GameMode1.hpp"
 #include "GameMode2.hpp"
@@ -15,9 +14,9 @@ GameHandler::~GameHandler() {
 }
 
 void GameHandler::setImageFolderPath() {
-    std::ostringstream sequenceStream;
-    sequenceStream << std::setw(4) << std::setfill('0') << m_sequence;
-    std::string sequenceString = sequenceStream.str();
+    std::string sequenceString = std::to_string(m_sequence);
+    sequenceString.insert(sequenceString.begin(), 4 - sequenceString.length(), '0');
+
     m_imageFolderPath = imageFolder + sequenceString;
 }
 
