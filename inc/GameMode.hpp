@@ -32,7 +32,7 @@ public:
     virtual void setImagePath(int image);
     virtual bool checkImage();
     virtual void display();
-    virtual void filterBoundingBoxesForFrame(int frameIndex);
+    virtual void showBoundingBoxesForFrame(int frameIndex);
     virtual void handleMouseClick(int x, int);
     virtual bool lastClickInBoundingBox();
     virtual void setupCallback();

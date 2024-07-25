@@ -48,12 +48,11 @@ void GameMode::loadBoundingBoxes(int sequence, int numberOfImages) {
     int frameIndex;
     iss >> frameIndex;
 
-    // Check if frameIndex exceeds numberOfImages
+    // Only load required images
     if (frameIndex >= numberOfImages) {
       break;
     }
 
-    // Reset the stringstream to process the entire line
     iss.clear();
     iss.seekg(0, std::ios::beg);
 
@@ -72,8 +71,6 @@ void GameMode::loadBoundingBoxes(int sequence, int numberOfImages) {
       m_Boxes.resize(frameIndex + 1);
     }
     m_Boxes[frameIndex].push_back(cv::Rect(cv::Point(box.getX1(), box.getY1()), cv::Point(box.getX2(), box.getY2())));
-    std::cout << "Loaded bounding box from frameIndex" << frameIndex << std::endl;
-    std::cout << "Boxes size: " << m_Boxes.size();
   }
 }
 
@@ -99,18 +96,11 @@ void GameMode::loadImage(int sequence, int image) {
   }
 }
 
-void GameMode::filterBoundingBoxesForFrame(int frameIndex) {
-  std::cout << "\nFrameIndex: " << frameIndex;
-  std::cout << "\nBounding Box Size: " << m_Boxes.size();
-  if (frameIndex < 0 || frameIndex >= static_cast<int>(m_Boxes.size())) {
-    std::cout << "Error: Invalid frame index for bounding box" << std::endl;
-    return;
-  }
+void GameMode::showBoundingBoxesForFrame(int frameIndex) {
   m_currentBoundingBoxes.clear();
   for (auto box : m_Boxes[frameIndex]) {
     m_currentBoundingBoxes.push_back(box);
-  }
-  return;
+}
 }
 
 bool GameMode::lastClickInBoundingBox() {
