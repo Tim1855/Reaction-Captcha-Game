@@ -21,7 +21,7 @@ protected:
     cv::Mat m_currentImage;
     std::vector<std::vector<cv::Rect>> m_Boxes;
     std::vector<cv::Rect> m_currentBoundingBoxes;
-    cv::Rect m_targetBoundingBox;
+    cv::Rect targetBox;
 public:
     GameMode();
     GameMode(std::string imageFolderPath);

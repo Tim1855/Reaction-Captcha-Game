@@ -36,6 +36,7 @@ void GameHandler::startGame() {
             myGameMode.loadBoundingBoxes(m_sequence, m_numberofImages);
             myGameMode.showBoundingBoxesForImage(image);
             myGameMode.display();
+            myGameMode.setupCallback();
             myGameMode.setImageClicked(false);
             auto startTime = std::chrono::high_resolution_clock::now();
             while (!myGameMode.getImageClicked()) {
@@ -75,6 +76,7 @@ void GameHandler::startGame() {
             myGameMode.loadBoundingBoxes(m_sequence, m_numberofImages);
             myGameMode.showBoundingBoxesForImage(image);
             myGameMode.display();
+            myGameMode.setupCallback();
             myGameMode.setSpaceBarPress(false);
             auto startTime = std::chrono::high_resolution_clock::now();
             while (!myGameMode.getSpaceBarPress()) {

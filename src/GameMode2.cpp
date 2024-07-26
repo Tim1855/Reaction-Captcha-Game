@@ -20,14 +20,13 @@ void GameMode2::display() {
 
     cv::Mat displayImage = m_currentImage.clone();
     for (const auto& box : m_currentBoundingBoxes) {
-        cv::Scalar color = (box == m_targetBoundingBox) ? cv::Scalar(0, 0, 255) : cv::Scalar(255, 0, 0);
+        cv::Scalar color = (box == targetBox) ? cv::Scalar(0, 0, 255) : cv::Scalar(255, 0, 0);
         cv::rectangle(displayImage, box, color, 2);
     }
 
     cv::imshow("Game Window", displayImage);
     cv::waitKey(1); // Wait to ensure the image is being rendered
     updateRedBoundingBox();
-    setupCallback();
 }
 
 void GameMode2::updateRedBoundingBox() {
@@ -42,7 +41,7 @@ void GameMode2::updateRedBoundingBox() {
 
 
 void GameMode2::handleMouseClick(int x, int y) {
-    if (m_targetBoundingBox.contains(cv::Point(x, y))) {
+    if (targetBox.contains(cv::Point(x, y))) {
         m_lastClickInBoundingBox = 1;
     }
     else {

@@ -113,7 +113,7 @@ void GameMode::chooseRandomBox() {
   std::random_device random;
   std::mt19937 generator(random());
   std::uniform_int_distribution<> distribution(0, m_currentBoundingBoxes.size() - 1);
-  m_targetBoundingBox = m_currentBoundingBoxes[distribution(generator)];
+  targetBox = m_currentBoundingBoxes[distribution(generator)];
 }
 
 double GameMode::chooseRandomDelay() {
@@ -129,9 +129,8 @@ void GameMode::display() {
   cv::waitKey(1); // Wait to ensure the image is being rendered
   chooseRandomBox();
   std::this_thread::sleep_for(std::chrono::duration<double>(chooseRandomDelay()));
-  cv::rectangle(displayImage, m_targetBoundingBox, cv::Scalar(0, 0, 255), 2);
+  cv::rectangle(displayImage, targetBox, cv::Scalar(0, 0, 255), 2);
   cv::imshow("Game Window", displayImage);
-  setupCallback();
 }
 
 void GameMode::setupCallback() {
@@ -145,7 +144,7 @@ void GameMode::setupCallback() {
 }
 
 void GameMode::handleMouseClick(int x, int y) {
-  if (m_targetBoundingBox.contains(cv::Point(x, y))) {
+  if (targetBox.contains(cv::Point(x, y))) {
     m_lastClickInBoundingBox = 1;
   }
   else {
