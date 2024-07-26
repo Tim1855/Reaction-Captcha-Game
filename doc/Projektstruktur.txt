@@ -10,14 +10,12 @@ Reaction-Captcha-Game/
 |           |   ├── 000000.png
 |           |   └── ...
 |           └── ...
-|
 ├── doc/
 │   ├── Anleitung_OpenCV.txt
 │   ├── Programmentwurf_ITA_und_IN_2024.pdf
 │   ├── Programmbeschreibung.txt
 │   ├── todo.txt
 │   └── Projektstruktur.txt
-│
 ├── inc/
 │   ├── Menu.hpp
 │   ├── Config.hpp
@@ -30,8 +28,6 @@ Reaction-Captcha-Game/
 |   ├── GameMode.hpp
 |   ├── GameMode1.hpp
 │   └── GameMode2.hpp
-|
-│
 ├── src/
 │   ├── Menu.cpp
 │   ├── Config.cpp
@@ -52,11 +48,7 @@ Reaction-Captcha-Game/
 │   ├── test_menu.cpp
 │   ├── test_mouse.cpp
 │   └── test_time.cpp
-│
 ├── .gitignore
-│
 ├── CMakeLists.txt
-│
 ├── LICENSE
-│
 └── README.md

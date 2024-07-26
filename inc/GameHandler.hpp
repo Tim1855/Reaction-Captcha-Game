@@ -26,6 +26,7 @@ private:
     bool m_spacebarPressed;
     std::unique_ptr<GameMode> m_currentGameMode;
     std::vector<double> m_reactionTimes;
+    std::string imageFolderPath;
 };
 
 #endif // GAMEHANDLER_HPP

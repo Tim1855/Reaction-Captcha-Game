@@ -7,26 +7,32 @@
 #include "BoundingBox.hpp"
 
 
+// Konstruktor für GameMode1, initialisiert die Mitglieder mit Standardwerten oder Null.
 GameMode1::GameMode1(const std::string& imageFolderPath, const std::string& bboxFolderPath)
     : m_imageFolderPath(imageFolderPath), m_bboxFolderPath(bboxFolderPath), m_currentSequence(0), m_currentIndex(0), m_imageClicked(nullptr), m_lastClickInBoundingBox(false) {
 }
 
+// Destruktor für GameMode1.
 GameMode1::~GameMode1() {
 }
 
+// Lädt die Bounding Boxes für die angegebene Sequenznummer.
 bool GameMode1::loadBoundingBoxes(int sequence) {
     m_currentSequence = sequence;
 
+    // Erstellt den vollständigen Pfad zur Bounding Box-Datei.
     std::ostringstream bboxFilePathStream;
     bboxFilePathStream << m_bboxFolderPath << "/" << std::setw(4) << std::setfill('0') << sequence << ".txt";
     std::string bboxFilePath = bboxFilePathStream.str();
 
+    // Versucht, die Datei zu öffnen.
     std::ifstream infile(bboxFilePath);
     if (!infile.is_open()) {
         std::cout << "Error: Cannot open bounding box file" << std::endl;
-        return 0;
+        return false;
     }
 
+    // Löscht frühere Bounding Boxes und liest neue ein.
     m_boundingBoxes.clear();
     std::string line;
     while (std::getline(infile, line)) {
@@ -35,30 +41,33 @@ bool GameMode1::loadBoundingBoxes(int sequence) {
         std::string type;
         float alpha, x1, y1, x2, y2, h, w, l, t1, t2, t3, rotY;
         if (!(iss >> frameIndex >> objIndex >> type >> truncation >> occlusion >> alpha >> x1 >> y1 >> x2 >> y2 >> h >> w >> l >> t1 >> t2 >> t3 >> rotY)) {
-            continue;
+            continue; // Springt zum nächsten Eintrag, wenn die Zeile nicht korrekt geparsed werden konnte.
         }
 
         if (type == "DontCare") {
-            continue;
+            continue; // Ignoriert Objekte vom Typ "DontCare".
         }
 
+        // Fügt die Bounding Box zur Liste hinzu.
         BoundingBox bbox(static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2), static_cast<int>(y2));
-            if (m_boundingBoxes.size() <= frameIndex) {
-                    m_boundingBoxes.resize(frameIndex + 1);
-            }
+        if (m_boundingBoxes.size() <= frameIndex) {
+            m_boundingBoxes.resize(frameIndex + 1);
+        }
         m_boundingBoxes[frameIndex].push_back(cv::Rect(cv::Point(bbox.getX1(), bbox.getY1()), cv::Point(bbox.getX2(), bbox.getY2())));
     }
 
-    return 1;
+    return true;
 }
 
+// Lädt das Bild und die zugehörigen Bounding Boxes für eine gegebene Sequenz und Index.
 void GameMode1::loadImageAndBoundingBox(int sequence, int index) {
-        if (!loadBoundingBoxes(sequence)) {
-            std::cout << "Cannot load bounding boxes";
-            return;
-        }
+    if (!loadBoundingBoxes(sequence)) {
+        std::cout << "Cannot load bounding boxes";
+        return;
+    }
     m_currentIndex = index;
 
+    // Bildet den Pfad zum Bild und lädt es.
     std::ostringstream imagePathStream;
     imagePathStream << m_imageFolderPath << "/" << std::setw(6) << std::setfill('0') << index << ".png";
     std::string imagePath = imagePathStream.str();
@@ -73,9 +82,10 @@ void GameMode1::loadImageAndBoundingBox(int sequence, int index) {
     display();
 }
 
+// Filtert Bounding Boxes für ein spezifisches Frame.
 bool GameMode1::filterBoundingBoxesForFrame(int frameIndex) {
     if (frameIndex < 0 || frameIndex >= static_cast<int>(m_boundingBoxes.size())) {
-        return 0;
+        return false;
     }
 
     m_currentBoundingBoxes.clear();
@@ -84,7 +94,7 @@ bool GameMode1::filterBoundingBoxesForFrame(int frameIndex) {
     }
 
     if (!m_currentBoundingBoxes.empty()) {
-        // Select a random bounding box
+        // Wählt zufällig eine Bounding Box aus.
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> dis(0, m_currentBoundingBoxes.size() - 1);
@@ -94,10 +104,12 @@ bool GameMode1::filterBoundingBoxesForFrame(int frameIndex) {
     return !m_currentBoundingBoxes.empty();
 }
 
+// Leer, da in GameMode1 keine zusätzliche Initialisierung nötig ist.
 void GameMode1::startMode(int sequence, int numImages) {
     // Empty for now
 }
 
+// Zeigt das Bild und markiert die Ziel-Bounding Box.
 void GameMode1::display() {
     if (m_currentImage.empty()) return;
 
@@ -112,20 +124,23 @@ void GameMode1::display() {
         }, this);
 }
 
+// Setzt die Callback-Funktion für Mausklicks.
 void GameMode1::setMouseCallback(bool* imageClicked) {
     m_imageClicked = imageClicked;
 }
 
+// Verarbeitet Mausklicks und prüft, ob sie innerhalb der Ziel-Bounding Box erfolgten.
 void GameMode1::handleMouseClick(int x, int y) {
     if (m_targetBoundingBox.contains(cv::Point(x, y))) {
-        m_lastClickInBoundingBox = 1;
+        m_lastClickInBoundingBox = true;
     }
     else {
-        m_lastClickInBoundingBox = 0;
+        m_lastClickInBoundingBox = false;
     }
-    *m_imageClicked = 1;
+    *m_imageClicked = true;
 }
 
+// Gibt zurück, ob der letzte Klick innerhalb der Bounding Box erfolgte.
 bool GameMode1::lastClickInBoundingBox() const {
     return m_lastClickInBoundingBox;
 }

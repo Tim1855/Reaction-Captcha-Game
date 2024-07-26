@@ -6,40 +6,46 @@
 
 class Menu {
 public:
-    Menu(/* args */);
-    ~Menu();
+    Menu(); // Konstruktor
+    ~Menu(); // Destruktor
 
-    void displayMenu();
+    // Methoden zur Anzeige und Abfrage der Benutzereingaben
+    void displayMenu(); // Zeigt das Hauptmenü
 
-    void promptPlayerName();
-    void promptNumberOfImages();
-    void promptSequence();
-    void promptGameMode();
-    void promptGameStart();
+    // Abfragen zur Eingabe von Spielerdaten und Spieloptionen
+    void promptPlayerName(); // Fragt nach dem Namen des Spielers
+    void promptNumberOfImages(); // Fragt nach der Anzahl der zu spielenden Bilder
+    void promptSequence(); // Fragt nach der Sequenznummer der Bilder
+    void promptGameMode(); // Fragt nach dem gewünschten Spielmodus
+    void promptGameStart(); // Fragt, ob das Spiel gestartet werden soll
 
-    void setPlayerName();
-    void setNumberOfImages();
-    void setSequence();
-    void setGameMode();
-    void setGameStart();
+    // Setter-Methoden zur Aktualisierung der internen Zustände basierend auf Benutzereingaben
+    void setPlayerName(); // Setzt den Namen des Spielers
+    void setNumberOfImages(); // Setzt die Anzahl der Bilder
+    void setSequence(); // Setzt die Sequenznummer
+    void setGameMode(); // Setzt den Spielmodus
+    void setGameStart(); // Startet das Spiel
 
-    bool checkEmpty(std::string m_playerName);
-    bool checkInteger(int integer);
-    bool checkBool(bool boolean);
+    // Überprüfungsmethoden für Eingaben
+    bool checkEmpty(std::string m_playerName); // Überprüft, ob der eingegebene String leer ist
+    bool checkInteger(int integer); // Überprüft, ob der Wert eine gültige Ganzzahl ist
+    bool checkBool(bool boolean); // Überprüft, ob der Wert ein gültiger boolescher Wert ist
 
-    bool checkNumberOfImages(int m_numberOfImages);
-    bool checkSequence(int m_sequence);
-    bool checkGameMode(int m_gameMode);
-    bool checkGameStart(int m_gameStart);
+    // Spezifische Überprüfungsmethoden für Spieloptionen
+    bool checkNumberOfImages(int m_numberOfImages); // Überprüft die Gültigkeit der Anzahl der Bilder
+    bool checkSequence(int m_sequence); // Überprüft die Gültigkeit der Sequenznummer
+    bool checkGameMode(int m_gameMode); // Überprüft die Gültigkeit des Spielmodus
+    bool checkGameStart(int m_gameStart); // Überprüft, ob das Spiel gestartet werden kann
 
-
-    std::string getPlayerName() const;
-    int getNumberOfImages() const;
-    int getSequence() const;
-    int getGameMode() const;
-    int getGameStart() const;
+    // Getter-Methoden
+    std::string getPlayerName() const; // Gibt den Namen des Spielers zurück
+    int getNumberOfImages() const; // Gibt die Anzahl der Bilder zurück
+    int getSequence() const; // Gibt die Sequenznummer zurück
+    int getGameMode() const; // Gibt den Spielmodus zurück
+    int getGameStart() const; // Gibt den Startstatus des Spiels zurück
 
 private:
+    // Private Mitgliedsvariablen zur Speicherung von Benutzerdaten und Spieloptionen
     std::string m_playerName;
     std::string m_input;
     int m_numberOfImages;
@@ -48,4 +54,4 @@ private:
     int m_gameStart;
 };
 
-#endif // MENU_HPP
+#endif 

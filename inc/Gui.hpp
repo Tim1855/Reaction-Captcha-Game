@@ -8,8 +8,8 @@
 class Gui {
 public:
     Gui(const std::string& windowName);
-    void showImage(const cv::Mat& image) const;
-    void drawBoundingBox(const BoundingBox& bbox, const cv::Scalar& color) const;
+    void showImage(const cv::Mat& image) const; // Methode zum Anzeigen eines Bildes
+    void drawBoundingBox(const BoundingBox& bbox, const cv::Scalar& color) const; // Methode zum Zeichnen einer Bounding Box auf einem Bild
 
 private:
     std::string m_windowName;
