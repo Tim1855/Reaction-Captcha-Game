@@ -48,7 +48,7 @@ void GameMode::loadBoundingBoxes(int sequence, int image) {
 
   std::ifstream infile(m_boxFolder);
   if (!infile.is_open()) {
-    std::cout << "Error: Cannot open bounding box file" << std::endl;
+    std::cout << "Fehler: Kann Box nicht öffnen: " << std::endl;
   }
 
   std::string line;

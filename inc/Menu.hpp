@@ -12,11 +12,11 @@ public:
     void displayMenu();
 
 
-    void promptPlayerName();
-    void promptNumberOfImages();
-    void promptSequence();
-    void promptGameMode();
-    void promptGameStart();
+    const void promptPlayerName();
+    const void promptNumberOfImages();
+    const void promptSequence();
+    const void promptGameMode();
+    const void promptGameStart();
 
 
     void setPlayerName();
