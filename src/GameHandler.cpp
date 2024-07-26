@@ -28,7 +28,7 @@ void GameHandler::startGame() {
             auto ConditionTime = startTime + std::chrono::seconds(3);
             while (std::chrono::high_resolution_clock::now() < ConditionTime) {
                 cv::waitKey(1); // allow opencv to process mouse callback
-                if ((myGameMode.getClickStatus() == INCORRECT_CLICK) || (myGameMode.getClickStatus() == CORRECT_CLICK)) {
+                if (myGameMode.getClickStatus() != NO_CLICK) {
                     break;
                 }
             }
@@ -60,8 +60,11 @@ void GameHandler::startGame() {
             auto startTime = std::chrono::high_resolution_clock::now();
             auto ConditionTime = startTime + std::chrono::seconds(3);
             while (std::chrono::high_resolution_clock::now() < ConditionTime) {
-                if (myGameMode.checkSpaceBarPress()) {
-                    break;
+                cv::waitKey(1); // allow opencv to process mouse callback
+                if (myGameMode.getClickStatus() != NO_CLICK) {
+                    if (myGameMode.checkSpaceBarPress()) {
+                        break;
+                    }
                 }
             }
             auto endTime = std::chrono::high_resolution_clock::now();

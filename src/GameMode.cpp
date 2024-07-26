@@ -92,9 +92,7 @@ bool GameMode::checkImage() {
 void GameMode::loadImage(int sequence, int image) {
   setImagePath(image, sequence);
   Image = cv::imread(m_imagePath);
-  if (checkImage() == false) {
-    return; // TODO: Do something else
-  }
+  checkImage();
 }
 
 
