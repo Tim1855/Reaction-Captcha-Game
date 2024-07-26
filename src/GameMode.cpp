@@ -145,7 +145,8 @@ void GameMode::setClickStatus(ClickStatus clickStatus) {
 ClickStatus GameMode::getClickStatus() {
   return this->clickStatus;
 }
-
-bool GameMode::checkSpaceBarPress() {
-  return 1;
+bool GameMode::getSpaceBarPress() {
+  return 0;
 }
+
+

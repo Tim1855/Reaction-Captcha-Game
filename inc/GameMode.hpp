@@ -43,7 +43,9 @@ public:
     void setClickStatus(ClickStatus clickStatus);
     virtual void display();
     virtual void updateTargetBox() {};
-    virtual bool checkSpaceBarPress();
+    virtual void setSpaceBarPress(bool spaceBarPress) {};
+    virtual bool getSpaceBarPress();
+
 };
 
 #endif // GAMEMODE_HPP

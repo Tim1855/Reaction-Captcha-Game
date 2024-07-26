@@ -12,10 +12,10 @@ public:
 
     void display() override;
     void updateTargetBox() override;
-    bool checkSpaceBarPress() override;
-
-private:
-    bool m_spaceBarPress;
+    bool getSpaceBarPress() override;
+    void setSpaceBarPress(bool spaceBarPress) override;
+    private:
+    bool spaceBarPress;
 };
 
 #endif // GAMEMODE2_HPP

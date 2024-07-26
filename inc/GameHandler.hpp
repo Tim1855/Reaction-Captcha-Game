@@ -25,6 +25,7 @@ public:
     void giveFeedback();
     ReactionData data;
     void sortReactionTimesAndImages(ReactionData& data);
+    void processImage(GameMode* myGameMode, int image);
 
 protected:
     std::string m_playerName;
