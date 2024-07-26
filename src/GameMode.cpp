@@ -82,7 +82,7 @@ void GameMode::loadBoundingBoxes(int sequence, int image) {
 
 bool GameMode::checkImage() {
   if (Image.empty()) {
-    std::cout << "Error: Image not found: " << m_imagePath << std::endl;
+    std::cout << "Fehler: Bild nichtgefunden: " << m_imagePath << std::endl;
     return 0;
   }
   return 1;
@@ -112,7 +112,7 @@ double GameMode::chooseRandomDelay() {
 void GameMode::display() {
   cv::Mat displayImage = Image.clone();
   cv::imshow("Game Window", displayImage);
-  cv::waitKey(1); // Wait to ensure the image is being rendered
+  cv::waitKey(1); // warte kurz damit das Bild angezeigt wird
   chooseRandomBox();
   std::this_thread::sleep_for(std::chrono::duration<double>(chooseRandomDelay()));
   cv::rectangle(displayImage, targetBox, cv::Scalar(0, 0, 255), 2);

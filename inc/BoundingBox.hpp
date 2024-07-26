@@ -4,6 +4,7 @@
 class BoundingBox {
 public:
     BoundingBox(int x1, int y1, int x2, int y2);
+    virtual ~BoundingBox();
     int getX1() const;
     int getY1() const;
     int getX2() const;

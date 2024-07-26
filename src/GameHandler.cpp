@@ -45,16 +45,17 @@ void GameHandler::processImage(GameMode* myGameMode, int image) {
     auto ConditionTime = startTime + std::chrono::seconds(3);
 
     while (true) {
-        int key = cv::waitKey(1); // give opencv one millisecond to register inputs
+        int key = cv::waitKey(1); // gebe opencv eine Millisekunde um Maus- und Tastatureingaben zu registrieren
         if (key == 32 && m_gameMode == 2) {
             myGameMode->setSpaceBarPress(1);
         }
 
-        // Check for timeout
+        // Checke ob Zeit von 3 Sekunden überschritten wurde
         if (std::chrono::high_resolution_clock::now() >= ConditionTime) {
             break;
         }
 
+        // Bedingungen für Abbruch der Spielmodi
         if (myGameMode->getClickStatus() != NO_CLICK) {
             if (m_gameMode == 1) {
                 break;
@@ -70,17 +71,17 @@ void GameHandler::processImage(GameMode* myGameMode, int image) {
     auto endTime = std::chrono::high_resolution_clock::now();
     auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
     if (reactionTime >= 3) {
-        std::cout << "Bild " << image << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
+        std::cout << "Bild " << image << ": Keine Reaktion: 5 Sekunden Strafe" << std::endl;
         data.images.push_back(image);
         data.reactionTimes.push_back(reactionTime);
     }
     else if (myGameMode->getClickStatus() == CORRECT_CLICK) {
-        std::cout << "Bild " << image << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
+        std::cout << "Bild " << image << ": " << reactionTime << " Sekunden" << std::endl;
         data.images.push_back(image);
         data.reactionTimes.push_back(reactionTime);
     }
     else if (myGameMode->getClickStatus() == INCORRECT_CLICK) {
-        std::cout << "Bild " << image << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
+        std::cout << "Bild " << image << ": Fehlklick: 5 Sekunden Strafe" << std::endl;
         data.images.push_back(image);
         data.reactionTimes.push_back(reactionTime);
     }
@@ -103,7 +104,7 @@ void GameHandler::giveFeedback() {
     }
     double average = sum / data.reactionTimes.size();
 
-    std::cout << "Reaktionszeiten: " << std::endl;
+    std::cout << "Beste Reaktionszeiten: " << std::endl;
     for (int i = 0; i < std::min(static_cast<int>(data.reactionTimes.size()), 3); i++) {
         if (data.reactionTimes[i] >= 0) {
             std::cout << "Bild " << data.images[i] << ": " << data.reactionTimes[i] << " Sekunden." << std::endl;

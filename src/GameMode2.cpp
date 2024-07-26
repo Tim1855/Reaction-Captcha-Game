@@ -21,7 +21,7 @@ void GameMode2::display() {
         cv::rectangle(displayImage, box, cv::Scalar(255, 0, 0), 2);
     }
     cv::imshow("Game Window", displayImage);
-    cv::waitKey(1); // Wait to ensure the image is being rendered
+    cv::waitKey(1); // warte kurz um das Bild zu rendern
 }
 
 void GameMode2::updateTargetBox() {
@@ -29,7 +29,7 @@ void GameMode2::updateTargetBox() {
     chooseRandomBox();
     cv::rectangle(displayImage, targetBox, cv::Scalar(0, 0, 255), 2);
     cv::imshow("Game Window", displayImage);
-    cv::waitKey(1); // Wait to ensure the image is being rendered
+    cv::waitKey(1);
 }
 
 

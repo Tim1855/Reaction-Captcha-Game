@@ -34,23 +34,23 @@ void Menu::displayMenu() {
 
 //Promptfunktionen für die Spielereingaben
 const void Menu::promptPlayerName() {
-    std::cout << "\nHallo Spieler, geben Sie ihren Namen ein: ";
+    std::cout << "Hallo Spieler, geben Sie ihren Namen ein: ";
 }
 
 const void Menu::promptNumberOfImages() {
-    std::cout << "\nWaehlen Sie wie viele Bilder Sie spielen moechten (1-77): ";
+    std::cout << std::endl << "Waehlen Sie wie viele Bilder Sie spielen moechten (1-77): ";
 }
 
 const void Menu::promptSequence() {
-    std::cout << "\nWaehlen Sie welche Sequenz Sie spielen moechten (0-20): ";
+    std::cout << std::endl << "Waehlen Sie welche Sequenz Sie spielen moechten (0-20): ";
 }
 
 const void Menu::promptGameMode() {
-    std::cout << "\nWaehlen Sie den Spielmodus aus (1 oder 2): ";
+    std::cout << std::endl << "Waehlen Sie den Spielmodus aus (1 oder 2): ";
 }
 
 const void Menu::promptGameStart() {
-    std::cout << "\nWollen Sie das Spiel starten (1:ja, 0:nein): ";
+    std::cout << std::endl << "Wollen Sie das Spiel starten (1:ja, 0:nein): ";
 }
 
 
@@ -85,7 +85,7 @@ void Menu::setSequence() {
     std::getline(std::cin, m_input);
     if (checkDataType<int>(m_input)) {
         m_sequence = std::stoi(m_input);
-        if ((m_sequence < 1) || (m_sequence > 20)) {
+        if ((m_sequence < 1) || (m_sequence > 20) || (m_sequence == 18)) { // Sequenz 18 hat Bilder ohne relevanten Boxen
             promptSequence();
             setSequence();
         }
@@ -135,7 +135,7 @@ void Menu::setGameStart() {
 
 //Checkerfunktionen testen Inputrange
 bool Menu::checkNumberOfImages(int m_numberOfImages) {
-    return ((m_numberOfImages >= 1) && (m_numberOfImages <= 77)); // smallest sequence has 77 images (0012)
+    return ((m_numberOfImages >= 1) && (m_numberOfImages <= 77)); // kleinste Sequenz 12 hat 77 Bilder
 }
 
 bool Menu::checkSequence(int m_sequence) {
