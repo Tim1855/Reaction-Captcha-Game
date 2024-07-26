@@ -9,7 +9,6 @@
 
 
 
-// Base template
 template<typename T>
 int checkDataType(const std::string& input) {
     std::istringstream iss(input);
@@ -20,7 +19,6 @@ int checkDataType(const std::string& input) {
     return 1;
 }
 
-// Specialization for int
 template<>
 int checkDataType<int>(const std::string& input) {
     std::istringstream iss(input);
@@ -31,7 +29,6 @@ int checkDataType<int>(const std::string& input) {
     return 1;
 }
 
-// Specialization for double
 template<>
 int checkDataType<double>(const std::string& input) {
     std::istringstream iss(input);
@@ -42,10 +39,8 @@ int checkDataType<double>(const std::string& input) {
     return 1;
 }
 
-// Specialization for std::string (any input is valid for std::string)
 template<>
 int checkDataType<std::string>(const std::string& input) {
-    return 1; // Always valid for std::string
+    return 1;
 }
-
 #endif // INPUTCHECKER_HPP

@@ -1,8 +1,6 @@
 #include "Config.hpp"
 
-// Definition der globalen Variablen mit konkreten Pfadangaben
-std::string imageFolder = std::string(SOURCE_DIR) + "/data/training/image_02/"; // Pfad zum Bilderordner
+// Hier kann der Pfad für die Bilder und die Labels geändert werden
 
-
-std::string bboxFolderPath = std::string(SOURCE_DIR) + "/data/training/label_02"; // Pfad zum Ordner der Bounding Boxes
-
+std::string imageFolder = std::string(SOURCE_DIR) + "/data/training/image_02/";
+std::string bboxFolderPath = std::string(SOURCE_DIR) + "/data/training/label_02/";
