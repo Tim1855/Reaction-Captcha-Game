@@ -17,27 +17,21 @@ GameMode2::~GameMode2() {
 
 
 void GameMode2::display() {
-
-    cv::Mat displayImage = m_currentImage.clone();
+    displayImage = Image.clone();
     for (const auto& box : m_currentBoundingBoxes) {
-        cv::Scalar color = (box == targetBox) ? cv::Scalar(0, 0, 255) : cv::Scalar(255, 0, 0);
-        cv::rectangle(displayImage, box, color, 2);
+        cv::rectangle(displayImage, box, cv::Scalar(255, 0, 0), 2);
     }
-
     cv::imshow("Game Window", displayImage);
     cv::waitKey(1); // Wait to ensure the image is being rendered
-    updateRedBoundingBox();
 }
 
-void GameMode2::updateRedBoundingBox() {
-    if (!m_redBoundingBoxSet) {
-        std::this_thread::sleep_for(std::chrono::duration<double>(chooseRandomDelay()));
-        chooseRandomBox();
-        m_redBoundingBoxSet = 1;
-        display();
-        m_redBoundingBoxSet = 0;
-    }
+void GameMode2::updateTargetBox() {
+    std::this_thread::sleep_for(std::chrono::duration<double>(chooseRandomDelay()));
+    chooseRandomBox();
+    cv::rectangle(displayImage, targetBox, cv::Scalar(0, 0, 255), 2);
+    cv::imshow("Game Window", displayImage);
 }
+
 
 
 void GameMode2::handleMouseClick(int x, int y) {

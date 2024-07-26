@@ -11,14 +11,13 @@ public:
     ~GameMode2();
 
     void display() override;
-    void updateRedBoundingBox();
+    void updateTargetBox();
     void handleMouseClick(int x, int y) override;
     void setSpaceBarPress(bool spaceBarPress);
     bool getSpaceBarPress();
     void checkSpaceBarPress();
 
 private:
-    bool m_redBoundingBoxSet;
     bool m_spaceBarPress;
 };
 

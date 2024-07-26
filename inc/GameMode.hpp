@@ -18,7 +18,8 @@ protected:
     int m_gameMode;
     bool m_imageClicked;
     bool m_lastClickInBoundingBox;
-    cv::Mat m_currentImage;
+    cv::Mat Image;
+    cv::Mat displayImage;
     std::vector<std::vector<cv::Rect>> m_Boxes;
     std::vector<cv::Rect> m_currentBoundingBoxes;
     cv::Rect targetBox;

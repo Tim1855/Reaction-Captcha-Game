@@ -83,7 +83,7 @@ void GameMode::setImagePath(int image) {
 }
 
 bool GameMode::checkImage() {
-  if (m_currentImage.empty()) {
+  if (Image.empty()) {
     std::cout << "Error: Image not found: " << m_imagePath << std::endl;
     return 0;
   }
@@ -92,7 +92,7 @@ bool GameMode::checkImage() {
 
 void GameMode::loadImage(int sequence, int image) {
   setImagePath(image);
-  m_currentImage = cv::imread(m_imagePath);
+  Image = cv::imread(m_imagePath);
   if (checkImage() == false) {
     return; // TODO: Do something else
   }
@@ -124,7 +124,7 @@ double GameMode::chooseRandomDelay() {
 }
 
 void GameMode::display() {
-  cv::Mat displayImage = m_currentImage.clone();
+  cv::Mat displayImage = Image.clone();
   cv::imshow("Game Window", displayImage);
   cv::waitKey(1); // Wait to ensure the image is being rendered
   chooseRandomBox();
