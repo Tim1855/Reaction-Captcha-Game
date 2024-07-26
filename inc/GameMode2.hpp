@@ -11,8 +11,8 @@ public:
     ~GameMode2();
 
     void display() override;
-    void updateTargetBox();
-    bool checkSpaceBarPress();
+    void updateTargetBox() override;
+    bool checkSpaceBarPress() override;
 
 private:
     bool m_spaceBarPress;

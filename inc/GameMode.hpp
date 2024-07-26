@@ -27,21 +27,23 @@ public:
     GameMode();
     virtual ~GameMode();
 
-    virtual void loadBoundingBoxes(int sequence, int numberOfImages);
-    virtual void loadImage(int sequence, int index);
-    virtual bool checkImage();
+    void loadBoundingBoxes(int sequence, int numberOfImages);
+    void loadImage(int sequence, int index);
+    bool checkImage();
+    void checkClick(int x, int y);
+    void setupCallback();
+    void setBoxFolderPath(int sequence);
+    std::string formatSequence(int sequence);
+    std::string formatImage(int image);
+    void setImagePath(int image, int sequence);
+    BoundingBox box(int x1, int y1, int x2, int y2);
+    void chooseRandomBox();
+    double chooseRandomDelay();
+    ClickStatus getClickStatus();
+    void setClickStatus(ClickStatus clickStatus);
     virtual void display();
-    virtual void checkClick(int x, int y);
-    virtual void setupCallback();
-    virtual void setBoxFolderPath(int sequence);
-    virtual std::string formatSequence(int sequence);
-    virtual std::string formatImage(int image);
-    virtual void setImagePath(int image, int sequence);
-    virtual BoundingBox box(int x1, int y1, int x2, int y2);
-    virtual void chooseRandomBox();
-    virtual double chooseRandomDelay();
-    virtual ClickStatus getClickStatus();
-    virtual void setClickStatus(ClickStatus clickStatus);
+    virtual void updateTargetBox() {};
+    virtual bool checkSpaceBarPress();
 };
 
 #endif // GAMEMODE_HPP

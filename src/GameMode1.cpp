@@ -4,7 +4,6 @@
 #include <iomanip>
 
 #include "GameMode1.hpp"
-#include "Gui.hpp"
 #include "BoundingBox.hpp"
 
 

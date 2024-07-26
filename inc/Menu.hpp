@@ -3,19 +3,20 @@
 
 #include <string>
 #include <iostream>
+#include <GameHandler.hpp>
 
 class Menu {
 public:
-    Menu(/* args */);
+    Menu();
     ~Menu();
 
     void displayMenu();
 
-    void promptPlayerName();
-    void promptNumberOfImages();
-    void promptSequence();
-    void promptGameMode();
-    void promptGameStart();
+    const void promptPlayerName();
+    const void promptNumberOfImages();
+    const void promptSequence();
+    const void promptGameMode();
+    const void promptGameStart();
 
     void setPlayerName();
     void setNumberOfImages();
@@ -23,21 +24,17 @@ public:
     void setGameMode();
     void setGameStart();
 
-    bool checkEmpty(std::string m_playerName);
-    bool checkInteger(int integer);
-    bool checkBool(bool boolean);
-
     bool checkNumberOfImages(int m_numberOfImages);
     bool checkSequence(int m_sequence);
     bool checkGameMode(int m_gameMode);
     bool checkGameStart(int m_gameStart);
-
 
     std::string getPlayerName() const;
     int getNumberOfImages() const;
     int getSequence() const;
     int getGameMode() const;
     int getGameStart() const;
+
 
 private:
     std::string m_playerName;

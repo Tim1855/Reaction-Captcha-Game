@@ -16,111 +16,99 @@ GameHandler::~GameHandler() {
 }
 
 void GameHandler::startGame() {
+    GameMode* myGameMode = nullptr;
     if (m_gameMode == 1) {
-        GameMode1 myGameMode;
-        for (int image = 0; image < m_numberofImages; image++) {
-            myGameMode.setClickStatus(NO_CLICK);
-            myGameMode.loadImage(m_sequence, image);
-            myGameMode.loadBoundingBoxes(m_sequence, image);
-            myGameMode.display();
-            myGameMode.setupCallback();
-            auto startTime = std::chrono::high_resolution_clock::now();
-            auto ConditionTime = startTime + std::chrono::seconds(3);
-            while (std::chrono::high_resolution_clock::now() < ConditionTime) {
-                cv::waitKey(1); // allow opencv to process mouse callback
-                if (myGameMode.getClickStatus() != NO_CLICK) {
-                    break;
-                }
-            }
-            auto endTime = std::chrono::high_resolution_clock::now();
-            auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
-            if (reactionTime >= 3 && myGameMode.getClickStatus() == NO_CLICK) {
-                std::cout << "Bild " << image << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
-                m_reactionTimes.push_back(5.0);
-            }
-            else if (myGameMode.getClickStatus() == CORRECT_CLICK) {
-                std::cout << "Bild " << image << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
-                m_reactionTimes.push_back(reactionTime);
-            }
-            else if (myGameMode.getClickStatus() == INCORRECT_CLICK) {
-                std::cout << "Bild " << image << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
-                m_reactionTimes.push_back(5.0);
-            }
-        }
+        myGameMode = new GameMode1();
     }
-    else {
-        GameMode2 myGameMode;
-        for (int image = 0; image < m_numberofImages; image++) {
-            myGameMode.setClickStatus(NO_CLICK);
-            myGameMode.loadImage(m_sequence, image);
-            myGameMode.loadBoundingBoxes(m_sequence, image);
-            myGameMode.display();
-            myGameMode.updateTargetBox();
-            myGameMode.setupCallback();
-            auto startTime = std::chrono::high_resolution_clock::now();
-            auto ConditionTime = startTime + std::chrono::seconds(3);
+    else if (m_gameMode == 2) {
+        myGameMode = new GameMode2();
+    }
+    for (int image = 0; image < m_numberofImages; image++) {
+        myGameMode->setClickStatus(NO_CLICK);
+        myGameMode->loadImage(m_sequence, image);
+        myGameMode->loadBoundingBoxes(m_sequence, image);
+        myGameMode->display();
+        myGameMode->updateTargetBox();
+        myGameMode->setupCallback();
+        auto startTime = std::chrono::high_resolution_clock::now();
+        auto ConditionTime = startTime + std::chrono::seconds(3);
             while (std::chrono::high_resolution_clock::now() < ConditionTime) {
                 cv::waitKey(1); // allow opencv to process mouse callback
-                if (myGameMode.getClickStatus() != NO_CLICK) {
-                    if (myGameMode.checkSpaceBarPress()) {
+                if (myGameMode->getClickStatus() != NO_CLICK) {
+                    if (myGameMode->checkSpaceBarPress()) {
                         break;
                     }
                 }
             }
-            auto endTime = std::chrono::high_resolution_clock::now();
-            auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
-            if (reactionTime >= 3 && myGameMode.getClickStatus() == NO_CLICK) {
-                std::cout << "Bild " << image << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
-                m_reactionTimes.push_back(5.0);
-            }
-            else if (myGameMode.getClickStatus() == CORRECT_CLICK) {
-                std::cout << "Bild " << image << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
-                m_reactionTimes.push_back(reactionTime);
-            }
-            else if (myGameMode.getClickStatus() == INCORRECT_CLICK) {
-                std::cout << "Bild " << image << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
-                m_reactionTimes.push_back(5.0);
-            }
+
+        auto endTime = std::chrono::high_resolution_clock::now();
+        auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
+        if (reactionTime >= 3 && myGameMode->getClickStatus() == NO_CLICK) {
+            std::cout << "Bild " << image << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
+            data.images.push_back(image);
+            data.reactionTimes.push_back(reactionTime);
+        }
+        else if (myGameMode->getClickStatus() == CORRECT_CLICK) {
+            std::cout << "Bild " << image << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
+            data.images.push_back(image);
+            data.reactionTimes.push_back(reactionTime);
+        }
+        else if (myGameMode->getClickStatus() == INCORRECT_CLICK) {
+            std::cout << "Bild " << image << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
+            data.images.push_back(image);
+            data.reactionTimes.push_back(reactionTime);
         }
     }
+    delete myGameMode;
     endGame();
     giveFeedback();
 }
 
 
+
 void GameHandler::endGame() {
     cv::destroyAllWindows();
-    std::cout << "Game ended." << std::endl;
+    std::cout << "Spiel beendet." << std::endl;
 }
 
+
 void GameHandler::giveFeedback() {
-    std::cout << "Player: " << m_playerName << std::endl;
+    std::cout << "Spieler: " << m_playerName << std::endl;
+    sortReactionTimesAndImages(data);
 
-    if (!m_reactionTimes.empty()) {
-        std::sort(m_reactionTimes.begin(), m_reactionTimes.end(), [](double a, double b) { return a > 0 && (b < 0 || a < b); });
-
-        double sum = 0;
-        int count = 0;
-        for (double time : m_reactionTimes) {
-            sum += time; // Add all times including penalties
-            if (time >= 0) {
-                count++;
-            }
-        }
-        double average = (count > 0) ? sum / m_reactionTimes.size() : 0; // Include penalties in average calculation
-
-        std::cout << "Beste Reaktionszeiten:" << std::endl;
-        for (int i = 0; i < std::min(3, static_cast<int>(m_reactionTimes.size())); i++) {
-            if (m_reactionTimes[i] >= 0) {
-                std::cout << i << ". " << m_reactionTimes[i] << " Sekunden" << std::endl;
-            }
-            else {
-                std::cout << i << ". " << "Keine Reaktion : 5 Sekunden Strafe" << std::endl;
-            }
-        }
-        std::cout << "Durchschnittliche Reaktionszeit: " << average << " Sekunden" << std::endl;
+    double sum = 0;
+    for (double time : data.reactionTimes) {
+        sum += time;
     }
-    else {
-        std::cout << "Keine Reaktionen registriert." << std::endl;
+    double average = sum / data.reactionTimes.size();
+
+    std::cout << "Reaktionszeiten: " << std::endl;
+    for (int i = 0; i < std::min(static_cast<int>(data.reactionTimes.size()), 3); i++) {
+        if (data.reactionTimes[i] >= 0) {
+            std::cout << "Bild " << data.images[i] << ": " << data.reactionTimes[i] << " Sekunden." << std::endl;
+        }
     }
+    std::cout << "Durchschnittliche Reaktionszeit: " << average << " Sekunden." << std::endl;
+    data.images.clear();
+    data.reactionTimes.clear();
+}
+
+void GameHandler::sortReactionTimesAndImages(ReactionData& data) {
+
+    std::vector<size_t> indices(data.reactionTimes.size());
+    std::iota(indices.begin(), indices.end(), 0);
+
+    std::sort(indices.begin(), indices.end(), [&data](size_t i, size_t j) {
+        return data.reactionTimes[i] < data.reactionTimes[j];
+        });
+
+    std::vector<double> sortedReactionTimes(data.reactionTimes.size());
+    std::vector<int> sortedImages(data.images.size());
+    for (size_t i = 0; i < indices.size(); ++i) {
+        sortedReactionTimes[i] = data.reactionTimes[indices[i]];
+        sortedImages[i] = data.images[indices[i]];
+    }
+
+    data.reactionTimes = std::move(sortedReactionTimes);
+    data.images = std::move(sortedImages);
 }

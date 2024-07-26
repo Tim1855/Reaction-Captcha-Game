@@ -4,9 +4,15 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <numeric>
 
 #include "GameMode.hpp"
 
+struct ReactionData {
+    std::vector<double> reactionTimes;
+    std::vector<int> images;
+};
 
 class GameHandler {
 public:
@@ -17,6 +23,8 @@ public:
     void startGame();
     void endGame();
     void giveFeedback();
+    ReactionData data;
+    void sortReactionTimesAndImages(ReactionData& data);
 
 protected:
     std::string m_playerName;

@@ -8,7 +8,6 @@
 
 #include "GameMode2.hpp"
 #include "BoundingBox.hpp"
-#include "Gui.hpp"
 
 GameMode2::GameMode2() : GameMode() {}
 

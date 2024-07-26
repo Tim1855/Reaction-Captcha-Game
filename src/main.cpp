@@ -6,11 +6,12 @@ int main() {
     Menu myMenu;
 
     // display menu and get player information
-    myMenu.displayMenu();
+    // myMenu.displayMenu();
+    myMenu.promptGameMode();
+    myMenu.setGameMode();
 
 
-
-    if (myMenu.getGameStart() || 1) {
+    if (myMenu.getGameStart()) {
 
         // initialize components
         // GameHandler gameHandler(myMenu.getPlayerName(), myMenu.getNumberOfImages(), myMenu.getSequence(), myMenu.getGameMode());

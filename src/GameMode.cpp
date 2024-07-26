@@ -8,7 +8,6 @@
 #include <chrono>
 
 #include "GameMode.hpp"
-#include "Gui.hpp"
 #include "Config.hpp"
 
 
@@ -147,4 +146,6 @@ ClickStatus GameMode::getClickStatus() {
   return this->clickStatus;
 }
 
-
+bool GameMode::checkSpaceBarPress() {
+  return 1;
+}

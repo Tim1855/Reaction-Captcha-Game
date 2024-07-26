@@ -8,51 +8,53 @@
 #include "Menu.hpp"
 #include "Inputchecker.hpp"
 
-Menu::Menu() : m_numberOfImages(0), m_sequence(0), m_gameMode(0), m_gameStart(false) {
+Menu::Menu() {
 }
 
 Menu::~Menu() {
 }
 
 void Menu::displayMenu() {
-    // promptPlayerName();
-    // setPlayerName();
+    promptPlayerName();
+    setPlayerName();
 
-    // promptNumberOfImages();
-    // setNumberOfImages();
+    promptNumberOfImages();
+    setNumberOfImages();
 
-    // promptSequence();
-    // setSequence();
+    promptSequence();
+    setSequence();
 
     promptGameMode();
     setGameMode();
 
-    // promptGameStart();
-    // setGameStart();
+    promptGameStart();
+    setGameStart();
 }
 
+
 //Promptfunktionen für die Spielereingaben
-void Menu::promptPlayerName() {
+const void Menu::promptPlayerName() {
     std::cout << "\nHallo Spieler, geben Sie ihren Namen ein: ";
 }
 
-void Menu::promptNumberOfImages() {
+const void Menu::promptNumberOfImages() {
     std::cout << "\nWaehlen Sie wie viele Bilder Sie spielen moechten (1-77): ";
 }
 
-void Menu::promptSequence() {
+const void Menu::promptSequence() {
     std::cout << "\nWaehlen Sie welche Sequenz Sie spielen moechten (0-20): ";
 }
 
-void Menu::promptGameMode() {
+const void Menu::promptGameMode() {
     std::cout << "\nWaehlen Sie den Spielmodus aus (1 oder 2): ";
 }
 
-void Menu::promptGameStart() {
+const void Menu::promptGameStart() {
     std::cout << "\nWollen Sie das Spiel starten (1:ja, 0:nein): ";
 }
 
-//Setter Funktionen für die Spielereingaben
+
+//Setterfunktionen für die Spielereingaben
 void Menu::setPlayerName() {
     std::getline(std::cin, m_input);
     if (checkDataType<std::string>(m_input)) {
@@ -117,7 +119,7 @@ void Menu::setGameStart() {
             displayMenu();
         }
         else if (m_gameStart == 1) {
-            std::cout << "\nSpielbeginn: ";
+            std::cout << "\nSpielbeginn: " << std::endl;
         }
         else {
             promptGameStart();
@@ -130,7 +132,8 @@ void Menu::setGameStart() {
     }
 }
 
-//Checker Funktionen testen Inputrange
+
+//Checkerfunktionen testen Inputrange
 bool Menu::checkNumberOfImages(int m_numberOfImages) {
     return ((m_numberOfImages >= 1) && (m_numberOfImages <= 77)); // smallest sequence has 77 images (0012)
 }
@@ -148,7 +151,7 @@ bool Menu::checkGameStart(int m_gameStart) {
 }
 
 
-//Getter Funktionen für die Spielereingaben
+//Getterfunktionen für die Spielereingaben
 std::string Menu::getPlayerName() const {
     return m_playerName;
 }
