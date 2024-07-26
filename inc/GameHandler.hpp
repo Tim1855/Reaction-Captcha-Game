@@ -23,7 +23,6 @@ protected:
     int m_numberofImages;
     int m_sequence;
     int m_gameMode;
-    int m_duration;
     std::vector<double> m_reactionTimes;
 };
 

@@ -15,7 +15,6 @@
 GameMode::GameMode() {}
 GameMode::~GameMode() {}
 
-
 BoundingBox GameMode::box(int x1, int y1, int x2, int y2) {
   return BoundingBox(x1, y1, x2, y2);
 }
@@ -99,10 +98,6 @@ void GameMode::loadImage(int sequence, int image) {
 }
 
 
-bool GameMode::lastClickInBoundingBox() {
-  return m_lastClickInBoundingBox;
-}
-
 void GameMode::chooseRandomBox() {
   std::random_device random;
   std::mt19937 generator(random());
@@ -125,6 +120,7 @@ void GameMode::display() {
   std::this_thread::sleep_for(std::chrono::duration<double>(chooseRandomDelay()));
   cv::rectangle(displayImage, targetBox, cv::Scalar(0, 0, 255), 2);
   cv::imshow("Game Window", displayImage);
+  cv::waitKey(1);
 }
 
 void GameMode::setupCallback() {
@@ -145,6 +141,12 @@ void GameMode::handleMouseClick(int x, int y) {
     m_lastClickInBoundingBox = 0;
   }
 }
+
+
+bool GameMode::lastClickInBoundingBox() {
+  return m_lastClickInBoundingBox;
+}
+
 
 bool GameMode::getImageClicked() {
   return m_imageClicked;

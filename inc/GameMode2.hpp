@@ -12,10 +12,7 @@ public:
 
     void display() override;
     void updateTargetBox();
-    void handleMouseClick(int x, int y) override;
-    void setSpaceBarPress(bool spaceBarPress);
-    bool getSpaceBarPress();
-    void checkSpaceBarPress();
+    bool checkSpaceBarPress();
 
 private:
     bool m_spaceBarPress;

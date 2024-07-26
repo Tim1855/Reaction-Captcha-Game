@@ -34,27 +34,9 @@ void GameMode2::updateTargetBox() {
 }
 
 
-
-void GameMode2::handleMouseClick(int x, int y) {
-    if (targetBox.contains(cv::Point(x, y))) {
-        m_lastClickInBoundingBox = 1;
-    }
-    else {
-        m_lastClickInBoundingBox = 0;
-    }
-    m_imageClicked = 1;
-}
-
-void GameMode2::setSpaceBarPress(bool spaceBarPress) {
-    m_spaceBarPress = spaceBarPress;
-}
-
-bool GameMode2::getSpaceBarPress() {
-    return m_spaceBarPress;
-}
-
-void GameMode2::checkSpaceBarPress() {
+bool GameMode2::checkSpaceBarPress() {
     if (cv::waitKey(30) == 32) { // wait briefly and check for spacebar press (ASCII code 32)
-        m_spaceBarPress = 1;
+        return 1;
     }
+    return 0;
 }

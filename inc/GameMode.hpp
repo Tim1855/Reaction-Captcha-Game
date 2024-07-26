@@ -27,7 +27,7 @@ public:
     virtual void loadImage(int sequence, int index);
     virtual bool checkImage();
     virtual void display();
-    virtual void handleMouseClick(int x, int);
+    virtual void handleMouseClick(int x, int y);
     virtual bool lastClickInBoundingBox();
     virtual void setupCallback();
     virtual bool getImageClicked();
@@ -36,9 +36,9 @@ public:
     virtual std::string formatSequence(int sequence);
     virtual std::string formatImage(int image);
     virtual void setImagePath(int image, int sequence);
-    BoundingBox box(int x1, int y1, int x2, int y2);
+    virtual BoundingBox box(int x1, int y1, int x2, int y2);
     virtual void chooseRandomBox();
-    double chooseRandomDelay();
+    virtual double chooseRandomDelay();
 };
 
 #endif // GAMEMODE_HPP
