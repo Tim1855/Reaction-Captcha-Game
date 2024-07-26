@@ -18,8 +18,7 @@ public:
     void checkSpaceBarPress();
 
 private:
-    cv::Rect m_redBoundingBox;
-    bool m_redBoundingBoxSet = 0;
+    bool m_redBoundingBoxSet;
     bool m_spaceBarPress;
 };
 

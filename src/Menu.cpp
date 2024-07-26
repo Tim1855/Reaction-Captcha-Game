@@ -15,20 +15,20 @@ Menu::~Menu() {
 }
 
 void Menu::displayMenu() {
-    promptPlayerName();
-    setPlayerName();
+    // promptPlayerName();
+    // setPlayerName();
 
-    promptNumberOfImages();
-    setNumberOfImages();
+    // promptNumberOfImages();
+    // setNumberOfImages();
 
-    promptSequence();
-    setSequence();
+    // promptSequence();
+    // setSequence();
 
     promptGameMode();
     setGameMode();
 
-    promptGameStart();
-    setGameStart();
+    // promptGameStart();
+    // setGameStart();
 }
 
 //Promptfunktionen für die Spielereingaben

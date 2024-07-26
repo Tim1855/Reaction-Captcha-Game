@@ -32,7 +32,7 @@ public:
     virtual void setImagePath(int image);
     virtual bool checkImage();
     virtual void display();
-    virtual void showBoundingBoxesForFrame(int frameIndex);
+    virtual void showBoundingBoxesForImage(int frameIndex);
     virtual void handleMouseClick(int x, int);
     virtual bool lastClickInBoundingBox();
     virtual void setupCallback();
@@ -41,6 +41,8 @@ public:
     virtual void setBoxFolderPath(int sequence);
     virtual std::string formatSequence(int sequence);
     BoundingBox box(int x1, int y1, int x2, int y2);
+    virtual void chooseRandomBox();
+    double chooseRandomDelay();
 };
 
 #endif // GAMEMODE_HPP

@@ -3,6 +3,8 @@
 #include <sstream>
 #include <iomanip>
 #include <random>
+#include <chrono>
+#include <thread>
 
 #include "GameMode2.hpp"
 #include "BoundingBox.hpp"
@@ -15,38 +17,32 @@ GameMode2::~GameMode2() {
 
 
 void GameMode2::display() {
-    if (m_currentImage.empty()) return;
 
     cv::Mat displayImage = m_currentImage.clone();
-    for (const auto& bbox : m_currentBoundingBoxes) {
-        cv::Scalar color = (bbox == m_redBoundingBox) ? cv::Scalar(0, 0, 255) : cv::Scalar(255, 0, 0);
-        cv::rectangle(displayImage, bbox, color, 2);
+    for (const auto& box : m_currentBoundingBoxes) {
+        cv::Scalar color = (box == m_targetBoundingBox) ? cv::Scalar(0, 0, 255) : cv::Scalar(255, 0, 0);
+        cv::rectangle(displayImage, box, color, 2);
     }
 
     cv::imshow("Game Window", displayImage);
+    cv::waitKey(1); // Wait to ensure the image is being rendered
     updateRedBoundingBox();
     setupCallback();
 }
 
 void GameMode2::updateRedBoundingBox() {
     if (!m_redBoundingBoxSet) {
-        int delay = 1000 + (std::rand() % 1000); // 1-2 seconds delay
-        cv::waitKey(delay); // Wait for the delay
-        if (!m_currentBoundingBoxes.empty()) {
-            std::random_device rd;
-            std::mt19937 gen(rd());
-            std::uniform_int_distribution<> dis(0, m_currentBoundingBoxes.size() - 1);
-            m_redBoundingBox = m_currentBoundingBoxes[dis(gen)];
-            m_redBoundingBoxSet = 1;
-            display();
-            m_redBoundingBoxSet = 0;
-        }
+        std::this_thread::sleep_for(std::chrono::duration<double>(chooseRandomDelay()));
+        chooseRandomBox();
+        m_redBoundingBoxSet = 1;
+        display();
+        m_redBoundingBoxSet = 0;
     }
 }
 
 
 void GameMode2::handleMouseClick(int x, int y) {
-    if (m_redBoundingBox.contains(cv::Point(x, y))) {
+    if (m_targetBoundingBox.contains(cv::Point(x, y))) {
         m_lastClickInBoundingBox = 1;
     }
     else {

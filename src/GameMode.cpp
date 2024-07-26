@@ -4,6 +4,8 @@
 #include <sstream>
 #include <iomanip>
 #include <random>
+#include <thread>
+#include <chrono>
 
 #include "GameMode.hpp"
 #include "Gui.hpp"
@@ -96,26 +98,37 @@ void GameMode::loadImage(int sequence, int image) {
   }
 }
 
-void GameMode::showBoundingBoxesForFrame(int frameIndex) {
+void GameMode::showBoundingBoxesForImage(int image) {
   m_currentBoundingBoxes.clear();
-  for (auto box : m_Boxes[frameIndex]) {
+  for (auto box : m_Boxes[image]) {
     m_currentBoundingBoxes.push_back(box);
-}
+  }
 }
 
 bool GameMode::lastClickInBoundingBox() {
   return m_lastClickInBoundingBox;
 }
 
-void GameMode::display() {
-  cv::Mat displayImage = m_currentImage.clone();
-
-  // Select a random bounding box
+void GameMode::chooseRandomBox() {
   std::random_device random;
   std::mt19937 generator(random());
   std::uniform_int_distribution<> distribution(0, m_currentBoundingBoxes.size() - 1);
   m_targetBoundingBox = m_currentBoundingBoxes[distribution(generator)];
+}
 
+double GameMode::chooseRandomDelay() {
+  std::random_device random;
+  std::mt19937 generator(random());
+  std::uniform_real_distribution<> distribution(1.0, 2.0);
+  return distribution(generator);
+}
+
+void GameMode::display() {
+  cv::Mat displayImage = m_currentImage.clone();
+  cv::imshow("Game Window", displayImage);
+  cv::waitKey(1); // Wait to ensure the image is being rendered
+  chooseRandomBox();
+  std::this_thread::sleep_for(std::chrono::duration<double>(chooseRandomDelay()));
   cv::rectangle(displayImage, m_targetBoundingBox, cv::Scalar(0, 0, 255), 2);
   cv::imshow("Game Window", displayImage);
   setupCallback();
