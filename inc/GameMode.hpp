@@ -20,8 +20,7 @@ protected:
     bool m_lastClickInBoundingBox;
     cv::Mat Image;
     cv::Mat displayImage;
-    std::vector<std::vector<cv::Rect>> m_Boxes;
-    std::vector<cv::Rect> m_currentBoundingBoxes;
+    std::vector<cv::Rect> m_Boxes;
     cv::Rect targetBox;
 public:
     GameMode();
@@ -33,7 +32,6 @@ public:
     virtual void setImagePath(int image);
     virtual bool checkImage();
     virtual void display();
-    virtual void showBoundingBoxesForImage(int frameIndex);
     virtual void handleMouseClick(int x, int);
     virtual bool lastClickInBoundingBox();
     virtual void setupCallback();

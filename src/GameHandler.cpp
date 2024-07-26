@@ -31,10 +31,9 @@ void GameHandler::startGame() {
     setImageFolderPath();
     if (m_gameMode == 1) {
         GameMode1 myGameMode(m_imageFolderPath);
-        for (int image = 0; image < m_numberofImages; ++image) {
+        for (int image = 0; image < m_numberofImages; image++) {
             myGameMode.loadImage(m_sequence, image);
-            myGameMode.loadBoundingBoxes(m_sequence, m_numberofImages);
-            myGameMode.showBoundingBoxesForImage(image);
+            myGameMode.loadBoundingBoxes(m_sequence, image);
             myGameMode.display();
             myGameMode.setupCallback();
             myGameMode.setImageClicked(false);
@@ -49,7 +48,7 @@ void GameHandler::startGame() {
                     break;
                 }
                 else if (m_duration >= 3) {
-                    std::cout << "Bild " << image + 1 << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
+                    std::cout << "Bild " << image << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
                     m_reactionTimes.push_back(5.0); // 5 seconds penalty
                     break;
                 }
@@ -59,11 +58,11 @@ void GameHandler::startGame() {
                 auto endTime = std::chrono::high_resolution_clock::now();
                 auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
                 if (myGameMode.lastClickInBoundingBox()) {
-                    std::cout << "Bild " << image + 1 << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
+                    std::cout << "Bild " << image << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
                     m_reactionTimes.push_back(reactionTime);
                 }
                 else {
-                    std::cout << "Bild " << image + 1 << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
+                    std::cout << "Bild " << image << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
                     m_reactionTimes.push_back(reactionTime + 5.0); // Strafe von 5 Sekunden
                 }
             }
@@ -71,10 +70,9 @@ void GameHandler::startGame() {
     }
     else {
         GameMode2 myGameMode(m_imageFolderPath);
-        for (int image = 0; image < m_numberofImages; ++image) {
+        for (int image = 0; image < m_numberofImages; image++) {
             myGameMode.loadImage(m_sequence, image);
-            myGameMode.loadBoundingBoxes(m_sequence, m_numberofImages);
-            myGameMode.showBoundingBoxesForImage(image);
+            myGameMode.loadBoundingBoxes(m_sequence, image);
             myGameMode.display();
             myGameMode.updateTargetBox();
             myGameMode.setupCallback();
@@ -91,7 +89,7 @@ void GameHandler::startGame() {
                 }
 
                 if (m_duration >= 3) {
-                    std::cout << "Bild " << image + 1 << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
+                    std::cout << "Bild " << image << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
                     m_reactionTimes.push_back(5.0); // 5 seconds penalty
                     break;
                 }
@@ -101,11 +99,11 @@ void GameHandler::startGame() {
                 auto endTime = std::chrono::high_resolution_clock::now();
                 auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
                 if (myGameMode.lastClickInBoundingBox()) {
-                    std::cout << "Bild " << image + 1 << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
+                    std::cout << "Bild " << image << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
                     m_reactionTimes.push_back(reactionTime);
                 }
                 else {
-                    std::cout << "Bild " << image + 1 << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
+                    std::cout << "Bild " << image << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
                     m_reactionTimes.push_back(reactionTime + 5.0); // Strafe von 5 Sekunden
                 }
             }
@@ -138,12 +136,12 @@ void GameHandler::giveFeedback() {
         double average = (count > 0) ? sum / m_reactionTimes.size() : 0; // Include penalties in average calculation
 
         std::cout << "Beste Reaktionszeiten:" << std::endl;
-        for (int i = 0; i < std::min(3, static_cast<int>(m_reactionTimes.size())); ++i) {
+        for (int i = 0; i < std::min(3, static_cast<int>(m_reactionTimes.size())); i++) {
             if (m_reactionTimes[i] >= 0) {
-                std::cout << i + 1 << ". " << m_reactionTimes[i] << " Sekunden" << std::endl;
+                std::cout << i << ". " << m_reactionTimes[i] << " Sekunden" << std::endl;
             }
             else {
-                std::cout << i + 1 << ". " << "Keine Reaktion : 5 Sekunden Strafe" << std::endl;
+                std::cout << i << ". " << "Keine Reaktion : 5 Sekunden Strafe" << std::endl;
             }
         }
         std::cout << "Durchschnittliche Reaktionszeit: " << average << " Sekunden" << std::endl;

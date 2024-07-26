@@ -35,25 +35,20 @@ void GameMode::setBoxFolderPath(int sequence) {
 }
 
 
-void GameMode::loadBoundingBoxes(int sequence, int numberOfImages) {
+void GameMode::loadBoundingBoxes(int sequence, int image) {
   setBoxFolderPath(sequence);
+  m_Boxes.clear();
 
   std::ifstream infile(m_boxFolder);
   if (!infile.is_open()) {
     std::cout << "Error: Cannot open bounding box file" << std::endl;
   }
 
-  m_Boxes.clear();
   std::string line;
   while (std::getline(infile, line)) {
     std::istringstream iss(line);
     int frameIndex;
     iss >> frameIndex;
-
-    // Only load required images
-    if (frameIndex >= numberOfImages) {
-      break;
-    }
 
     iss.clear();
     iss.seekg(0, std::ios::beg);
@@ -65,14 +60,16 @@ void GameMode::loadBoundingBoxes(int sequence, int numberOfImages) {
       continue;
     }
 
+    if (frameIndex != image) {
+      continue;
+    }
+
     if (type == "DontCare") {
       continue;
     }
     BoundingBox box = this->box(static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2), static_cast<int>(y2));
-    if (m_Boxes.size() <= frameIndex) {
-      m_Boxes.resize(frameIndex + 1);
-    }
-    m_Boxes[frameIndex].push_back(cv::Rect(cv::Point(box.getX1(), box.getY1()), cv::Point(box.getX2(), box.getY2())));
+    m_Boxes.push_back(cv::Rect(cv::Point(box.getX1(), box.getY1()), cv::Point(box.getX2(), box.getY2())));
+    std::cout << "Box with frameIndex: " << frameIndex << std::endl;
   }
 }
 
@@ -98,12 +95,6 @@ void GameMode::loadImage(int sequence, int image) {
   }
 }
 
-void GameMode::showBoundingBoxesForImage(int image) {
-  m_currentBoundingBoxes.clear();
-  for (auto box : m_Boxes[image]) {
-    m_currentBoundingBoxes.push_back(box);
-  }
-}
 
 bool GameMode::lastClickInBoundingBox() {
   return m_lastClickInBoundingBox;
@@ -112,8 +103,8 @@ bool GameMode::lastClickInBoundingBox() {
 void GameMode::chooseRandomBox() {
   std::random_device random;
   std::mt19937 generator(random());
-  std::uniform_int_distribution<> distribution(0, m_currentBoundingBoxes.size() - 1);
-  targetBox = m_currentBoundingBoxes[distribution(generator)];
+  std::uniform_int_distribution<> distribution(0, m_Boxes.size() - 1);
+  targetBox = m_Boxes[distribution(generator)];
 }
 
 double GameMode::chooseRandomDelay() {
