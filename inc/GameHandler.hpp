@@ -7,6 +7,7 @@
 
 #include "GameMode.hpp"
 
+
 class GameHandler {
 public:
     GameHandler();
@@ -16,7 +17,6 @@ public:
     void startGame();
     void endGame();
     void giveFeedback();
-
 
 protected:
     std::string m_playerName;

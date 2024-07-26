@@ -35,7 +35,7 @@ void GameMode2::updateTargetBox() {
 
 
 bool GameMode2::checkSpaceBarPress() {
-    if (cv::waitKey(30) == 32) { // wait briefly and check for spacebar press (ASCII code 32)
+    if (cv::waitKey(1) == 32) { // allow opencv to process keyboard and check for spacebar press (ASCII code 32)
         return 1;
     }
     return 0;

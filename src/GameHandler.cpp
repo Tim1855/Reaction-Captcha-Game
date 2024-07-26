@@ -19,7 +19,7 @@ void GameHandler::startGame() {
     if (m_gameMode == 1) {
         GameMode1 myGameMode;
         for (int image = 0; image < m_numberofImages; image++) {
-            myGameMode.setImageClicked(0);
+            myGameMode.setClickStatus(NO_CLICK);
             myGameMode.loadImage(m_sequence, image);
             myGameMode.loadBoundingBoxes(m_sequence, image);
             myGameMode.display();
@@ -28,21 +28,21 @@ void GameHandler::startGame() {
             auto ConditionTime = startTime + std::chrono::seconds(3);
             while (std::chrono::high_resolution_clock::now() < ConditionTime) {
                 cv::waitKey(1); // allow opencv to process mouse callback
-                if (myGameMode.getImageClicked()) {
+                if ((myGameMode.getClickStatus() == INCORRECT_CLICK) || (myGameMode.getClickStatus() == CORRECT_CLICK)) {
                     break;
                 }
             }
             auto endTime = std::chrono::high_resolution_clock::now();
             auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
-            if (reactionTime >= 3) {
+            if (reactionTime >= 3 && myGameMode.getClickStatus() == NO_CLICK) {
                 std::cout << "Bild " << image << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
                 m_reactionTimes.push_back(5.0);
             }
-            else if (myGameMode.lastClickInBoundingBox()) {
+            else if (myGameMode.getClickStatus() == CORRECT_CLICK) {
                 std::cout << "Bild " << image << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
                 m_reactionTimes.push_back(reactionTime);
             }
-            else {
+            else if (myGameMode.getClickStatus() == INCORRECT_CLICK) {
                 std::cout << "Bild " << image << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
                 m_reactionTimes.push_back(5.0);
             }
@@ -51,6 +51,7 @@ void GameHandler::startGame() {
     else {
         GameMode2 myGameMode;
         for (int image = 0; image < m_numberofImages; image++) {
+            myGameMode.setClickStatus(NO_CLICK);
             myGameMode.loadImage(m_sequence, image);
             myGameMode.loadBoundingBoxes(m_sequence, image);
             myGameMode.display();
@@ -59,22 +60,21 @@ void GameHandler::startGame() {
             auto startTime = std::chrono::high_resolution_clock::now();
             auto ConditionTime = startTime + std::chrono::seconds(3);
             while (std::chrono::high_resolution_clock::now() < ConditionTime) {
-                cv::waitKey(1); // allow opencv to process mouse callback
                 if (myGameMode.checkSpaceBarPress()) {
                     break;
                 }
             }
             auto endTime = std::chrono::high_resolution_clock::now();
             auto reactionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() / 1000.0;
-            if (reactionTime >= 3) {
+            if (reactionTime >= 3 && myGameMode.getClickStatus() == NO_CLICK) {
                 std::cout << "Bild " << image << ": Keine Reaktion : 5 Sekunden Strafe" << std::endl;
                 m_reactionTimes.push_back(5.0);
             }
-            else if (myGameMode.lastClickInBoundingBox()) {
+            else if (myGameMode.getClickStatus() == CORRECT_CLICK) {
                 std::cout << "Bild " << image << ": Reaktionszeit: " << reactionTime << " Sekunden" << std::endl;
                 m_reactionTimes.push_back(reactionTime);
             }
-            else {
+            else if (myGameMode.getClickStatus() == INCORRECT_CLICK) {
                 std::cout << "Bild " << image << ": Fehlklick : 5 Sekunden Strafe" << std::endl;
                 m_reactionTimes.push_back(5.0);
             }

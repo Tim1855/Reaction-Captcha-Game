@@ -127,31 +127,26 @@ void GameMode::setupCallback() {
   cv::setMouseCallback("Game Window", [](int event, int x, int y, int flags, void* userdata) {
     if (event == cv::EVENT_LBUTTONDOWN) {
       GameMode* handler = static_cast<GameMode*>(userdata);
-      handler->handleMouseClick(x, y);
-      handler->m_imageClicked = 1;
+      handler->checkClick(x, y);
     }
     }, this);
 }
 
-void GameMode::handleMouseClick(int x, int y) {
+void GameMode::checkClick(int x, int y) {
   if (targetBox.contains(cv::Point(x, y))) {
-    m_lastClickInBoundingBox = 1;
+    clickStatus = CORRECT_CLICK;
   }
   else {
-    m_lastClickInBoundingBox = 0;
+    clickStatus = INCORRECT_CLICK;
   }
 }
 
+void GameMode::setClickStatus(ClickStatus clickStatus) {
+  this->clickStatus = clickStatus;
+}
 
-bool GameMode::lastClickInBoundingBox() {
-  return m_lastClickInBoundingBox;
+ClickStatus GameMode::getClickStatus() {
+  return this->clickStatus;
 }
 
 
-bool GameMode::getImageClicked() {
-  return m_imageClicked;
-}
-
-void GameMode::setImageClicked(bool imageClicked) {
-  m_imageClicked = imageClicked;
-}
