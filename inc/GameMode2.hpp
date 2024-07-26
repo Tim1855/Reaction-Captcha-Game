@@ -7,7 +7,7 @@
 
 class GameMode2 : public GameMode {
 public:
-    GameMode2(std::string imageFolderPath);
+    GameMode2();
     ~GameMode2();
 
     void display() override;

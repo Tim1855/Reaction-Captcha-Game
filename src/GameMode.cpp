@@ -15,9 +15,6 @@
 GameMode::GameMode() {}
 GameMode::~GameMode() {}
 
-GameMode::GameMode(std::string imageFolderPath)
-  : m_imageFolderPath(imageFolderPath), m_currentSequence(0), m_currentIndex(0), m_imageClicked(0), m_lastClickInBoundingBox(0) {
-}
 
 BoundingBox GameMode::box(int x1, int y1, int x2, int y2) {
   return BoundingBox(x1, y1, x2, y2);
@@ -29,9 +26,21 @@ std::string GameMode::formatSequence(int sequence) {
   return sequenceString;
 }
 
+std::string GameMode::formatImage(int image) {
+  std::string imageString = std::to_string(image);
+  imageString.insert(imageString.begin(), 6 - imageString.length(), '0');
+  return imageString;
+}
+
 void GameMode::setBoxFolderPath(int sequence) {
   std::string sequenceString = formatSequence(sequence);
-  m_boxFolder = bboxFolderPath + "/" + sequenceString + ".txt";
+  m_boxFolder = bboxFolderPath + sequenceString + ".txt";
+}
+
+void GameMode::setImagePath(int image, int sequence) {
+  std::string sequenceString = formatSequence(sequence);
+  std::string imageString = formatImage(image);
+  m_imagePath = imageFolder + sequenceString + "/" + imageString + ".png";
 }
 
 
@@ -69,15 +78,9 @@ void GameMode::loadBoundingBoxes(int sequence, int image) {
     }
     BoundingBox box = this->box(static_cast<int>(x1), static_cast<int>(y1), static_cast<int>(x2), static_cast<int>(y2));
     m_Boxes.push_back(cv::Rect(cv::Point(box.getX1(), box.getY1()), cv::Point(box.getX2(), box.getY2())));
-    std::cout << "Box with frameIndex: " << frameIndex << std::endl;
   }
 }
 
-void GameMode::setImagePath(int image) {
-  std::ostringstream imagePathStream;
-  imagePathStream << m_imageFolderPath << "/" << std::setw(6) << std::setfill('0') << image << ".png";
-  m_imagePath = imagePathStream.str();
-}
 
 bool GameMode::checkImage() {
   if (Image.empty()) {
@@ -88,7 +91,7 @@ bool GameMode::checkImage() {
 }
 
 void GameMode::loadImage(int sequence, int image) {
-  setImagePath(image);
+  setImagePath(image, sequence);
   Image = cv::imread(m_imagePath);
   if (checkImage() == false) {
     return; // TODO: Do something else

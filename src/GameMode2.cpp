@@ -10,7 +10,7 @@
 #include "BoundingBox.hpp"
 #include "Gui.hpp"
 
-GameMode2::GameMode2(std::string imageFolderPath) : GameMode(imageFolderPath) {}
+GameMode2::GameMode2() : GameMode() {}
 
 GameMode2::~GameMode2() {
 }

@@ -13,24 +13,9 @@ GameHandler::GameHandler(std::string playerName, int numberofImages, int sequenc
 GameHandler::~GameHandler() {
 }
 
-std::string GameHandler::formatSequence(int sequence) {
-    std::string sequenceString = std::to_string(sequence);
-    sequenceString.insert(sequenceString.begin(), 4 - sequenceString.length(), '0');
-    return sequenceString;
-}
-
-void GameHandler::setImageFolderPath() {
-    std::string sequenceString = formatSequence(m_sequence);
-    m_imageFolderPath = imageFolder + sequenceString;
-}
-
-
-
-
 void GameHandler::startGame() {
-    setImageFolderPath();
     if (m_gameMode == 1) {
-        GameMode1 myGameMode(m_imageFolderPath);
+        GameMode1 myGameMode;
         for (int image = 0; image < m_numberofImages; image++) {
             myGameMode.loadImage(m_sequence, image);
             myGameMode.loadBoundingBoxes(m_sequence, image);
@@ -69,7 +54,7 @@ void GameHandler::startGame() {
         }
     }
     else {
-        GameMode2 myGameMode(m_imageFolderPath);
+        GameMode2 myGameMode;
         for (int image = 0; image < m_numberofImages; image++) {
             myGameMode.loadImage(m_sequence, image);
             myGameMode.loadBoundingBoxes(m_sequence, image);
